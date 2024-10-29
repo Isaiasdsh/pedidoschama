@@ -28,7 +28,29 @@ function addToCart(productName, sizeClass, breadClass, ingredientClass, addonCla
         additionalItems: additionalItems.join(', ')
     });
 
+    // Limpar as seleções após adicionar ao carrinho
+    resetSelections(sizeClass, breadClass, ingredientClass, addonClass);
     displayCart();
+}
+
+function resetSelections(sizeClass, breadClass, ingredientClass, addonClass) {
+    // Reseta o tamanho para o padrão (Simples)
+    if (sizeClass) document.querySelector(`input[name=${sizeClass}][value="single"]`).checked = true;
+
+    // Reseta o pão para o padrão (Brioche ou primeira opção)
+    if (breadClass) document.querySelector(`input[name=${breadClass}][value="brioche"]`).checked = true;
+
+    // Desmarca todos os ingredientes para remover
+    document.querySelectorAll(`.${ingredientClass}:checked`).forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+
+    // Desmarca todos os adicionais
+    if (addonClass) {
+        document.querySelectorAll(`.${addonClass}:checked`).forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+    }
 }
 
 function displayCart() {
@@ -36,15 +58,35 @@ function displayCart() {
     cartElement.innerHTML = "";
     let total = 0;
     cart.forEach((item, index) => {
-        cartElement.innerHTML += `<p>${item.productName} (${item.size}) - Pão: ${item.bread} - R$${item.price.toFixed(2)} <br> Removido: ${item.removedIngredients} <br> Adicionais: ${item.additionalItems} <button onclick="removeFromCart(${index})">Remover</button></p>`;
+        cartElement.innerHTML += `
+            <p>
+                <strong>Nome do lanche:</strong> ${item.productName}<br>
+                <strong>Tamanho:</strong> ${item.size}<br>
+                <strong>Tipo de pão:</strong> ${item.bread}<br>
+                <strong>Ingredientes para Remover:</strong> ${item.removedIngredients || 'Nenhum'}<br>
+                <strong>Adicionais:</strong> ${item.additionalItems || 'Nenhum'}<br>
+                <button onclick="removeFromCart(${index})">Remover</button>
+            </p>
+            <hr>
+        `;
         total += item.price;
     });
+
+    const deliveryFeeElement = document.getElementById("delivery-fee");
+    const totalPriceElement = document.getElementById("total-price");
+    deliveryFeeElement.innerHTML = `<h3>Taxa de entrega: R$${deliveryFee.toFixed(2)}</h3>`;
+    totalPriceElement.innerHTML = `<h3>Total com entrega: R$${(total + deliveryFee).toFixed(2)}</h3>`;
 }
 
 function finalizeOrder() {
     let orderSummary = `Estamos atendendo apenas Fazenda da Armação e Palmas.\n\nSeu Pedido:\n`;
     cart.forEach(item => {
-        orderSummary += `Hambúrguer: ${item.productName} (${item.size}), Pão: ${item.bread}, Removido: ${item.removedIngredients}, Adicionais: ${item.additionalItems}, Preço: R$${item.price.toFixed(2)}\n`;
+        orderSummary += `
+Nome do lanche: ${item.productName}
+Tamanho: ${item.size}
+Tipo de pão: ${item.bread}
+Ingredientes para Remover: ${item.removedIngredients || 'Nenhum'}
+Adicionais: ${item.additionalItems || 'Nenhum'}\n\n`;
     });
 
     let beverages = "";
@@ -60,7 +102,10 @@ function finalizeOrder() {
         orderSummary += `\nBebidas:\n${beverages}`;
     }
 
+    orderSummary += `\nTaxa de Entrega: R$${deliveryFee.toFixed(2)}`;
+
     const phoneNumber = "48991490613";
     const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderSummary)}`;
     window.open(whatsappLink, '_blank');
 }
+
