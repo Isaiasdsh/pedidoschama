@@ -9,8 +9,8 @@ function startOrder() {
 
     if (customerName && customerPhone) {
         document.getElementById('welcome-screen').style.display = 'none';
-        document.querySelector('header').style.display = 'block';
-        document.querySelector('main').style.display = 'flex';
+        document.getElementById('header').style.display = 'block';
+        document.getElementById('main-content').style.display = 'flex';
     } else {
         alert('Por favor, insira seu nome e WhatsApp.');
     }
@@ -72,3 +72,4 @@ function finalizeOrder() {
     const whatsappLink = `https://wa.me/48991758488?text=${encodeURIComponent(orderSummary)}`;
     window.open(whatsappLink, '_blank');
 }
+
