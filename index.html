@@ -19,10 +19,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
-
     <!-- Menu e Lanches -->
     <header id="header" style="display: none;">
         <h1>Chama Burguer</h1>
@@ -34,38 +30,42 @@
             <h2>Lanches</h2>
 
             <!-- CHAMA Clássico -->
-<div class="product-card">
-    <h3>CHAMA Clássico</h3>
-    <p class="description">Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
-    <div class="price">R$26,00 Simples | R$33,00 Duplo</div>
-    
-    <div class="option-group">
-        <h4>Tamanho</h4>
-        <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
-        <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
-    </div>
-    <div class="option-group">
-        <h4>Escolha seu Pão</h4>
-        <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
-        <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
-    </div>
-    <div class="option-group">
-        <h4>O que deseja retirar do seu lanche?</h4>
-        <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
-        <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
-        <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
-        <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
-    </div>
-    <div class="option-group">
-        <h4>Turbine seu pedido!</h4>
-        <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon (R$5)</label>
-        <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
-        <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
-    </div>
-    <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', null, 'ingredient-classico', 'addon-classico', null, 26)">Adicionar ao Carrinho</button>
-</div>
+            <div class="product-card">
+                <h3>CHAMA Clássico</h3>
+                <p class="description">Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
+                <div class="price">R$26,00 Simples | R$33,00 Duplo</div>
+                
+                <div class="option-group">
+                    <h4>Tamanho</h4>
+                    <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
+                    <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
+                </div>
 
-<!-- CHAMA Bacon -->
+                <div class="option-group">
+                    <h4>Escolha seu Pão</h4>
+                    <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
+                    <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
+                </div>
+
+                <div class="option-group">
+                    <h4>O que deseja retirar do seu lanche?</h4>
+                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
+                    <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
+                    <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
+                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
+                </div>
+
+                <div class="option-group">
+                    <h4>Turbine seu pedido!</h4>
+                    <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon (R$5)</label>
+                    <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
+                    <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
+                </div>
+
+                <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', null, 'ingredient-classico', 'addon-classico', null, 26)">Adicionar ao Carrinho</button>
+            </div>
+
+            <!-- CHAMA Bacon -->
 <div class="product-card">
     <h3>CHAMA Bacon</h3>
     <p class="description">Pão, Hambúrguer de carne bovina, BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa, maionese da casa.</p>
@@ -129,4 +129,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
