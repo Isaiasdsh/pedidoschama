@@ -14,6 +14,8 @@ function startOrder() {
     }
 }
 
+let cart = [];
+
 function addToCart(name, size, bread, point, ingredients, addons, noteId, price) {
     const sizeValue = document.querySelector(`input[name="${size}"]:checked`).value;
     const breadValue = document.querySelector(`input[name="${bread}"]:checked`).value;
@@ -21,25 +23,60 @@ function addToCart(name, size, bread, point, ingredients, addons, noteId, price)
     const ingredientElements = document.querySelectorAll(`.${ingredients}:checked`);
     const addonElements = document.querySelectorAll(`.${addons}:checked`);
     const note = document.getElementById(noteId).value;
-    const selectedIngredients = Array.from(ingredientElements).map(el => el.value).join(", ");
-    const selectedAddons = Array.from(addonElements).map(el => el.value).join(", ");
+    
+    const selectedIngredients = Array.from(ingredientElements).map(el => el.value);
+    const selectedAddons = Array.from(addonElements).map(el => el.value);
 
-    const item = `
-        <div>
-            <strong>${name}</strong> - ${sizeValue} (${price})
-            <br>Pão: ${breadValue} - Ponto: ${pointValue}
-            <br>Remover: ${selectedIngredients}
-            <br>Adicionais: ${selectedAddons}
-            <br>Observação: ${note || "Nenhuma"}
-        </div>
-    `;
-    document.getElementById("cart-content").innerHTML += item;
+    const item = {
+        name,
+        size: sizeValue,
+        bread: breadValue,
+        point: pointValue,
+        ingredients: selectedIngredients,
+        addons: selectedAddons,
+        note: note || "Nenhuma",
+        price: sizeValue === "Duplo" ? price + 7 : price
+    };
+
+    cart.push(item);
+    updateCartDisplay();
+}
+
+function updateCartDisplay() {
+    const cartContent = document.getElementById("cart-content");
+    cartContent.innerHTML = "";
+    let totalPrice = 5; // Taxa de entrega
+
+    cart.forEach(item => {
+        totalPrice += item.price;
+        const itemElement = document.createElement("div");
+        itemElement.classList.add("cart-item");
+        itemElement.innerHTML = `
+            <strong>${item.name}</strong> - ${item.size} (R$${item.price.toFixed(2)})
+            <br>Pão: ${item.bread} - Ponto: ${item.point}
+            <br>Remover: ${item.ingredients.join(", ") || "Nenhum"}
+            <br>Adicionais: ${item.addons.join(", ") || "Nenhum"}
+            <br>Observação: ${item.note}
+            <hr>
+        `;
+        cartContent.appendChild(itemElement);
+    });
+
+    document.getElementById("total-price").innerText = `Total: R$${totalPrice.toFixed(2)}`;
 }
 
 function finalizeOrder() {
-    const cartContent = document.getElementById("cart-content").innerText;
-    const phone = "48991490613";
-    const message = encodeURIComponent(`Pedido:\n${cartContent}`);
+    const cartContent = cart.map(item => `
+        ${item.name} - ${item.size} (R$${item.price.toFixed(2)})
+        Pão: ${item.bread} - Ponto: ${item.point}
+        Remover: ${item.ingredients.join(", ") || "Nenhum"}
+        Adicionais: ${item.addons.join(", ") || "Nenhum"}
+        Observação: ${item.note}
+    `).join("\n\n");
+
+    const phone = "48991758488";
+    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${document.getElementById("total-price").innerText.split(": R$")[1]}`);
     window.open(`https://wa.me/${phone}?text=${message}`);
 }
+
 
