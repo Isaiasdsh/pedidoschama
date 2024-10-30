@@ -1,51 +1,43 @@
 .product-card {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .product-card h3 {
-    grid-column: span 2;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: #ff4500;
-}
-
-.product-card .description {
-    grid-column: span 2;
-    font-size: 0.9em;
-    color: #ccc;
-}
-
-.product-card .price {
-    grid-column: span 2;
-    font-weight: bold;
-    color: #ff4500;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
     margin-bottom: 10px;
 }
 
+.product-card .description,
+.product-card .price {
+    font-size: 0.9em;
+    color: #bbb;
+}
+
 .option-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    margin-top: 10px;
+    padding: 5px 0;
+    border-bottom: 1px dotted #555;
 }
 
 .option-group h4 {
-    margin: 0;
     font-size: 0.9em;
     font-weight: bold;
-    color: #fff;
+    color: #ff4500;
 }
 
 .option-group label {
     font-size: 0.85em;
-    color: #ccc;
-    display: flex;
-    align-items: center;
+    color: #ddd;
+    display: block;
+    margin-left: 15px;
 }
 
 input[type="radio"],
@@ -55,7 +47,8 @@ input[type="checkbox"] {
 }
 
 .add-to-cart {
-    grid-column: span 2;
+    display: block;
+    width: 100%;
     background-color: #ff4500;
     color: white;
     padding: 10px;
@@ -64,39 +57,34 @@ input[type="checkbox"] {
     cursor: pointer;
     font-weight: bold;
     margin-top: 15px;
-    transition: background-color 0.3s;
-}
-
-.add-to-cart:hover {
-    background-color: #e63900;
+    text-align: center;
 }
 
 .cart-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #1e1e1e;
-    color: #fff;
+    background-color: #222;
     padding: 15px;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid #444;
+}
+
+.cart-footer p {
+    margin: 5px 0;
+    color: #ccc;
+    font-size: 0.9em;
 }
 
 .finalize-btn {
-    padding: 10px;
+    width: 100%;
     background-color: #ff4500;
     color: white;
-    font-weight: bold;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.finalize-btn:hover {
-    background-color: #e63900;
-}
 
