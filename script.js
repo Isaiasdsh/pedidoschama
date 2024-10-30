@@ -9,6 +9,7 @@ function startOrder() {
         document.getElementById("welcome-screen").style.display = "none";
         document.getElementById("header").style.display = "block";
         document.getElementById("main-content").style.display = "block";
+        document.querySelector(".cart-footer").style.display = "block"; // Exibe o carrinho apenas após iniciar o pedido
     } else {
         alert("Por favor, insira seu nome e WhatsApp.");
     }
@@ -64,6 +65,10 @@ function addBeveragesToCart() {
 }
 
 function updateCartDisplay() {
+    const cartContent = document.getElementcontinuação do código...
+
+```javascript
+function updateCartDisplay() {
     const cartContent = document.getElementById("cart-content");
     cartContent.innerHTML = "";
     let totalPrice = 5; // Taxa de entrega
@@ -101,10 +106,8 @@ function finalizeOrder() {
         Observação: ${item.note}
     `).join("\n\n");
 
-    const phone = "48991758488";
+    const phone = "48991490613";
     const totalPrice = document.getElementById("total-price").innerText.split(": R$")[1];
     const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
     window.open(`https://wa.me/${phone}?text=${message}`);
 }
-
-
