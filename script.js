@@ -15,6 +15,7 @@ function startOrder() {
 }
 
 let cart = [];
+let beverages = [];
 
 function addToCart(name, size, bread, point, ingredients, addons, noteId, price) {
     const sizeValue = document.querySelector(`input[name="${size}"]:checked`).value;
@@ -42,6 +43,17 @@ function addToCart(name, size, bread, point, ingredients, addons, noteId, price)
     updateCartDisplay();
 }
 
+function addBeveragesToCart() {
+    const beverageItems = [
+        { name: "Coca Cola 310ml", price: 6, quantity: document.getElementById("coca-cola").value },
+        { name: "Guaraná Antártica 310ml", price: 6, quantity: document.getElementById("guarana").value },
+        { name: "Água com Gás", price: 3, quantity: document.getElementById("agua").value }
+    ];
+
+    beverages = beverageItems.filter(bev => bev.quantity > 0);
+    updateCartDisplay();
+}
+
 function updateCartDisplay() {
     const cartContent = document.getElementById("cart-content");
     cartContent.innerHTML = "";
@@ -62,10 +74,23 @@ function updateCartDisplay() {
         cartContent.appendChild(itemElement);
     });
 
+    beverages.forEach(beverage => {
+        const bevTotal = beverage.price * beverage.quantity;
+        totalPrice += bevTotal;
+        const beverageElement = document.createElement("div");
+        beverageElement.classList.add("cart-item");
+        beverageElement.innerHTML = `
+            <strong>${beverage.name}</strong> - Quantidade: ${beverage.quantity} (R$${bevTotal.toFixed(2)})
+            <hr>
+        `;
+        cartContent.appendChild(beverageElement);
+    });
+
     document.getElementById("total-price").innerText = `Total: R$${totalPrice.toFixed(2)}`;
 }
 
 function finalizeOrder() {
+    addBeveragesToCart();
     const cartContent = cart.map(item => `
         ${item.name} - ${item.size} (R$${item.price.toFixed(2)})
         Pão: ${item.bread} - Ponto: ${item.point}
@@ -74,8 +99,13 @@ function finalizeOrder() {
         Observação: ${item.note}
     `).join("\n\n");
 
+    const beverageContent = beverages.map(beverage => `
+        ${beverage.name} - Quantidade: ${beverage.quantity} (R$${(beverage.price * beverage.quantity).toFixed(2)})
+    `).join("\n");
+
     const phone = "48991490613";
-    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${document.getElementById("total-price").innerText.split(": R$")[1]}`);
+    const totalPrice = document.getElementById("total-price").innerText.split(": R$")[1];
+    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nBebidas:\n${beverageContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
     window.open(`https://wa.me/${phone}?text=${message}`);
 }
 
