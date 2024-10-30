@@ -15,7 +15,6 @@ function startOrder() {
 }
 
 let cart = [];
-let beverages = [];
 
 function addToCart(name, size, bread, point, ingredients, addons, noteId, price) {
     const sizeValue = document.querySelector(`input[name="${size}"]:checked`).value;
@@ -50,7 +49,17 @@ function addBeveragesToCart() {
         { name: "Água com Gás", price: 3, quantity: document.getElementById("agua").value }
     ];
 
-    beverages = beverageItems.filter(bev => bev.quantity > 0);
+    beverageItems.forEach(beverage => {
+        if (beverage.quantity > 0) {
+            cart.push({
+                name: beverage.name,
+                quantity: beverage.quantity,
+                price: beverage.price * beverage.quantity,
+                isBeverage: true
+            });
+        }
+    });
+
     updateCartDisplay();
 }
 
@@ -63,7 +72,10 @@ function updateCartDisplay() {
         totalPrice += item.price;
         const itemElement = document.createElement("div");
         itemElement.classList.add("cart-item");
-        itemElement.innerHTML = `
+        itemElement.innerHTML = item.isBeverage ? `
+            <strong>${item.name}</strong> - Quantidade: ${item.quantity} (R$${item.price.toFixed(2)})
+            <hr>
+        ` : `
             <strong>${item.name}</strong> - ${item.size} (R$${item.price.toFixed(2)})
             <br>Pão: ${item.bread} - Ponto: ${item.point}
             <br>Remover: ${item.ingredients.join(", ") || "Nenhum"}
@@ -74,24 +86,14 @@ function updateCartDisplay() {
         cartContent.appendChild(itemElement);
     });
 
-    beverages.forEach(beverage => {
-        const bevTotal = beverage.price * beverage.quantity;
-        totalPrice += bevTotal;
-        const beverageElement = document.createElement("div");
-        beverageElement.classList.add("cart-item");
-        beverageElement.innerHTML = `
-            <strong>${beverage.name}</strong> - Quantidade: ${beverage.quantity} (R$${bevTotal.toFixed(2)})
-            <hr>
-        `;
-        cartContent.appendChild(beverageElement);
-    });
-
     document.getElementById("total-price").innerText = `Total: R$${totalPrice.toFixed(2)}`;
 }
 
 function finalizeOrder() {
     addBeveragesToCart();
-    const cartContent = cart.map(item => `
+    const cartContent = cart.map(item => item.isBeverage ? `
+        ${item.name} - Quantidade: ${item.quantity} (R$${item.price.toFixed(2)})
+    ` : `
         ${item.name} - ${item.size} (R$${item.price.toFixed(2)})
         Pão: ${item.bread} - Ponto: ${item.point}
         Remover: ${item.ingredients.join(", ") || "Nenhum"}
@@ -99,13 +101,10 @@ function finalizeOrder() {
         Observação: ${item.note}
     `).join("\n\n");
 
-    const beverageContent = beverages.map(beverage => `
-        ${beverage.name} - Quantidade: ${beverage.quantity} (R$${(beverage.price * beverage.quantity).toFixed(2)})
-    `).join("\n");
-
-    const phone = "48991490613";
+    const phone = "48991758488";
     const totalPrice = document.getElementById("total-price").innerText.split(": R$")[1];
-    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nBebidas:\n${beverageContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
+    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
     window.open(`https://wa.me/${phone}?text=${message}`);
 }
+
 
