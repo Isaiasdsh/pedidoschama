@@ -7,50 +7,62 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <!-- Tela de Boas-vindas para inserir nome e WhatsApp -->
+    <div id="welcome-screen">
+        <h1>Bem-vindo ao Chama Burguer!</h1>
+        <p>Para continuar, insira seu nome e WhatsApp:</p>
+        <input type="text" id="customer-name" placeholder="Seu Nome" required>
+        <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
+        <button onclick="startOrder()">Iniciar Pedido</button>
+    </div>
+
+    <header style="display: none;">
         <h1>Chama Burguer</h1>
         <p class="info">Atendemos apenas Fazenda da Armação e Palmas no nosso Delivery.</p>
     </header>
 
-    <main>
+    <main style="display: none;">
         <!-- Seção de Produtos -->
         <section class="product-list">
             <div class="product-card">
                 <h2>CHAMA Clássico</h2>
                 <p>Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
                 <div class="price">R$26,00</div>
-                <div class="quantity-control">
-                    <button onclick="updateQuantity('CHAMA Clássico', -1)">-</button>
-                    <span id="quantity-CHAMA Clássico">0</span>
-                    <button onclick="updateQuantity('CHAMA Clássico', 1)">+</button>
+
+                <!-- Escolha do Pão -->
+                <div class="option">
+                    <h4>Escolha o Pão:</h4>
+                    <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
+                    <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
                 </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 26)">Adicionar ao Carrinho</button>
+
+                <!-- Ponto da Carne -->
+                <div class="option">
+                    <h4>Ponto da Carne:</h4>
+                    <label><input type="radio" name="point-classico" value="Mal Passada" checked> Mal Passada</label>
+                    <label><input type="radio" name="point-classico" value="Ao Ponto"> Ao Ponto</label>
+                    <label><input type="radio" name="point-classico" value="Bem Passada"> Bem Passada</label>
+                </div>
+
+                <!-- Remover Ingredientes -->
+                <div class="option">
+                    <h4>Ingredientes para Remover:</h4>
+                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
+                    <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
+                    <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
+                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
+                </div>
+
+                <!-- Observação -->
+                <div class="option">
+                    <h4>Observação:</h4>
+                    <input type="text" id="note-classico" placeholder="Ex: Sem salada">
+                </div>
+
+                <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'bread-classico', 'point-classico', 'ingredient-classico', 'note-classico', 26)">Adicionar ao Carrinho</button>
             </div>
 
-            <div class="product-card">
-                <h2>CHAMA Bacon</h2>
-                <p>Pão, Hambúrguer de carne bovina, BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa, maionese da casa.</p>
-                <div class="price">R$30,00</div>
-                <div class="quantity-control">
-                    <button onclick="updateQuantity('CHAMA Bacon', -1)">-</button>
-                    <span id="quantity-CHAMA Bacon">0</span>
-                    <button onclick="updateQuantity('CHAMA Bacon', 1)">+</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Bacon', 30)">Adicionar ao Carrinho</button>
-            </div>
-
-            <div class="product-card">
-                <h2>Coca Cola 310ml</h2>
-                <div class="price">R$6,00</div>
-                <div class="quantity-control">
-                    <button onclick="updateQuantity('Coca Cola', -1)">-</button>
-                    <span id="quantity-Coca Cola">0</span>
-                    <button onclick="updateQuantity('Coca Cola', 1)">+</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('Coca Cola', 6)">Adicionar ao Carrinho</button>
-            </div>
-            
-            <!-- Adicione mais produtos conforme necessário -->
+            <!-- Outras opções de produtos (por exemplo, CHAMA Bacon) podem seguir o mesmo layout -->
         </section>
 
         <!-- Carrinho Fixo -->
@@ -66,4 +78,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
