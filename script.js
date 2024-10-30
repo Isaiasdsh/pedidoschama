@@ -16,9 +16,10 @@ function startOrder() {
     }
 }
 
-function addToCart(productName, breadClass, pointClass, ingredientClass, noteId, price) {
-    const bread = document.querySelector(`input[name=${breadClass}]:checked`).value;
-    const point = document.querySelector(`input[name=${pointClass}]:checked`).value;
+function addToCart(productName, sizeClass, breadClass, pointClass, ingredientClass, noteId, basePrice) {
+    const size = sizeClass ? document.querySelector(`input[name=${sizeClass}]:checked`).value : 'Simples';
+    const bread = breadClass ? document.querySelector(`input[name=${breadClass}]:checked`).value : 'Pão Kids';
+    const point = pointClass ? document.querySelector(`input[name=${pointClass}]:checked`).value : 'Padrão';
 
     let removedIngredients = [];
     document.querySelectorAll(`.${ingredientClass}:checked`).forEach((checkbox) => {
@@ -27,8 +28,12 @@ function addToCart(productName, breadClass, pointClass, ingredientClass, noteId,
 
     const note = document.getElementById(noteId).value || 'Nenhuma observação';
 
+    // Ajuste de preço com base no tamanho selecionado
+    const price = size === 'Duplo' ? basePrice + 7 : basePrice;
+
     cart.push({
         productName,
+        size,
         bread,
         point,
         removedIngredients: removedIngredients.join(', '),
@@ -38,6 +43,7 @@ function addToCart(productName, breadClass, pointClass, ingredientClass, noteId,
 
     displayCart();
 }
+
 
 function displayCart() {
     const cartContent = document.getElementById("cart-content");
