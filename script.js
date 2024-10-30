@@ -1,81 +1,45 @@
-let cart = [];
-const deliveryFee = 5.00;
-let customerName = '';
-let customerPhone = '';
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("welcome-screen").style.display = "flex";
+});
 
 function startOrder() {
-    customerName = document.getElementById('customer-name').value;
-    customerPhone = document.getElementById('customer-phone').value;
-
-    if (customerName && customerPhone) {
-        document.getElementById('welcome-screen').style.display = 'none';
-        document.getElementById('header').style.display = 'block';
-        document.getElementById('main-content').style.display = 'flex';
+    const name = document.getElementById("customer-name").value;
+    const phone = document.getElementById("customer-phone").value;
+    if (name && phone) {
+        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("header").style.display = "block";
+        document.getElementById("main-content").style.display = "block";
     } else {
-        alert('Por favor, insira seu nome e WhatsApp.');
+        alert("Por favor, insira seu nome e WhatsApp.");
     }
 }
 
-function addToCart(productName, sizeClass, breadClass, pointClass, ingredientClass, noteId, basePrice) {
-    const size = sizeClass ? document.querySelector(`input[name=${sizeClass}]:checked`).value : 'Simples';
-    const bread = breadClass ? document.querySelector(`input[name=${breadClass}]:checked`).value : 'Pão Kids';
-    const point = pointClass ? document.querySelector(`input[name=${pointClass}]:checked`).value : 'Padrão';
+function addToCart(name, size, bread, point, ingredients, addons, noteId, price) {
+    const sizeValue = document.querySelector(`input[name="${size}"]:checked`).value;
+    const breadValue = document.querySelector(`input[name="${bread}"]:checked`).value;
+    const pointValue = document.querySelector(`input[name="${point}"]:checked`).value;
+    const ingredientElements = document.querySelectorAll(`.${ingredients}:checked`);
+    const addonElements = document.querySelectorAll(`.${addons}:checked`);
+    const note = document.getElementById(noteId).value;
+    const selectedIngredients = Array.from(ingredientElements).map(el => el.value).join(", ");
+    const selectedAddons = Array.from(addonElements).map(el => el.value).join(", ");
 
-    let removedIngredients = [];
-    document.querySelectorAll(`.${ingredientClass}:checked`).forEach((checkbox) => {
-        removedIngredients.push(checkbox.value);
-    });
-
-    const note = document.getElementById(noteId).value || 'Nenhuma observação';
-
-    // Ajuste de preço com base no tamanho selecionado
-    const price = size === 'Duplo' ? basePrice + 7 : basePrice;
-
-    cart.push({
-        productName,
-        size,
-        bread,
-        point,
-        removedIngredients: removedIngredients.join(', '),
-        note,
-        price
-    });
-
-    displayCart();
-}
-
-
-function displayCart() {
-    const cartContent = document.getElementById("cart-content");
-    const totalPriceElement = document.getElementById("total-price");
-    cartContent.innerHTML = "";
-
-    let total = 0;
-    cart.forEach((item, index) => {
-        cartContent.innerHTML += `
-            <p><strong>Nome:</strong> ${item.productName}<br>
-            <strong>Pão:</strong> ${item.bread}<br>
-            <strong>Ponto:</strong> ${item.point}<br>
-            <strong>Remover:</strong> ${item.removedIngredients || 'Nenhum'}<br>
-            <strong>Observação:</strong> ${item.note}<br>
-            <strong>Preço:</strong> R$${item.price.toFixed(2)}<br>
-            <button onclick="removeFromCart(${index})">Remover</button></p>
-            <hr>`;
-        total += item.price;
-    });
-
-    total += deliveryFee;
-    totalPriceElement.textContent = `Total: R$${total.toFixed(2)}`;
+    const item = `
+        <div>
+            <strong>${name}</strong> - ${sizeValue} (${price})
+            <br>Pão: ${breadValue} - Ponto: ${pointValue}
+            <br>Remover: ${selectedIngredients}
+            <br>Adicionais: ${selectedAddons}
+            <br>Observação: ${note || "Nenhuma"}
+        </div>
+    `;
+    document.getElementById("cart-content").innerHTML += item;
 }
 
 function finalizeOrder() {
-    let orderSummary = `Pedido de ${customerName} - WhatsApp: ${customerPhone}\n\n`;
-    cart.forEach(item => {
-        orderSummary += `Nome do lanche: ${item.productName}\nTipo de pão: ${item.bread}\nPonto da carne: ${item.point}\nRemover: ${item.removedIngredients || 'Nenhum'}\nObservação: ${item.note}\nPreço: R$${item.price.toFixed(2)}\n\n`;
-    });
-    orderSummary += `Taxa de Entrega: R$${deliveryFee.toFixed(2)}\nTotal: R$${(cart.reduce((sum, item) => sum + item.price, 0) + deliveryFee).toFixed(2)}`;
-
-    const whatsappLink = `https://wa.me/48991758488?text=${encodeURIComponent(orderSummary)}`;
-    window.open(whatsappLink, '_blank');
+    const cartContent = document.getElementById("cart-content").innerText;
+    const phone = "48991490613";
+    const message = encodeURIComponent(`Pedido:\n${cartContent}`);
+    window.open(`https://wa.me/${phone}?text=${message}`);
 }
 
