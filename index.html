@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chama Burguer - Peça Já!</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Tela de Boas-vindas para inserir nome e WhatsApp -->
-    <div id="welcome-screen">
-        <div class="welcome-container">
-            <img src="logo.jpg" alt="Chama Burguer Logo" class="logo">
-            <h1>Bem-vindo ao Chama Burguer!</h1>
-            <p>Para continuar, insira seu nome e WhatsApp:</p>
-            <input type="text" id="customer-name" placeholder="Seu Nome" required>
-            <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
-            <button onclick="startOrder()">Iniciar Pedido</button>
-        </div>
+<div id="welcome-screen">
+    <div class="welcome-container">
+        <img src="logo.jpg" alt="Chama Burguer Logo" class="logo">
+        <h1>Bem-vindo ao Chama Burguer!</h1>
+        <p>Para continuar, insira seu nome e WhatsApp:</p>
+        <input type="text" id="customer-name" placeholder="Seu Nome" required>
+        <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
+        <button onclick="startOrder()">Iniciar Pedido</button>
     </div>
+</div>
 
     <!-- Cabeçalho e Menu do Cardápio -->
     <header id="header" style="display: none;">
