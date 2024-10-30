@@ -11,10 +11,9 @@ body {
     align-items: center;
     background-color: #121212;
     color: #fff;
-    margin-bottom: 100px; /* Espaço para o footer fixo */
+    margin-bottom: 100px;
 }
 
-/* Tela de boas-vindas */
 #welcome-screen {
     display: flex;
     align-items: center;
@@ -38,43 +37,6 @@ body {
 .logo {
     width: 100px;
     margin-bottom: 15px;
-}
-
-.welcome-container h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.welcome-container p {
-    font-size: 1em;
-    margin-bottom: 20px;
-}
-
-.welcome-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-    font-size: 1em;
-    background-color: #fff;
-    color: #333;
-}
-
-.welcome-container button {
-    width: 100%;
-    padding: 12px;
-    background-color: #ff4500;
-    color: white;
-    font-size: 1.1em;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.welcome-container button:hover {
-    background-color: #e63900;
 }
 
 header, main {
@@ -112,12 +74,34 @@ header, main {
     margin-bottom: 10px;
 }
 
-.option-group {
-    margin-top: 10px;
+.bread-choice, .size-choice, .meat-point, .remove-ingredients, .addons, .note {
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.bread-choice {
+    background-color: #333333;
+}
+
+.size-choice {
+    background-color: #444444;
+}
+
+.meat-point {
+    background-color: #3a3a3a;
+}
+
+.remove-ingredients {
+    background-color: #555555;
+}
+
+.addons {
+    background-color: #666666;
 }
 
 .add-to-cart {
-    margin-top: 15px;
     padding: 10px;
     background-color: #ff4500;
     color: white;
@@ -127,11 +111,6 @@ header, main {
     transition: background-color 0.3s ease;
 }
 
-.add-to-cart:hover {
-    background-color: #e63900;
-}
-
-/* Footer fixo para carrinho */
 .cart-footer {
     position: fixed;
     bottom: 0;
@@ -147,12 +126,7 @@ header, main {
     align-items: center;
 }
 
-.cart-footer #cart-content {
-    margin-bottom: 10px;
-    font-size: 0.9em;
-}
-
-.cart-footer .finalize-btn {
+.finalize-btn {
     width: 100%;
     padding: 10px;
     background-color: #ff4500;
@@ -161,11 +135,6 @@ header, main {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cart-footer .finalize-btn:hover {
-    background-color: #e63900;
 }
 
 
