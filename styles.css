@@ -5,10 +5,13 @@
     font-family: Arial, sans-serif;
 }
 
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121212;
+    color: #fff;
+    margin-bottom: 100px;
 }
 
 #welcome-screen {
@@ -17,8 +20,7 @@ body, html {
     align-items: center;
     height: 100vh;
     width: 100%;
-    background: #1e1e1e; /* Fundo escuro da marca */
-    color: #fff;
+    background: #1e1e1e;
     text-align: center;
 }
 
@@ -53,13 +55,12 @@ input {
     background-color: #333333;
     color: #fff;
     text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background-color: #ff4500; /* Cor laranja vibrante da marca */
+    background-color: #ff4500;
     color: white;
     font-size: 1.1em;
     font-weight: bold;
@@ -67,31 +68,17 @@ button {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
     background-color: #e63900;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.logo {
-    width: 80px;
-    margin-bottom: 15px;
-}
-
-header, main {
-    width: 90%;
+/* Produtos */
+.product-list, .beverages {
+    width: 100%;
     max-width: 1200px;
     padding: 20px;
-}
-
-.product-list {
-    width: 100%;
 }
 
 .product-card {
@@ -100,67 +87,9 @@ header, main {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-card h3 {
-    font-size: 1.3em;
-    color: #ff7043;
-}
-
-.product-card .price {
-    font-weight: bold;
-    color: #ff4500;
-    margin-bottom: 10px;
-}
-
-.bread-choice, .size-choice, .meat-point, .remove-ingredients, .addons, .note {
-    background-color: #2a2a2a;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.bread-choice {
-    background-color: #333333;
-}
-
-.size-choice {
-    background-color: #444444;
-}
-
-.meat-point {
-    background-color: #3a3a3a;
-}
-
-.remove-ingredients {
-    background-color: #555555;
-}
-
-.addons {
-    background-color: #666666;
-}
-
-.add-to-cart {
-    padding: 10px;
-    background-color: #ff4500;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-to-cart:hover {
-    background-color: #e63900;
-}
-
-/* Carrinho fixo para todos os dispositivos */
+/* Carrinho */
 .cart-footer {
     position: fixed;
     bottom: 0;
@@ -169,57 +98,121 @@ header, main {
     background-color: #1e1e1e;
     color: #fff;
     padding: 15px;
-    border-top: 2px solid #333;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.cart-footer .finalize-btn {
-    width: 100%;
+.finalize-btn {
     padding: 10px;
     background-color: #ff4500;
     color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    font-weight:Aqui está o código completo de HTML, CSS, e JavaScript, com o visual e as funcionalidades conforme discutido, incluindo todos os lanches e as seções ajustadas.
 
-.cart-footer .finalize-btn:hover {
-    background-color: #e63900;
-}
+### **JavaScript Completo (script.js)**
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .welcome-container, .product-card, .cart-footer {
-        width: 100%;
-        padding: 15px;
-    }
+```javascript
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("welcome-screen").style.display = "flex";
+});
 
-    .product-card h3 {
-        font-size: 1.2em;
-    }
-
-    .finalize-btn {
-        padding: 8px;
+function startOrder() {
+    const name = document.getElementById("customer-name").value;
+    const phone = document.getElementById("customer-phone").value;
+    if (name && phone) {
+        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("header").style.display = "block";
+        document.getElementById("main-content").style.display = "block";
+    } else {
+        alert("Por favor, insira seu nome e WhatsApp.");
     }
 }
 
-@media (max-width: 480px) {
-    .product-card h3 {
-        font-size: 1em;
-    }
+let cart = [];
 
-    .welcome-container {
-        padding: 20px;
-    }
+function addToCart(name, size, bread, point, ingredients, addons, noteId, price) {
+    const sizeValue = document.querySelector(`input[name="${size}"]:checked`).value;
+    const breadValue = document.querySelector(`input[name="${bread}"]:checked`).value;
+    const pointValue = document.querySelector(`input[name="${point}"]:checked`).value;
+    const ingredientElements = document.querySelectorAll(`.${ingredients}:checked`);
+    const addonElements = document.querySelectorAll(`.${addons}:checked`);
+    const note = document.getElementById(noteId).value;
+    
+    const selectedIngredients = Array.from(ingredientElements).map(el => el.value);
+    const selectedAddons = Array.from(addonElements).map(el => el.value);
 
-    .add-to-cart, .finalize-btn {
-        font-size: 0.9em;
-    }
+    const item = {
+        name,
+        size: sizeValue,
+        bread: breadValue,
+        point: pointValue,
+        ingredients: selectedIngredients,
+        addons: selectedAddons,
+        note: note || "Nenhuma",
+        price: sizeValue === "Duplo" ? price + 7 : price
+    };
+
+    cart.push(item);
+    updateCartDisplay();
+}
+
+function addBeveragesToCart() {
+    const beverageItems = [        { name: "Coca Cola 310ml", price: 6, quantity: document.getElementById("coca-cola").value },        { name: "Guaraná Antártica 310ml", price: 6, quantity: document.getElementById("guarana").value },        { name: "Água com Gás", price: 3, quantity: document.getElementById("agua").value }    ];
+
+    beverageItems.forEach(beverage => {
+        if (beverage.quantity > 0) {
+            cart.push({
+                name: beverage.name,
+                quantity: beverage.quantity,
+                price: beverage.price * beverage.quantity,
+                isBeverage: true
+            });
+        }
+    });
+
+    updateCartDisplay();
+}
+
+function updateCartDisplay() {
+    const cartContent = document.getElementById("cart-content");
+    cartContent.innerHTML = "";
+    let totalPrice = 5; // Taxa de entrega
+
+    cart.forEach(item => {
+        totalPrice += item.price;
+        const itemElement = document.createElement("div");
+        itemElement.classList.add("cart-item");
+        itemElement.innerHTML = item.isBeverage ? `
+            <strong>${item.name}</strong> - Quantidade: ${item.quantity} (R$${item.price.toFixed(2)})
+            <hr>
+        ` : `
+            <strong>${item.name}</strong> - ${item.size} (R$${item.price.toFixed(2)})
+            <br>Pão: ${item.bread} - Ponto: ${item.point}
+            <br>Remover: ${item.ingredients.join(", ") || "Nenhum"}
+            <br>Adicionais: ${item.addons.join(", ") || "Nenhum"}
+            <br>Observação: ${item.note}
+            <hr>
+        `;
+        cartContent.appendChild(itemElement);
+    });
+
+    document.getElementById("total-price").innerText = `Total: R$${totalPrice.toFixed(2)}`;
+}
+
+function finalizeOrder() {
+    addBeveragesToCart();
+    const cartContent = cart.map(item => item.isBeverage ? `
+        ${item.name} - Quantidade: ${item.quantity} (R$${item.price.toFixed(2)})
+    ` : `
+        ${item.name} - ${item.size} (R$${item.price.toFixed(2)})
+        Pão: ${item.bread} - Ponto: ${item.point}
+        Remover: ${item.ingredients.join(", ") || "Nenhum"}
+        Adicionais: ${item.addons.join(", ") || "Nenhum"}
+        Observação: ${item.note}
+    `).join("\n\n");
+
+    const phone = "48991490613";
+    const totalPrice = document.getElementById("total-price").innerText.split(": R$")[1];
+    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
+    window.open(`https://wa.me/${phone}?text=${message}`);
 }
 
 
