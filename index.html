@@ -1,26 +1,36 @@
-<div id="welcome-screen">
-    <div class="welcome-container">
-        <img src="logo.jpg" alt="Chama Burguer Logo" class="small-logo">
-        <div class="input-container">
-            <input type="text" id="customer-name" placeholder="Seu Nome" required>
-            <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
-            <button onclick="startOrder()">Iniciar Pedido</button>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chama Burguer - Peça Já!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela de Boas-vindas -->
+    <div id="welcome-screen">
+        <div class="welcome-container">
+            <img src="logo.png" alt="Chama Burguer Logo" class="small-logo">
+            <div class="input-container">
+                <input type="text" id="customer-name" placeholder="Seu Nome" required>
+                <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
+                <button onclick="startOrder()">Iniciar Pedido</button>
+            </div>
         </div>
     </div>
-</div>
 
-
-    <!-- Cabeçalho e Menu do Cardápio -->
+    <!-- Menu e Lanches -->
     <header id="header" style="display: none;">
         <h1>Chama Burguer</h1>
         <p class="info">Atendemos apenas Fazenda da Armação e Palmas no nosso Delivery.</p>
     </header>
 
     <main id="main-content" style="display: none;">
-        <!-- Seção de Lanches -->
+        <!-- Lista de Produtos -->
         <section class="product-list">
             <h2>Lanches</h2>
-            <!-- Exemplo: CHAMA Clássico -->
+
+            <!-- Exemplo de lanche - CHAMA Clássico -->
             <div class="product-card">
                 <h3>CHAMA Clássico</h3>
                 <p>Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
@@ -54,72 +64,59 @@
                     <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
                     <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
                 </div>
-                
                 <div class="option-group note">
                     <h4>Observação:</h4>
                     <input type="text" id="note-classico" placeholder="Ex: Sem salada">
                 </div>
                 <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', 'point-classico', 'ingredient-classico', 'addon-classico', 'note-classico', 26)">Adicionar ao Carrinho</button>
             </div>
-            <!-- CHAMA Bacon -->
+
+            <!-- Exemplo de lanche - CHAMA Bacon -->
             <div class="product-card">
                 <h3>CHAMA Bacon</h3>
-                <p>Pão, Hambúrguer de carne bovina, BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa, maionese da casa.</p>
+                <p>Pão, Hambúrguer de carne bovina, BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, cebola roxa, alface, tomate, maionese da casa.</p>
                 <div class="price">R$30,00 Simples | R$37,00 Duplo</div>
-                <div class="option-group">
+                <div class="option-group size-choice">
                     <h4>Tamanho:</h4>
-                    <label><input type="radio" name="size-bacon" value="Simples" checked> Simples</label>
-                    <label><input type="radio" name="size-bacon" value="Duplo"> Duplo</label>
+                    <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
+                    <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group bread-choice">
                     <h4>Pão:</h4>
-                    <label><input type="radio" name="bread-bacon" value="Brioche" checked> Brioche</label>
-                    <label><input type="radio" name="bread-bacon" value="Parmesão"> Parmesão</label>
+                    <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
+                    <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group meat-point">
                     <h4>Ponto da Carne:</h4>
-                    <label><input type="radio" name="point-bacon" value="Mal Passada" checked> Mal Passada</label>
-                    <label><input type="radio" name="point-bacon" value="Ao Ponto"> Ao Ponto</label>
-                    <label><input type="radio" name="point-bacon" value="Bem Passada"> Bem Passada</label>
+                    <label><input type="radio" name="point-classico" value="Mal Passada" checked> Mal Passada</label>
+                    <label><input type="radio" name="point-classico" value="Ao Ponto"> Ao Ponto</label>
+                    <label><input type="radio" name="point-classico" value="Bem Passada"> Bem Passada</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group remove-ingredients">
                     <h4>Remover Ingredientes:</h4>
-                    <label><input type="checkbox" value="Bacon" class="ingredient-bacon"> Bacon</label>
+                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
+                    <label><input type="checkbox" value="Alface" class="ingredient-bacon"> Alface</label>
+                    <label><input type="checkbox" value="Tomate" class="ingredient-bacon"> Tomate</label>
+                    <label><input type="checkbox" value="BBQ" class="ingredient-bacon"> BBQ</label>
                     <label><input type="checkbox" value="Cheddar Cremoso" class="ingredient-bacon"> Cheddar Cremoso</label>
-                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-bacon"> Cebola Roxa</label>
                     <label><input type="checkbox" value="Maionese da Casa" class="ingredient-bacon"> Maionese da Casa</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group addons">
                     <h4>Adicionais:</h4>
                     <label><input type="checkbox" value="Bacon - R$5" class="addon-bacon"> Bacon (R$5)</label>
                     <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-bacon"> Cheddar Cremoso (R$4)</label>
                     <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-bacon"> Maionese da Casa (R$2)</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group note">
                     <h4>Observação:</h4>
-                    <input type="text" id="note-bacon" placeholder="Ex: Sem BBQ">
+                    <input type="text" id="note-bacon" placeholder="Ex: Sem salada">
                 </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Bacon', 'size-bacon', 'bread-bacon', 'point-bacon', 'ingredient-bacon', 'addon-bacon', 'note-bacon', 30)">Adicionar ao Carrinho</button>
+                <button class="add-to-cart" onclick="addToCart('CHAMA Bacon', 'size-bacon', 'bread-bacon', 'point-bacon', 'ingredient-bacon', 'addon-bacon', 'note-bacon', 26)">Adicionar ao Carrinho</button>
             </div>
 
-            <!-- CHAMA Kids (sem escolha de pão ou ponto da carne) -->
-            <div class="product-card">
-                <h3>CHAMA Kids</h3>
-                <p>Pão Kids, Hambúrguer de carne bovina (80g), queijo mussarela, maionese da casa.</p>
-                <div class="price">R$19,00</div>
-                <div class="option-group">
-                    <h4>Remover Ingredientes:</h4>
-                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-kids"> Maionese da Casa</label>
-                </div>
-                <div class="option-group">
-                    <h4>Observação:</h4>
-                    <input type="text" id="note-kids" placeholder="Ex: Sem maionese">
-                </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Kids', null, null, null, 'ingredient-kids', null, 'note-kids', 19)">Adicionar ao Carrinho</button>
-            </div>
         </section>
 
-        <!-- Seção de Bebidas ao Final -->
+        <!-- Bebidas -->
         <section class="beverages">
             <h2>Bebidas</h2>
             <div class="beverage-option">
