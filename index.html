@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <!-- Cabeçalho e Menu do Cardápio -->
+    <!-- Cabeçalho do Cardápio -->
     <header id="header" style="display: none;">
         <h1>Chama Burguer</h1>
         <p class="info">Atendemos apenas Fazenda da Armação e Palmas no nosso Delivery.</p>
@@ -28,7 +28,6 @@
     <main id="main-content" style="display: none;">
         <!-- Seção de Lanches -->
         <section class="product-list">
-            <!-- CHAMA Clássico -->
             <div class="product-card">
                 <h2>CHAMA Clássico</h2>
                 <p>Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
@@ -62,57 +61,8 @@
                 </div>
                 <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', 'point-classico', 'ingredient-classico', 'note-classico', 26)">Adicionar ao Carrinho</button>
             </div>
-
-            <!-- CHAMA Bacon -->
-            <div class="product-card">
-                <h2>CHAMA Bacon</h2>
-                <p>Pão, Hambúrguer de carne bovina, BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa, maionese da casa.</p>
-                <div class="price">R$30,00 Simples | R$37,00 Duplo</div>
-                <div class="option">
-                    <h4>Escolha o Tamanho:</h4>
-                    <label><input type="radio" name="size-bacon" value="Simples" checked> Simples</label>
-                    <label><input type="radio" name="size-bacon" value="Duplo"> Duplo</label>
-                </div>
-                <div class="option">
-                    <h4>Escolha o Pão:</h4>
-                    <label><input type="radio" name="bread-bacon" value="Brioche" checked> Brioche</label>
-                    <label><input type="radio" name="bread-bacon" value="Parmesão"> Parmesão</label>
-                </div>
-                <div class="option">
-                    <h4>Ponto da Carne:</h4>
-                    <label><input type="radio" name="point-bacon" value="Mal Passada" checked> Mal Passada</label>
-                    <label><input type="radio" name="point-bacon" value="Ao Ponto"> Ao Ponto</label>
-                    <label><input type="radio" name="point-bacon" value="Bem Passada"> Bem Passada</label>
-                </div>
-                <div class="option">
-                    <h4>Ingredientes para Remover:</h4>
-                    <label><input type="checkbox" value="Bacon" class="ingredient-bacon"> Bacon</label>
-                    <label><input type="checkbox" value="Cheddar Cremoso" class="ingredient-bacon"> Cheddar Cremoso</label>
-                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-bacon"> Cebola Roxa</label>
-                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-bacon"> Maionese da Casa</label>
-                </div>
-                <div class="option">
-                    <h4>Observação:</h4>
-                    <input type="text" id="note-bacon" placeholder="Ex: Sem BBQ">
-                </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Bacon', 'size-bacon', 'bread-bacon', 'point-bacon', 'ingredient-bacon', 'note-bacon', 30)">Adicionar ao Carrinho</button>
-            </div>
-
-            <!-- CHAMA Kids (sem escolha de pão ou ponto da carne) -->
-            <div class="product-card">
-                <h2>CHAMA Kids</h2>
-                <p>Pão Kids, Hambúrguer de carne bovina (80g), queijo mussarela, maionese da casa.</p>
-                <div class="price">R$19,00</div>
-                <div class="option">
-                    <h4>Ingredientes para Remover:</h4>
-                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-kids"> Maionese da Casa</label>
-                </div>
-                <div class="option">
-                    <h4>Observação:</h4>
-                    <input type="text" id="note-kids" placeholder="Ex: Sem maionese">
-                </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Kids', null, null, null, 'ingredient-kids', 'note-kids', 19)">Adicionar ao Carrinho</button>
-            </div>
+            
+            <!-- Outros produtos são adicionados da mesma forma -->
         </section>
 
         <!-- Seção de Bebidas -->
@@ -150,8 +100,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
