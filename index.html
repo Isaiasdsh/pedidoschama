@@ -3,122 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chama Burguer - Peça Já!</title>
+    <title>Cardápio Chama Burguer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Tela de Boas-vindas -->
     <div id="welcome-screen">
         <div class="welcome-container">
-            <img src="logo.jpg" alt="Chama Burguer Logo" class="small-logo">
-            <div class="input-container">
-                <input type="text" id="customer-name" placeholder="Seu Nome" required>
-                <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
-                <button onclick="startOrder()">Iniciar Pedido</button>
-            </div>
+            <img src="logo.jpg" alt="Chama Burguer Logo" class="logo">
+            <input type="text" id="customer-name" placeholder="Seu Nome" required>
+            <input type="tel" id="customer-phone" placeholder="Seu WhatsApp" required>
+            <button onclick="startOrder()">Iniciar Pedido</button>
         </div>
     </div>
 
-    <!-- Menu e Lanches -->
-    <header id="header" style="display: none;">
-        <h1>Chama Burguer</h1>
-        <p class="info">Atendemos apenas Fazenda da Armação e Palmas no nosso Delivery.</p>
-    </header>
-
-    <main id="main-content" style="display: none;">
+    <!-- Cardápio Digital -->
+    <div id="menu-screen" style="display: none;">
+        <h1>Cardápio Chama Burguer</h1>
         <section class="product-list">
             <h2>Lanches</h2>
 
             <!-- CHAMA Clássico -->
             <div class="product-card">
                 <h3>CHAMA Clássico</h3>
-                <p class="description">Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
-                <div class="price">R$26,00 Simples | R$33,00 Duplo</div>
-                
-                <div class="option-group">
-                    <h4>Tamanho</h4>
-                    <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
-                    <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
+                <p>Hambúrguer, queijo mussarela, cebola, alface, tomate, maionese da casa</p>
+                <label>Tamanho:
+                    <select id="size-classico">
+                        <option value="Simples - 26">Simples - R$26,00</option>
+                        <option value="Duplo - 33">Duplo - R$33,00</option>
+                    </select>
+                </label>
+                <label>Escolha do Pão:
+                    <select id="bread-classico">
+                        <option value="Brioche">Brioche</option>
+                        <option value="Parmesão">Parmesão</option>
+                    </select>
+                </label>
+                <div>
+                    <h4>Adicionais</h4>
+                    <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon - R$5</label>
+                    <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso - R$4</label>
                 </div>
-
-                <div class="option-group">
-                    <h4>Escolha seu Pão</h4>
-                    <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
-                    <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
-                </div>
-
-                <div class="option-group">
-                    <h4>O que deseja retirar do seu lanche?</h4>
-                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
-                    <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
-                    <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
-                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
-                </div>
-
-                <div class="option-group">
-                    <h4>Turbine seu pedido!</h4>
-                    <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon (R$5)</label>
-                    <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
-                    <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
-                </div>
-
-                <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', null, 'ingredient-classico', 'addon-classico', null, 26)">Adicionar ao Carrinho</button>
+                <button onclick="addToCart('CHAMA Clássico')">Adicionar ao Carrinho</button>
             </div>
 
             <!-- CHAMA Bacon -->
-<div class="product-card">
-    <h3>CHAMA Bacon</h3>
-    <p class="description">Pão, Hambúrguer de carne bovina, BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa, maionese da casa.</p>
-    <div class="price">R$30,00 Simples | R$37,00 Duplo</div>
-    
-    <div class="option-group">
-        <h4>Tamanho</h4>
-        <label><input type="radio" name="size-bacon" value="Simples" checked> Simples</label>
-        <label><input type="radio" name="size-bacon" value="Duplo"> Duplo</label>
-    </div>
-    <div class="option-group">
-        <h4>Escolha seu Pão</h4>
-        <label><input type="radio" name="bread-bacon" value="Brioche" checked> Brioche</label>
-        <label><input type="radio" name="bread-bacon" value="Parmesão"> Parmesão</label>
-    </div>
-    <div class="option-group">
-        <h4>O que deseja retirar do seu lanche?</h4>
-        <label><input type="checkbox" value="Cebola Roxa" class="ingredient-bacon"> Cebola Roxa</label>
-        <label><input type="checkbox" value="Alface" class="ingredient-bacon"> Alface</label>
-        <label><input type="checkbox" value="Tomate" class="ingredient-bacon"> Tomate</label>
-        <label><input type="checkbox" value="Maionese da Casa" class="ingredient-bacon"> Maionese da Casa</label>
-    </div>
-    <div class="option-group">
-        <h4>Turbine seu pedido!</h4>
-        <label><input type="checkbox" value="Bacon - R$5" class="addon-bacon"> Bacon (R$5)</label>
-        <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-bacon"> Cheddar Cremoso (R$4)</label>
-        <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-bacon"> Maionese da Casa (R$2)</label>
-    </div>
-    <button class="add-to-cart" onclick="addToCart('CHAMA Bacon', 'size-bacon', 'bread-bacon', null, 'ingredient-bacon', 'addon-bacon', null, 30)">Adicionar ao Carrinho</button>
-</div>
+            <div class="product-card">
+                <h3>CHAMA Bacon</h3>
+                <p>Hambúrguer, queijo mussarela, bacon em tiras, alface, tomate, maionese da casa</p>
+                <label>Tamanho:
+                    <select id="size-bacon">
+                        <option value="Simples - 30">Simples - R$30,00</option>
+                        <option value="Duplo - 37">Duplo - R$37,00</option>
+                    </select>
+                </label>
+                <label>Escolha do Pão:
+                    <select id="bread-bacon">
+                        <option value="Brioche">Brioche</option>
+                        <option value="Parmesão">Parmesão</option>
+                    </select>
+                </label>
+                <div>
+                    <h4>Adicionais</h4>
+                    <label><input type="checkbox" value="Bacon - R$5" class="addon-bacon"> Bacon - R$5</label>
+                    <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-bacon"> Cheddar Cremoso - R$4</label>
+                </div>
+                <button onclick="addToCart('CHAMA Bacon')">Adicionar ao Carrinho</button>
+            </div>
 
-<!-- CHAMA Kids (Sem escolha de pão e ponto da carne) -->
-<div class="product-card">
-    <h3>CHAMA Kids</h3>
-    <p class="description">Pão Kids, Hambúrguer de carne bovina (80g), queijo mussarela, maionese da casa.</p>
-    <div class="price">R$19,00</div>
+            <!-- CHAMA Kids -->
+            <div class="product-card">
+                <h3>CHAMA Kids</h3>
+                <p>Hambúrguer de carne (80g), queijo mussarela, maionese da casa</p>
+                <div class="price">R$19,00</div>
+                <div>
+                    <h4>Adicionais</h4>
+                    <label><input type="checkbox" value="Bacon - R$5" class="addon-kids"> Bacon - R$5</label>
+                    <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-kids"> Cheddar Cremoso - R$4</label>
+                </div>
+                <button onclick="addToCart('CHAMA Kids')">Adicionar ao Carrinho</button>
+            </div>
 
-    <div class="option-group">
-        <h4>O que deseja retirar do seu lanche?</h4>
-        <label><input type="checkbox" value="Maionese da Casa" class="ingredient-kids"> Maionese da Casa</label>
-    </div>
-    <div class="option-group">
-        <h4>Turbine seu pedido!</h4>
-        <label><input type="checkbox" value="Bacon - R$5" class="addon-kids"> Bacon (R$5)</label>
-        <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-kids"> Cheddar Cremoso (R$4)</label>
-        <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-kids"> Maionese da Casa (R$2)</label>
-    </div>
-    <button class="add-to-cart" onclick="addToCart('CHAMA Kids', null, null, null, 'ingredient-kids', 'addon-kids', null, 19)">Adicionar ao Carrinho</button>
-</div>
-        </section>
-    </main>
-
-    <h2>Bebidas</h2>
+            <h2>Bebidas</h2>
             <div class="product-card">
                 <h3>Coca Cola 310ml - R$6</h3>
                 <input type="number" id="coca-cola" placeholder="Quantidade">
@@ -132,15 +98,9 @@
                 <input type="number" id="agua" placeholder="Quantidade">
             </div>
         </section>
-    </main>
 
-    <!-- Carrinho Fixo na Parte Inferior -->
-    <footer class="cart-footer" style="display: none;">
-        <div id="cart-content"></div>
-        <p id="delivery-fee">Taxa de Entrega: R$5,00</p>
-        <p id="total-price">Total: R$0,00</p>
-        <button class="finalize-btn" onclick="finalizeOrder()">Finalizar Pedido</button>
-    </footer>
+        <button onclick="finalizeOrder()">Finalizar Pedido</button>
+    </div>
 
     <script src="script.js"></script>
 </body>
