@@ -10,7 +10,7 @@
     <!-- Tela de Boas-vindas para inserir nome e WhatsApp -->
     <div id="welcome-screen">
         <div class="welcome-container">
-            <img src="logo.jpg" alt="Chama Burguer Logo" class="logo">
+            <img src="logo.png" alt="Chama Burguer Logo" class="logo">
             <h1>Bem-vindo ao Chama Burguer!</h1>
             <p>Para continuar, insira seu nome e WhatsApp:</p>
             <input type="text" id="customer-name" placeholder="Seu Nome" required>
@@ -29,49 +29,47 @@
         <!-- Seção de Lanches -->
         <section class="product-list">
             <h2>Lanches</h2>
-            
-            <!-- CHAMA Clássico -->
+            <!-- Exemplo: CHAMA Clássico -->
             <div class="product-card">
                 <h3>CHAMA Clássico</h3>
                 <p>Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
                 <div class="price">R$26,00 Simples | R$33,00 Duplo</div>
-                <div class="option-group">
+                <div class="option-group size-choice">
                     <h4>Tamanho:</h4>
                     <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
                     <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group bread-choice">
                     <h4>Pão:</h4>
                     <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
                     <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group meat-point">
                     <h4>Ponto da Carne:</h4>
                     <label><input type="radio" name="point-classico" value="Mal Passada" checked> Mal Passada</label>
                     <label><input type="radio" name="point-classico" value="Ao Ponto"> Ao Ponto</label>
                     <label><input type="radio" name="point-classico" value="Bem Passada"> Bem Passada</label>
                 </div>
-                <div class="option-group">
+                <div class="option-group remove-ingredients">
                     <h4>Remover Ingredientes:</h4>
                     <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
                     <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
                     <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
                     <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
                 </div>
-                <!-- Adicionais -->
-                <div class="option-group">
+                <div class="option-group addons">
                     <h4>Adicionais:</h4>
                     <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon (R$5)</label>
                     <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
                     <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
                 </div>
-                <div class="option-group">
+                
+                <div class="option-group note">
                     <h4>Observação:</h4>
                     <input type="text" id="note-classico" placeholder="Ex: Sem salada">
                 </div>
                 <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', 'point-classico', 'ingredient-classico', 'addon-classico', 'note-classico', 26)">Adicionar ao Carrinho</button>
             </div>
-
             <!-- CHAMA Bacon -->
             <div class="product-card">
                 <h3>CHAMA Bacon</h3>
@@ -130,7 +128,7 @@
             </div>
         </section>
 
-        <!-- Seção de Bebidas -->
+        <!-- Seção de Bebidas ao Final -->
         <section class="beverages">
             <h2>Bebidas</h2>
             <div class="beverage-option">
