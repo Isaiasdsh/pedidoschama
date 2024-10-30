@@ -72,3 +72,12 @@ function finalizeOrder() {
         Pão: ${item.bread} - Ponto: ${item.point}
         Remover: ${item.ingredients.join(", ") || "Nenhum"}
         Adicionais: ${item.addons.join(", ") || "Nenhum"}
+        Observação: ${item.note}
+    `).join("\n\n");
+
+    const phone = "48991490613";
+    const totalPrice = document.getElementById("total-price").innerText.split(": R$")[1];
+    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
+    window.open(`https://wa.me/${phone}?text=${message}`);
+}
+
