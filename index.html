@@ -19,13 +19,14 @@
         </div>
     </div>
 
+    <!-- Cabeçalho e Menu do Cardápio -->
     <header id="header" style="display: none;">
         <h1>Chama Burguer</h1>
         <p class="info">Atendemos apenas Fazenda da Armação e Palmas no nosso Delivery.</p>
     </header>
 
     <main id="main-content" style="display: none;">
-        <!-- Seção de Produtos -->
+        <!-- Seção de Lanches -->
         <section class="product-list">
             <!-- CHAMA Clássico -->
             <div class="product-card">
@@ -110,8 +111,30 @@
                     <h4>Observação:</h4>
                     <input type="text" id="note-kids" placeholder="Ex: Sem maionese">
                 </div>
-                <button class="add-to-cart" onclick="addToCart('CHAMA Kids', null, null, 'ingredient-kids', 'note-kids', 19)">Adicionar ao Carrinho</button>
+                <button class="add-to-cart" onclick="addToCart('CHAMA Kids', null, null, null, 'ingredient-kids', 'note-kids', 19)">Adicionar ao Carrinho</button>
             </div>
+        </section>
+
+        <!-- Seção de Bebidas -->
+        <section class="beverages">
+            <h2>Bebidas</h2>
+            <div class="beverage-option">
+                <label>Coca Cola 310ml - R$6,00: <input type="number" id="coca-cola" min="0" placeholder="0"></label>
+            </div>
+            <div class="beverage-option">
+                <label>Guaraná Antártica 310ml - R$6,00: <input type="number" id="guarana" min="0" placeholder="0"></label>
+            </div>
+            <div class="beverage-option">
+                <label>Água com Gás - R$3,00: <input type="number" id="agua" min="0" placeholder="0"></label>
+            </div>
+        </section>
+
+        <!-- Seção de Adicionais -->
+        <section class="addons">
+            <h2>Adicionais</h2>
+            <label><input type="checkbox" value="Bacon - R$5" class="addon-item"> Bacon (R$5)</label>
+            <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-item"> Cheddar Cremoso (R$4)</label>
+            <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-item"> Maionese da Casa (R$2)</label>
         </section>
 
         <!-- Carrinho Fixo -->
@@ -127,6 +150,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
