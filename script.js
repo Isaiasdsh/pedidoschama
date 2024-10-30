@@ -74,9 +74,8 @@ function finalizeOrder() {
         Observação: ${item.note}
     `).join("\n\n");
 
-    const phone = "48991758488";
+    const phone = "48991490613";
     const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${document.getElementById("total-price").innerText.split(": R$")[1]}`);
     window.open(`https://wa.me/${phone}?text=${message}`);
 }
-
 
