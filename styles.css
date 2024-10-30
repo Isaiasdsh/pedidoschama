@@ -1,90 +1,74 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #121212;
-    color: #fff;
-    margin-bottom: 100px;
-}
-
-#welcome-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    background: #1e1e1e;
-    text-align: center;
-}
-
-.welcome-container {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-    max-width: 350px;
-    width: 100%;
-}
-
-.small-logo {
-    width: 80px;
-    margin-bottom: 20px;
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-    font-size: 1em;
-    background-color: #333333;
-    color: #fff;
-    text-align: center;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #ff4500;
-    color: white;
-    font-size: 1.1em;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #e63900;
-}
-
-.product-list, .beverages {
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-}
-
 .product-card {
     background-color: #1e1e1e;
     border: 1px solid #333;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.product-card h3 {
+    grid-column: span 2;
+    font-size: 1.4em;
+    color: #ff4500;
+}
+
+.product-card .description {
+    grid-column: span 2;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.product-card .price {
+    grid-column: span 2;
+    font-weight: bold;
+    color: #ff4500;
+    margin-bottom: 10px;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-group h4 {
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+}
+
+.option-group label {
+    font-size: 0.85em;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #ff4500;
+}
+
+.add-to-cart {
+    grid-column: span 2;
+    background-color: #ff4500;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #e63900;
 }
 
 .cart-footer {
@@ -96,6 +80,9 @@ button:hover {
     color: #fff;
     padding: 15px;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .finalize-btn {
@@ -103,5 +90,13 @@ button:hover {
     background-color: #ff4500;
     color: white;
     font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.finalize-btn:hover {
+    background-color: #e63900;
 }
 
