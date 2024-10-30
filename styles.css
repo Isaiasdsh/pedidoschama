@@ -1,3 +1,4 @@
+/* Estilos básicos e visuais principais */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,31 +14,43 @@ body {
     color: #333;
 }
 
-header {
-    background-color: #ff4500;
-    color: #fff;
-    padding: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.info {
-    font-size: 0.9em;
-    margin-top: 10px;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
+header, main {
     width: 100%;
     max-width: 1200px;
     padding: 20px;
-    gap: 20px;
+}
+
+#welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ff4500;
+    color: #fff;
+    text-align: center;
+}
+
+#welcome-screen input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: none;
+}
+
+#welcome-screen button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .product-list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
@@ -47,47 +60,14 @@ main {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
 }
 
 .product-card h2 {
-    font-size: 1.5em;
     color: #ff4500;
 }
 
-.product-card p {
-    font-size: 0.9em;
-    margin: 10px 0;
-}
-
-.price {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.quantity-control {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.quantity-control button {
-    width: 30px;
-    height: 30px;
-    font-size: 1em;
-    border: none;
-    background-color: #ff4500;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+.option {
+    margin-top: 15px;
 }
 
 .add-to-cart {
@@ -101,54 +81,15 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.add-to-cart:hover {
-    background-color: #e63900;
-}
-
 .cart {
-    width: 100%;
-    max-width: 300px;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 300px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    right: 20px;
-    top: 100px;
-}
-
-.cart h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: #ff4500;
-}
-
-.finalize-btn {
-    background-color: #ff4500;
-    color: #fff;
-    padding: 15px;
-    width: 100%;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.finalize-btn:hover {
-    background-color: #e63900;
-}
-
-@media (max-width: 768px) {
-    .product-list {
-        grid-template-columns: 1fr;
-    }
-
-    .cart {
-        position: static;
-        width: 100%;
-        margin-top: 20px;
-    }
 }
 
