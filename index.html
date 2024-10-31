@@ -29,60 +29,42 @@
         <section class="product-list">
             <h2>Lanches</h2>
 
-            <!-- CHAMA Clássico (exemplo de layout de comanda) -->
+            <!-- CHAMA Clássico -->
             <div class="product-card">
                 <h3>CHAMA Clássico</h3>
+                <p class="description">Pão, Hambúrguer de carne bovina, queijo mussarela, cebola roxa, alface, tomate, maionese da casa.</p>
+                <div class="price">R$26,00 Simples | R$33,00 Duplo</div>
                 <div class="option-group">
-                    <div class="section">
-                        <h4>Tamanho</h4>
-                        <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
-                        <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
-                    </div>
-
-                    <div class="section">
-                        <h4>Pão</h4>
-                        <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
-                        <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
-                    </div>
-
-                    <div class="section">
-                        <h4>O que deseja retirar do seu lanche?</h4>
-                        <label><input type="checkbox" value="Queijo Mussarela" class="ingredient-classico"> Queijo Mussarela</label>
-                        <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
-                        <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
-                        <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
-                        <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
-                    </div>
-
-                    <div class="section">
-                        <h4>Adicionais</h4>
-                        <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon (R$5)</label>
-                        <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
-                        <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
-                    </div>
-
-                    <div class="section">
-                        <h4>Bebidas</h4>
-                        <label><input type="checkbox" value="Coca Cola" class="beverage-classico"> Coca Cola</label>
-                        <label><input type="checkbox" value="Guaraná" class="beverage-classico"> Guaraná</label>
-                        <label><input type="checkbox" value="Água" class="beverage-classico"> Água</label>
-                    </div>
-
-                    <div class="section">
-                        <h4>Forma de Pagamento</h4>
-                        <label><input type="radio" name="payment-classico" value="Pix" checked> Pix</label>
-                        <label><input type="radio" name="payment-classico" value="Dinheiro"> Dinheiro</label>
-                        <label><input type="radio" name="payment-classico" value="Cartão"> Cartão</label>
-                    </div>
-
-                    <div class="section">
-                        <h4>Endereço</h4>
-                        <input type="text" id="address-classico" placeholder="Endereço de entrega">
-                    </div>
+                    <h4>Tamanho</h4>
+                    <label><input type="radio" name="size-classico" value="Simples" checked> Simples</label>
+                    <label><input type="radio" name="size-classico" value="Duplo"> Duplo</label>
                 </div>
 
-                <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', 'ingredient-classico', 'addon-classico', 'beverage-classico', 'payment-classico', 'address-classico', 26)">Adicionar ao Carrinho</button>
+                <div class="option-group">
+                    <h4>Escolha seu Pão</h4>
+                    <label><input type="radio" name="bread-classico" value="Brioche" checked> Brioche</label>
+                    <label><input type="radio" name="bread-classico" value="Parmesão"> Parmesão</label>
+                </div>
+
+                <div class="option-group">
+                    <h4>O que deseja retirar do seu lanche?</h4>
+                    <label><input type="checkbox" value="Cebola Roxa" class="ingredient-classico"> Cebola Roxa</label>
+                    <label><input type="checkbox" value="Alface" class="ingredient-classico"> Alface</label>
+                    <label><input type="checkbox" value="Tomate" class="ingredient-classico"> Tomate</label>
+                    <label><input type="checkbox" value="Maionese da Casa" class="ingredient-classico"> Maionese da Casa</label>
+                </div>
+
+                <div class="option-group">
+                    <h4>Adicionais</h4>
+                    <label><input type="checkbox" value="Bacon - R$5" class="addon-classico"> Bacon (R$5)</label>
+                    <label><input type="checkbox" value="Cheddar Cremoso - R$4" class="addon-classico"> Cheddar Cremoso (R$4)</label>
+                    <label><input type="checkbox" value="Maionese da Casa - R$2" class="addon-classico"> Maionese da Casa (R$2)</label>
+                </div>
+
+                <button class="add-to-cart" onclick="addToCart('CHAMA Clássico', 'size-classico', 'bread-classico', 'ingredient-classico', 'addon-classico', null, 26)">Adicionar ao Carrinho</button>
             </div>
+
+            <!-- Outros Lanches e Bebidas podem ser adicionados seguindo o mesmo modelo -->
         </section>
     </main>
 
