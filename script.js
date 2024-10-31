@@ -17,29 +17,33 @@ function startOrder() {
 
 let cart = [];
 
-function addToCart(name, size, bread, ingredientsClass, addonsClass, beverageClass, paymentId, addressId, price) {
-    const sizeValue = document.querySelector(`input[name="${size}"]:checked`).value;
-    const breadValue = document.querySelector(`input[name="${bread}"]:checked`).value;
-    const ingredientElements = document.querySelectorAll(`.${ingredientsClass}:checked`);
-    const addonElements = document.querySelectorAll(`.${addonsClass}:checked`);
-    const beverageElements = document.querySelectorAll(`.${beverageClass}:checked`);
-    const payment = document.querySelector(`input[name="${paymentId}"]:checked`).value;
+function addToCart(name, sizeClass, breadClass, ingredientsClass, addonsClass, beveragesClass, paymentClass, addressId, basePrice) {
+    const size = document.querySelector(`input[name="${sizeClass}"]:checked`);
+    const bread = document.querySelector(`input[name="${breadClass}"]:checked`);
+    const ingredients = document.querySelectorAll(`.${ingredientsClass}:checked`);
+    const addons = document.querySelectorAll(`.${addonsClass}:checked`);
+    const beverages = document.querySelectorAll(`.${beveragesClass}:checked`);
+    const payment = document.querySelector(`input[name="${paymentClass}"]:checked`);
     const address = document.getElementById(addressId).value;
-    
-    const selectedIngredients = Array.from(ingredientElements).map(el => el.value);
-    const selectedAddons = Array.from(addonElements).map(el => el.value);
-    const selectedBeverages = Array.from(beverageElements).map(el => el.value);
+
+    // Calculate price based on size
+    const sizePrice = size && size.value === "Duplo" ? basePrice + 7 : basePrice;
+
+    const selectedIngredients = Array.from(ingredients).map(el => el.value);
+    const selectedAddons = Array.from(addons).map(el => el.value);
+    const selectedBeverages = Array.from(beverages).map(el => el.value);
+    const paymentMethod = payment ? payment.value : "Não informado";
 
     const item = {
         name,
-        size: sizeValue,
-        bread: breadValue,
+        size: size ? size.value : "Simples",
+        bread: bread ? bread.value : "Padrão",
         ingredients: selectedIngredients,
         addons: selectedAddons,
         beverages: selectedBeverages,
-        payment,
-        address,
-        price: sizeValue === "Duplo" ? price + 7 : price
+        payment: paymentMethod,
+        address: address || "Endereço não informado",
+        price: sizePrice
     };
 
     cart.push(item);
@@ -49,20 +53,20 @@ function addToCart(name, size, bread, ingredientsClass, addonsClass, beverageCla
 function updateCartDisplay() {
     const cartContent = document.getElementById("cart-content");
     cartContent.innerHTML = "";
-    let totalPrice = 5; // Taxa de entrega
+    let totalPrice = 5; // Delivery fee
 
     cart.forEach(item => {
         totalPrice += item.price;
         const itemElement = document.createElement("div");
         itemElement.classList.add("cart-item");
         itemElement.innerHTML = `
-            <strong>${item.name}</strong> - ${item.size} (R$${item.price.toFixed(2)})
-            <br>Pão: ${item.bread}
-            <br>Remover: ${item.ingredients.join(", ") || "Nenhum"}
-            <br>Adicionais: ${item.addons.join(", ") || "Nenhum"}
-            <br>Bebidas: ${item.beverages.join(", ") || "Nenhuma"}
-            <br>Pagamento: ${item.payment}
-            <br>Endereço: ${item.address || "Não informado"}
+            <div><strong>${item.name}</strong> - ${item.size} (R$${item.price.toFixed(2)})</div>
+            <div>Pão: ${item.bread}</div>
+            <div>Remover: ${item.ingredients.join(", ") || "Nenhum"}</div>
+            <div>Adicionais: ${item.addons.join(", ") || "Nenhum"}</div>
+            <div>Bebidas: ${item.beverages.join(", ") || "Nenhuma"}</div>
+            <div>Pagamento: ${item.payment}</div>
+            <div>Endereço: ${item.address}</div>
             <hr>
         `;
         cartContent.appendChild(itemElement);
@@ -72,19 +76,18 @@ function updateCartDisplay() {
 }
 
 function finalizeOrder() {
-    const cartContent = cart.map(item => `
+    const cartSummary = cart.map(item => `
         ${item.name} - ${item.size} (R$${item.price.toFixed(2)})
         Pão: ${item.bread}
         Remover: ${item.ingredients.join(", ") || "Nenhum"}
         Adicionais: ${item.addons.join(", ") || "Nenhum"}
         Bebidas: ${item.beverages.join(", ") || "Nenhuma"}
         Pagamento: ${item.payment}
-        Endereço: ${item.address || "Não informado"}
+        Endereço: ${item.address}
     `).join("\n\n");
 
     const phone = "48991758488";
     const totalPrice = document.getElementById("total-price").innerText.split(": R$")[1];
-    const message = encodeURIComponent(`Pedido:\n${cartContent}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
+    const message = encodeURIComponent(`Pedido:\n${cartSummary}\n\nTaxa de Entrega: R$5,00\nTotal: R$${totalPrice}`);
     window.open(`https://wa.me/${phone}?text=${message}`);
 }
-
