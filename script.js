@@ -79,10 +79,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Campo para o cliente informar o nome da pessoa que vai comer o lanche
         conteudoLanche.innerHTML += `
-            <p><strong>Qual o nome da pessoa que vai comer esse lanche?</strong></p>
+            <p><strong>Quem vai comer esse lanche?</strong></p>
             <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-            <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
-            <button onclick="voltarParaMenu()">Voltar</button>
+            
         `;
     };
 
