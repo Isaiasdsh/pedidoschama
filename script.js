@@ -76,10 +76,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Função para adicionar o lanche ao carrinho
     window.adicionarAoCarrinho = function() {
         let pedido = "Lanche: ";
+        let total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 19);
+
         document.querySelectorAll("#personalizar-lanche input:checked").forEach(item => {
+            if (item.classList.contains("extra") || item.classList.contains("drink")) {
+                total += parseFloat(item.getAttribute("data-price"));
+            }
             pedido += `${item.value}, `;
         });
-        let total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 19);
+
         totalCarrinho += total;
         carrinho.push({ pedido, total });
 
@@ -117,3 +122,4 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
+
