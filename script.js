@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p><strong>Pão:</strong></p>
                 <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
                 <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
-                <p><strong>Quais Ingredientes Deseja?</strong></p>
+                <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
                 <div class="ingredientes">
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p><strong>Pão:</strong></p>
                 <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
                 <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
-                <p><strong>Quais Ingredientes Deseja?</strong></p>
+                <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
                 <div class="ingredientes">
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Cheddar cremoso" checked> Cheddar cremoso</label>
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <li>Pão Kids (Brioche)</li>
                     <li>Hambúrguer 80g</li>
                 </ul>
-                <p><strong>Quais Ingredientes Deseja Remover?</strong></p>
+                <p><strong>Quais Ingredientes deseja? (desmarque o que você quer retirar)</strong></p>
                 <div class="ingredientes">
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
@@ -81,86 +81,12 @@ document.addEventListener("DOMContentLoaded", function() {
         conteudoLanche.innerHTML += `
             <p><strong>Qual o nome da pessoa que vai comer esse lanche?</strong></p>
             <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-             `;
+            
+        `;
     };
 
-    // Função para adicionar o lanche ao carrinho
-    window.adicionarAoCarrinho = function() {
-        let pedido = "";
-        let total = 0;
-        const tipoLanche = document.getElementById("titulo-lanche").innerText;
-
-        if (tipoLanche.includes("CHAMA Kids")) {
-            // Tratamento especial para o CHAMA Kids
-            pedido += "*CHAMA Kids*\n";
-            total = 19.00;
-            pedido += `Tipo de Pão: Pão Kids (Brioche)\n`;
-            pedido += `Hambúrguer: Hambúrguer 80g\n`;
-
-            // Ingredientes removidos para CHAMA Kids
-            const ingredientesRemovidos = [];
-            document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
-                ingredientesRemovidos.push(ingrediente.value);
-            });
-            if (ingredientesRemovidos.length > 0) {
-                pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
-            }
-
-        } else {
-            // Tratamento para os outros lanches
-            const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.value || "Simples";
-            total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 0);
-            pedido += `*${tipoLanche}* (${tipo})\n`;
-
-            // Tipo de pão
-            const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked").value;
-            pedido += `Tipo de Pão: ${paoEscolhido}\n`;
-
-            // Ingredientes removidos
-            const ingredientesRemovidos = [];
-            document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
-                ingredientesRemovidos.push(ingrediente.value);
-            });
-            if (ingredientesRemovidos.length > 0) {
-                pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
-            }
-        }
-
-        // Adicionais
-        const adicionaisEscolhidos = [];
-        document.querySelectorAll("#personalizar-lanche input.extra:checked").forEach(adicional => {
-            adicionaisEscolhidos.push(adicional.value);
-            total += parseFloat(adicional.getAttribute("data-price"));
-        });
-        if (adicionaisEscolhidos.length > 0) {
-            pedido += `Adicionais: ${adicionaisEscolhidos.join(", ")}\n`;
-        }
-
-        // Bebida
-        const bebidaEscolhida = [];
-        document.querySelectorAll("#personalizar-lanche input.drink:checked").forEach(bebida => {
-            bebidaEscolhida.push(bebida.value);
-            total += parseFloat(bebida.getAttribute("data-price"));
-        });
-        if (bebidaEscolhida.length > 0) {
-            pedido += `Bebida: ${bebidaEscolhida.join(", ")}\n`;
-        }
-
-        // Nome da pessoa que vai consumir o lanche
-        const nomePessoa = document.getElementById("nome-pessoa").value;
-        if (nomePessoa) {
-            pedido += `Para: ${nomePessoa}\n`;
-        }
-
-        // Adiciona o total do lanche, mas só mostra ao final se houver mais de um lanche
-        carrinho.push({ pedido, total });
-        totalCarrinho += total;
-
-        atualizarCarrinho();
-        alert("Item adicionado ao carrinho!");
-
-        // Zerar os campos adicionais e bebidas para o próximo lanche
-        document.querySelectorAll("#personalizar-lanche input[type='checkbox']").forEach(input => input.checked = false);
+    // Função para retornar ao menu de lanches
+    window.voltarParaMenu = function() {
         document.getElementById("personalizar-lanche").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
     };
@@ -181,13 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
         carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
     }
 
-    // Função para remover um item do carrinho
-    function removerDoCarrinho(index) {
-        totalCarrinho -= carrinho[index].total; // Subtrai o valor do item removido do total
-        carrinho.splice(index, 1); // Remove o item do array
-        atualizarCarrinho(); // Atualiza a exibição do carrinho
-    }
-
     // Função para visualizar o carrinho completo
     window.verCarrinho = function() {
         carrinhoCompletoDiv.innerHTML = ""; // Limpa o carrinho completo anterior
@@ -202,6 +121,15 @@ document.addEventListener("DOMContentLoaded", function() {
         totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
         totalFinal.style.fontWeight = "bold";
         carrinhoCompletoDiv.appendChild(totalFinal);
+
+        // Botão para voltar ao menu
+        const backButton = document.createElement("button");
+        backButton.innerText = "Voltar";
+        backButton.onclick = function() {
+            carrinhoCompletoDiv.style.display = "none";
+            document.getElementById("lanches-menu").style.display = "block";
+        };
+        carrinhoCompletoDiv.appendChild(backButton);
 
         carrinhoCompletoDiv.style.display = "block"; // Exibe a div do carrinho completo
     };
@@ -227,3 +155,4 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
+
