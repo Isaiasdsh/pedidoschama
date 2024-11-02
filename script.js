@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         conteudoLanche.innerHTML = ""; // Limpar conteúdo anterior
 
         if (tipo === "classico") {
-            document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Clássico";
+            document.getElementById("titulo-lanche").innerText = "CHAMA Clássico";
             conteudoLanche.innerHTML = `
                 <p><strong>Escolha o Tipo:</strong></p>
                 <label><input type="radio" name="tipo" value="Simples" data-price="26" checked> Simples - R$26,00</label>
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             `;
         } else if (tipo === "bacon") {
-            document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Bacon";
+            document.getElementById("titulo-lanche").innerText = "CHAMA Bacon";
             conteudoLanche.innerHTML = `
                 <p><strong>Escolha o Tipo:</strong></p>
                 <label><input type="radio" name="tipo" value="Simples" data-price="30" checked> Simples - R$30,00</label>
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             `;
         } else if (tipo === "kids") {
-            document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Kids";
+            document.getElementById("titulo-lanche").innerText = "CHAMA Kids";
             conteudoLanche.innerHTML = `
                 <p class="preco">R$19,00</p>
                 <p><strong>Ingredientes (não removíveis):</strong></p>
