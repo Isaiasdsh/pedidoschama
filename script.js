@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (tipoLanche.includes("CHAMA Kids")) {
             // Tratamento especial para o CHAMA Kids
-            pedido += "CHAMA Kids\n";
+            pedido += "*CHAMA Kids*\n";
             total = 19.00;
             pedido += `Tipo de Pão: Pão Kids (Brioche)\n`;
             pedido += `Hambúrguer: Hambúrguer 80g\n`;
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Tratamento para os outros lanches
             const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.value || "Simples";
             total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 0);
-            pedido += `${tipoLanche} (${tipo})\n`;
+            pedido += `*${tipoLanche}* (${tipo})\n`;
 
             // Tipo de pão
             const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked").value;
@@ -178,37 +178,25 @@ document.addEventListener("DOMContentLoaded", function() {
         carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
     }
 
-    // Função para visualizar o carrinho completo
-    window.verCarrinho = function() {
-        carrinhoCompletoDiv.innerHTML = ""; // Limpa o carrinho completo anterior
-
-        carrinho.forEach(item => {
-            const p = document.createElement("p");
-            p.innerText = item.pedido;
-            carrinhoCompletoDiv.appendChild(p);
-        });
-
-        const totalFinal = document.createElement("p");
-        totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
-        totalFinal.style.fontWeight = "bold";
-        carrinhoCompletoDiv.appendChild(totalFinal);
-
-        carrinhoCompletoDiv.style.display = "block"; // Exibe a div do carrinho completo
-    };
-
+    // Função para finalizar o pedido
     window.finalizarPedido = function() {
-        let pedido = "Pedido:\n";
+        let pedido = "Pedido de:\n";
+        const name = document.getElementById("name").value;
+        const whatsapp = document.getElementById("whatsapp").value;
+        const horarioPedido = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+        pedido += `Nome: ${name}\nWhatsApp: ${whatsapp}\nHorário do pedido: ${horarioPedido}\n\n`;
+
+        // Adiciona cada item do carrinho
         carrinho.forEach(item => {
             pedido += `${item.pedido}\n`;
         });
-        pedido += `\nTotal: R$${totalCarrinho.toFixed(2)}`;
-        pedido += `\nTaxa de Entrega: R$${taxaEntrega.toFixed(2)}`;
-        pedido += `\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
 
-        const name = document.getElementById("name").value;
-        const whatsapp = document.getElementById("whatsapp").value;
-        const mensagem = encodeURIComponent(`Pedido de: ${name}\nWhatsApp: ${whatsapp}\n\n${pedido}`);
-        
+        // Adiciona taxa de entrega e total final
+        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\n`;
+        pedido += `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+
+        const mensagem = encodeURIComponent(pedido);
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
