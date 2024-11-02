@@ -10,7 +10,7 @@ h1, h2, h3 {
     color: #333;
 }
 
-.welcome-screen, #menu {
+.welcome-screen, #lanches-menu, #personalizar-lanche, #carrinho {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -40,21 +40,19 @@ button:hover {
     background-color: #218838;
 }
 
-/* Estilo para os cards dos lanches */
-.lanche-card {
-    margin-bottom: 20px;
-    padding: 15px;
+.lanche-opcao {
     border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px 0;
     border-radius: 8px;
+    cursor: pointer;
     background-color: #f9f9f9;
 }
 
-.lanche-card h3 {
-    margin-bottom: 5px;
-    color: #444;
+.lanche-opcao:hover {
+    background-color: #e9e9e9;
 }
 
-/* Ingredientes em duas colunas */
 .ingredientes {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -71,3 +69,4 @@ h3 {
     border-radius: 4px;
     font-weight: bold;
 }
+
