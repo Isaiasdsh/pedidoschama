@@ -1,67 +1,93 @@
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-button");
-    const totalPriceEl = document.getElementById("total-price");
+    const carrinhoLista = document.getElementById("carrinho-lista");
+    const carrinhoTotal = document.getElementById("carrinho-total");
     let carrinho = [];
     let totalCarrinho = 0;
 
     startButton.addEventListener("click", function(e) {
         e.preventDefault();
         document.querySelector(".welcome-screen").style.display = "none";
-        document.getElementById("menu").style.display = "block";
+        document.getElementById("lanches-menu").style.display = "block";
     });
 
-    function updateTotalPrice() {
-        let total = 0;
+    // Função para exibir a tela de personalização do lanche escolhido
+    window.escolherLanche = function(tipo) {
+        document.getElementById("lanches-menu").style.display = "none";
+        document.getElementById("personalizar-lanche").style.display = "block";
+        const conteudoLanche = document.getElementById("conteudo-lanche");
+        conteudoLanche.innerHTML = ""; // Limpar conteúdo anterior
 
-        const tipo = document.querySelector("input[name='tipo-classico']:checked") || document.querySelector("input[name='tipo-bacon']:checked");
-        if (tipo) total += parseFloat(tipo.dataset.price);
+        if (tipo === "classico") {
+            document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Clássico";
+            conteudoLanche.innerHTML = `
+                <p><strong>Escolha o Tipo:</strong></p>
+                <label><input type="radio" name="tipo" value="Simples" data-price="26" checked> Simples - R$26,00</label>
+                <label><input type="radio" name="tipo" value="Duplo" data-price="33"> Duplo - R$33,00</label>
+                <p><strong>Pão:</strong></p>
+                <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
+                <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
+                <p><strong>Quais Ingredientes Deseja?</strong></p>
+                <div class="ingredientes">
+                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
+                    <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
+                    <label><input type="checkbox" name="ingrediente" value="Alface" checked> Alface</label>
+                    <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
+                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
+            `;
+        } else if (tipo === "bacon") {
+            document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Bacon";
+            conteudoLanche.innerHTML = `
+                <p><strong>Escolha o Tipo:</strong></p>
+                <label><input type="radio" name="tipo" value="Simples" data-price="30" checked> Simples - R$30,00</label>
+                <label><input type="radio" name="tipo" value="Duplo" data-price="37"> Duplo - R$37,00</label>
+                <p><strong>Pão:</strong></p>
+                <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
+                <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
+                <p><strong>Quais Ingredientes Deseja?</strong></p>
+                <div class="ingredientes">
+                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
+                    <label><input type="checkbox" name="ingrediente" value="Cheddar cremoso" checked> Cheddar cremoso</label>
+                    <label><input type="checkbox" name="ingrediente" value="Bacon em tiras" checked> Bacon em tiras</label>
+                    <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
+                    <label><input type="checkbox" name="ingrediente" value="Alface" checked> Alface</label>
+                    <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
+                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
+            `;
+        } else if (tipo === "kids") {
+            document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Kids";
+            conteudoLanche.innerHTML = `
+                <p class="preco">R$19,00</p>
+                <p><strong>Ingredientes:</strong></p>
+                <div class="ingredientes">
+                    <label><input type="checkbox" name="ingrediente" value="Pão Kids (Brioche)" checked> Pão Kids (Brioche)</label>
+                    <label><input type="checkbox" name="ingrediente" value="Hambúrguer 80g" checked> Hambúrguer 80g</label>
+                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
+                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
+            `;
+        }
+    };
 
-        document.querySelectorAll(".extra:checked, .drink:checked").forEach(item => {
-            total += parseFloat(item.getAttribute("data-price"));
-        });
-
-        totalPriceEl.textContent = total.toFixed(2);
-    }
-
-    document.getElementById("menu").addEventListener("change", updateTotalPrice);
-
+    // Função para adicionar o lanche ao carrinho
     window.adicionarAoCarrinho = function() {
         let pedido = "Lanche: ";
-        document.querySelectorAll("#menu input:checked").forEach(item => {
+        document.querySelectorAll("#personalizar-lanche input:checked").forEach(item => {
             pedido += `${item.value}, `;
         });
-        let total = parseFloat(totalPriceEl.textContent);
+        let total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 19);
         totalCarrinho += total;
         carrinho.push({ pedido, total });
 
         alert("Item adicionado ao carrinho!");
-        document.getElementById("menu").style.display = "none";
-        document.getElementById("total-price").textContent = "0.00";
-    };
-
-    window.verCarrinho = function() {
-        const carrinhoLista = document.getElementById("carrinho-lista");
-        carrinhoLista.innerHTML = "";
-        carrinho.forEach(item => {
-            const li = document.createElement("li");
-            li.textContent = `${item.pedido} - R$${item.total.toFixed(2)}`;
-            carrinhoLista.appendChild(li);
-        });
-        document.getElementById("carrinho-total").textContent = totalCarrinho.toFixed(2);
-        document.getElementById("carrinho").style.display = "block";
+        document.getElementById("personalizar-lanche").style.display = "none";
+        document.getElementById("lanches-menu").style.display = "block";
     };
 
     window.finalizarPedido = function() {
-        let pedido = "Pedido:\n";
-        carrinho.forEach(item => {
-            pedido += `${item.pedido} - R$${item.total.toFixed(2)}\n`;
-        });
-        pedido += `Total: R$${totalCarrinho.toFixed(2)}`;
-        
-        const name = document.getElementById("name").value;
-        const whatsapp = document.getElementById("whatsapp").value;
-        const mensagem = encodeURIComponent(`Pedido de: ${name}\nWhatsApp: ${whatsapp}\n\n${pedido}`);
-        
-        window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
+        // Código de finalização de pedido para WhatsApp
     };
 });
+
