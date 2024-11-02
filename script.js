@@ -1,3 +1,12 @@
+// Quando o formulário da tela de boas-vindas é enviado
+document.getElementById("welcome-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Previne o envio do formulário
+
+    // Oculta a tela de boas-vindas e exibe o menu
+    document.querySelector(".welcome-screen").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+});
+
 function finalizarPedido() {
     // Obter o lanche selecionado e o preço
     const lanche = document.querySelector('input[name="lanche"]:checked');
@@ -42,3 +51,4 @@ function finalizarPedido() {
     // Enviar pedido para o WhatsApp
     window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
 }
+
