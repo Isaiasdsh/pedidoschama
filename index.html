@@ -22,13 +22,14 @@
         <!-- Card para CHAMA Clássico -->
         <div class="lanche-card">
             <h3>CHAMA Clássico</h3>
-            
-            <!-- Escolha do Pão -->
+            <p><strong>Escolha o Tipo:</strong></p>
+            <label><input type="radio" name="tipo-classico" value="Simples" data-price="26" checked> Simples - R$26,00</label>
+            <label><input type="radio" name="tipo-classico" value="Duplo" data-price="33"> Duplo - R$33,00</label>
+
             <p><strong>Pão:</strong></p>
             <label><input type="radio" name="pao-classico" value="Brioche" checked> Brioche</label>
             <label><input type="radio" name="pao-classico" value="Parmesão"> Parmesão</label>
 
-            <!-- Escolha dos Ingredientes -->
             <p><strong>Quais Ingredientes Deseja?</strong></p>
             <div class="ingredientes">
                 <label><input type="checkbox" name="ingredientes-classico" value="Queijo mussarela" checked> Queijo mussarela</label>
@@ -36,6 +37,42 @@
                 <label><input type="checkbox" name="ingredientes-classico" value="Alface" checked> Alface</label>
                 <label><input type="checkbox" name="ingredientes-classico" value="Tomate" checked> Tomate</label>
                 <label><input type="checkbox" name="ingredientes-classico" value="Maionese da casa" checked> Maionese</label>
+            </div>
+        </div>
+
+        <!-- Card para CHAMA Bacon -->
+        <div class="lanche-card">
+            <h3>CHAMA Bacon</h3>
+            <p><strong>Escolha o Tipo:</strong></p>
+            <label><input type="radio" name="tipo-bacon" value="Simples" data-price="30" checked> Simples - R$30,00</label>
+            <label><input type="radio" name="tipo-bacon" value="Duplo" data-price="37"> Duplo - R$37,00</label>
+
+            <p><strong>Pão:</strong></p>
+            <label><input type="radio" name="pao-bacon" value="Brioche" checked> Brioche</label>
+            <label><input type="radio" name="pao-bacon" value="Parmesão"> Parmesão</label>
+
+            <p><strong>Quais Ingredientes Deseja?</strong></p>
+            <div class="ingredientes">
+                <label><input type="checkbox" name="ingredientes-bacon" value="Queijo mussarela" checked> Queijo mussarela</label>
+                <label><input type="checkbox" name="ingredientes-bacon" value="Cheddar cremoso" checked> Cheddar cremoso</label>
+                <label><input type="checkbox" name="ingredientes-bacon" value="Bacon em tiras" checked> Bacon em tiras</label>
+                <label><input type="checkbox" name="ingredientes-bacon" value="Cebola roxa" checked> Cebola roxa</label>
+                <label><input type="checkbox" name="ingredientes-bacon" value="Alface" checked> Alface</label>
+                <label><input type="checkbox" name="ingredientes-bacon" value="Tomate" checked> Tomate</label>
+                <label><input type="checkbox" name="ingredientes-bacon" value="Maionese da casa" checked> Maionese</label>
+            </div>
+        </div>
+
+        <!-- Card para CHAMA Kids -->
+        <div class="lanche-card">
+            <h3>CHAMA Kids</h3>
+            <p class="preco">R$19,00</p>
+            <p><strong>Ingredientes:</strong></p>
+            <div class="ingredientes">
+                <label><input type="checkbox" name="ingredientes-kids" value="Pão Kids Brioche" checked> Pão Kids (Brioche)</label>
+                <label><input type="checkbox" name="ingredientes-kids" value="Hambúrguer de carne bovina (80g)" checked> Hambúrguer 80g</label>
+                <label><input type="checkbox" name="ingredientes-kids" value="Queijo mussarela" checked> Queijo mussarela</label>
+                <label><input type="checkbox" name="ingredientes-kids" value="Maionese da casa" checked> Maionese da casa</label>
             </div>
         </div>
 
@@ -55,11 +92,20 @@
         <h3>Valor Total: R$<span id="total-price">0.00</span></h3>
         <h3>Taxa de Entrega: R$5,00</h3>
 
-        <!-- Botão para finalizar o pedido -->
+        <!-- Botão para adicionar ao carrinho e ver o carrinho -->
+        <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+        <button onclick="verCarrinho()">Ver Carrinho</button>
+    </div>
+
+    <div id="carrinho" style="display: none;">
+        <h2>Carrinho de Pedidos</h2>
+        <ul id="carrinho-lista"></ul>
+        <h3>Total do Pedido: R$<span id="carrinho-total">0.00</span></h3>
         <button onclick="finalizarPedido()">Finalizar Pedido</button>
     </div>
 
     <script src="./script.js"></script>
 </body>
 </html>
+
 
