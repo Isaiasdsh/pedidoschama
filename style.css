@@ -59,31 +59,72 @@ p {
     background-color: #1C1C1C;
     color: #FFFFFF;
     padding: 20px;
-    text-align: left;
+    text-align: center;
     width: 90%;
-    max-width: 500px;
+    max-width: 800px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 #lanches-menu h2 {
     color: #FFA500;
+    margin-bottom: 20px;
 }
 
-#lanches-menu button {
+/* Estilo do contêiner dos cartões */
+.card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Estilo individual dos cartões */
+.card {
+    background-color: #2C2C2C; /* Fundo cinza escuro */
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+/* Efeito de hover nos cartões */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Título do lanche */
+.card h3 {
+    color: #FFA500; /* Cor laranja para o título */
+    margin-bottom: 10px;
+}
+
+/* Parágrafo com a descrição do lanche */
+.card p {
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    color: #E0E0E0;
+}
+
+/* Botão de personalização */
+.card button {
     padding: 10px 20px;
-    background-color: #FFA500;
-    color: #1C1C1C;
+    background-color: #FFA500; /* Botão laranja */
+    color: #1C1C1C; /* Texto do botão em preto */
     border: none;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    width: 100%;
-    margin: 10px 0;
+    transition: background-color 0.3s;
 }
 
-#lanches-menu button:hover {
-    background-color: #FF8C00;
+.card button:hover {
+    background-color: #FF8C00; /* Cor mais escura no hover */
 }
 
 /* Estilo de personalização do lanche */
