@@ -1,10 +1,14 @@
-// Quando o formulário da tela de boas-vindas é enviado
-document.getElementById("welcome-form").addEventListener("submit", function (e) {
-    e.preventDefault(); // Previne o envio do formulário
+document.addEventListener("DOMContentLoaded", function() {
+    const startButton = document.querySelector("#welcome-form button");
 
-    // Oculta a tela de boas-vindas e exibe o menu
-    document.querySelector(".welcome-screen").style.display = "none";
-    document.getElementById("menu").style.display = "block";
+    // Evento de clique no botão para iniciar o atendimento
+    startButton.addEventListener("click", function (e) {
+        e.preventDefault(); // Previne o envio do formulário
+
+        // Oculta a tela de boas-vindas e exibe o menu
+        document.querySelector(".welcome-screen").style.display = "none";
+        document.getElementById("menu").style.display = "block";
+    });
 });
 
 function finalizarPedido() {
@@ -51,4 +55,3 @@ function finalizarPedido() {
     // Enviar pedido para o WhatsApp
     window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
 }
-
