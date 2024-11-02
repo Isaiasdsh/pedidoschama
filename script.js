@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
         conteudoLanche.innerHTML += `
             <p><strong>Qual o nome da pessoa que vai comer esse lanche?</strong></p>
             <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-        `;
+             `;
     };
 
     // Função para adicionar o lanche ao carrinho
@@ -165,19 +165,47 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("lanches-menu").style.display = "block";
     };
 
-    // Atualiza o carrinho em tempo real
+    // Atualiza o carrinho em tempo real e exibe os itens com um botão de remover
     function atualizarCarrinho() {
         carrinhoLista.innerHTML = "";
-        carrinho.forEach(item => {
+        carrinho.forEach((item, index) => {
             const li = document.createElement("li");
             li.textContent = item.pedido;
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remover";
+            removeButton.onclick = () => removerDoCarrinho(index);
+            li.appendChild(removeButton);
             carrinhoLista.appendChild(li);
         });
         carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
         carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
     }
 
-    // Função para finalizar o pedido
+    // Função para remover um item do carrinho
+    function removerDoCarrinho(index) {
+        totalCarrinho -= carrinho[index].total; // Subtrai o valor do item removido do total
+        carrinho.splice(index, 1); // Remove o item do array
+        atualizarCarrinho(); // Atualiza a exibição do carrinho
+    }
+
+    // Função para visualizar o carrinho completo
+    window.verCarrinho = function() {
+        carrinhoCompletoDiv.innerHTML = ""; // Limpa o carrinho completo anterior
+
+        carrinho.forEach(item => {
+            const p = document.createElement("p");
+            p.innerText = item.pedido;
+            carrinhoCompletoDiv.appendChild(p);
+        });
+
+        const totalFinal = document.createElement("p");
+        totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+        totalFinal.style.fontWeight = "bold";
+        carrinhoCompletoDiv.appendChild(totalFinal);
+
+        carrinhoCompletoDiv.style.display = "block"; // Exibe a div do carrinho completo
+    };
+
     window.finalizarPedido = function() {
         let pedido = "Pedido de:\n";
         const name = document.getElementById("name").value;
