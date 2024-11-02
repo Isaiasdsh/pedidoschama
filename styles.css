@@ -1,208 +1,25 @@
-/* Definindo a paleta de cores */
-:root {
-    --primary-color: #ff4500;
-    --secondary-color: #ffdd57;
-    --text-color: #ffffff;
-    --bg-color: #1a1a1a;
-    --highlight-color: #ffdd57;
-    --menu-icon-color: #ff4500;
-    --price-color: #ffdd57;
-}
-
-/* Estilo Global */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-header {
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
 }
 
-header .logo img {
-    max-width: 200px;
-    height: auto;
+.welcome-screen, #menu {
+    margin-top: 50px;
 }
 
-main {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-h2 {
-    font-size: 1.8em;
-    color: var(--highlight-color);
-}
-
-.menu-item {
-    border-bottom: 1px solid #444;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-
-/* Estilo para o destaque dos tamanhos do lanche */
-.price-options {
-    font-size: 1.5em;  /* Aumenta o tamanho da fonte */
-    font-weight: bold; /* Deixa o texto em negrito para destaque */
-    color: var(--price-color);
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Define o espaço entre os preços */
-    justify-content: flex-start; /* Alinha os preços à esquerda */
-}
-
-.price-options span {
-    padding: 5px 10px;
-    border-radius: 8px;
-    background-color: #333; /* Fundo escuro para destacar os preços */
-    color: #fff;            /* Cor branca para contraste */
-    white-space: nowrap;    /* Impede a quebra de linha entre os preços */
-}
-
-
-.add-to-cart-btn, .finalize-btn {
-    background: var(--primary-color);
-    color: var(--text-color);
-    padding: 15px;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.add-to-cart-btn:hover, .finalize-btn:hover {
-    background: #ff7043;
-}
-
-/* Estilo do Carrinho */
-#cart h2 {
-    font-size: 2.2em;
-    color: var(--highlight-color);
-}
-
-#cart-content {
-    font-size: 1.1em;
-    margin-top: 15px;
-}
-
-/* Estilo para os ingredientes removidos */
-.removed-ingredients {
-    font-style: italic;
-    color: #ffdd57;
-}
-
-/* Botão para remover item do carrinho */
-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-left: 10px;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #ff7043;
-}
-
-/* Destaque para a taxa de entrega */
-#delivery-fee {
-    font-size: 1.2em;
-    color: var(--secondary-color);
-    margin-top: 20px;
-}
-
-#total-price {
-    font-size: 1.5em;
-    color: var(--highlight-color);
-    margin-top: 10px;
-}
-
-/* Seções de pagamento */
-#payment {
-    margin-top: 20px;
-}
-
-#troco-section, #pix-section {
-    margin-top: 15px;
-    background-color: #333;
+input, button {
+    display: block;
+    margin: 10px auto;
     padding: 10px;
-    border-radius: 5px;
+    font-size: 16px;
 }
 
-/* Estilo dos inputs */
-input[type="text"] {
-    padding: 15px;
-    margin: 10px 0;
-    width: 100%;
-    border-radius: 10px;
+button {
+    background-color: #28a745;
+    color: white;
     border: none;
-    background-color: #333;
-    color: var(--text-color);
+    cursor: pointer;
 }
-
-/* ----- Responsividade para dispositivos móveis ----- */
-@media (max-width: 768px) {
-    main {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    .price-options {
-        font-size: 0.9em;
-    }
-
-    p {
-        font-size: 1em;
-    }
-
-    .add-to-cart-btn, .finalize-btn {
-        padding: 12px;
-        font-size: 1.1em;
-    }
-
-    .customize h3, .bread-options h3 {
-        font-size: 1.3em;
-    }
-}
-
-@media (max-width: 480px) {
-    h2 {
-        font-size: 1.3em;
-    }
-
-    .menu-icon {
-        font-size: 1.2em;
-        margin-right: 3px;
-    }
-
-    .price-options {
-        font-size: 0.8em;
-    }
-
-    .add-to-cart-btn, .finalize-btn {
-        font-size: 1em;
-        padding: 10px;
-    }
-
-    input[type="text"] {
-        padding: 10px;
-    }
-}
-
 
 
 
