@@ -1,42 +1,57 @@
-<link rel="stylesheet" href="./style.css">
-<script src="./script.js" defer></script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chama Burguer - Pedido</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <div class="welcome-screen">
+        <h1>Bem-vindo à Chama Burguer</h1>
+        <form id="welcome-form">
+            <input type="text" id="name" placeholder="Digite seu nome" required>
+            <input type="tel" id="whatsapp" placeholder="Número do WhatsApp" required>
+            <button type="submit">Iniciar Atendimento</button>
+        </form>
+    </div>
 
-<div id="menu" style="display: none;">
-    <h2>Escolha seu lanche:</h2>
-    
-    <!-- Lanches -->
-    <label><input type="radio" name="lanche" value="CHAMA Clássico Simples" data-price="26" checked> CHAMA Clássico (Simples) - R$26,00</label><br>
-    <label><input type="radio" name="lanche" value="CHAMA Clássico Duplo" data-price="33"> CHAMA Clássico (Duplo) - R$33,00</label><br>
-    <label><input type="radio" name="lanche" value="CHAMA Bacon Simples" data-price="30"> CHAMA Bacon (Simples) - R$30,00</label><br>
-    <label><input type="radio" name="lanche" value="CHAMA Bacon Duplo" data-price="37"> CHAMA Bacon (Duplo) - R$37,00</label><br>
-    <label><input type="radio" name="lanche" value="CHAMA Kids" data-price="19"> CHAMA Kids - R$19,00</label><br>
+    <div id="menu" style="display: none;">
+        <h2>Escolha seu lanche:</h2>
+        
+        <!-- Lanches -->
+        <label><input type="radio" name="lanche" value="CHAMA Clássico Simples" data-price="26" checked> CHAMA Clássico (Simples) - R$26,00</label><br>
+        <label><input type="radio" name="lanche" value="CHAMA Clássico Duplo" data-price="33"> CHAMA Clássico (Duplo) - R$33,00</label><br>
+        <label><input type="radio" name="lanche" value="CHAMA Bacon Simples" data-price="30"> CHAMA Bacon (Simples) - R$30,00</label><br>
+        <label><input type="radio" name="lanche" value="CHAMA Bacon Duplo" data-price="37"> CHAMA Bacon (Duplo) - R$37,00</label><br>
+        <label><input type="radio" name="lanche" value="CHAMA Kids" data-price="19"> CHAMA Kids - R$19,00</label><br>
 
-    <!-- Escolha do Ponto da Carne -->
-    <h3>Ponto da Carne:</h3>
-    <label><input type="radio" name="ponto" value="Mal Passada" checked> Mal Passada</label><br>
-    <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label><br>
-    <label><input type="radio" name="ponto" value="Bem Passada"> Bem Passada</label><br>
+        <!-- Escolha do Ponto da Carne -->
+        <h3>Ponto da Carne:</h3>
+        <label><input type="radio" name="ponto" value="Mal Passada" checked> Mal Passada</label><br>
+        <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label><br>
+        <label><input type="radio" name="ponto" value="Bem Passada"> Bem Passada</label><br>
 
-    <!-- Escolha do Pão -->
-    <h3>Escolha seu pão:</h3>
-    <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label><br>
-    <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label><br>
+        <!-- Escolha do Pão -->
+        <h3>Escolha seu pão:</h3>
+        <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label><br>
+        <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label><br>
 
-    <!-- Adicionais -->
-    <h3>Adicionais:</h3>
-    <label><input type="checkbox" class="extra" value="Bacon" data-price="5"> Bacon - R$5,00</label><br>
-    <label><input type="checkbox" class="extra" value="Cheddar Cremoso" data-price="4"> Cheddar Cremoso - R$4,00</label><br>
-    <label><input type="checkbox" class="extra" value="Maionese da Casa" data-price="2"> Maionese da Casa - R$2,00</label><br>
+        <!-- Adicionais -->
+        <h3>Adicionais:</h3>
+        <label><input type="checkbox" class="extra" value="Bacon" data-price="5"> Bacon - R$5,00</label><br>
+        <label><input type="checkbox" class="extra" value="Cheddar Cremoso" data-price="4"> Cheddar Cremoso - R$4,00</label><br>
+        <label><input type="checkbox" class="extra" value="Maionese da Casa" data-price="2"> Maionese da Casa - R$2,00</label><br>
 
-    <!-- Bebidas -->
-    <h3>Bebidas:</h3>
-    <label><input type="checkbox" class="drink" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label><br>
-    <label><input type="checkbox" class="drink" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label><br>
-    <label><input type="checkbox" class="drink" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label><br>
+        <!-- Bebidas -->
+        <h3>Bebidas:</h3>
+        <label><input type="checkbox" class="drink" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label><br>
+        <label><input type="checkbox" class="drink" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label><br>
+        <label><input type="checkbox" class="drink" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label><br>
 
-    <!-- Botão para finalizar o pedido -->
-    <button onclick="finalizarPedido()">Finalizar Pedido</button>
-</div>
-
-
-
+        <!-- Botão para finalizar o pedido -->
+        <button onclick="finalizarPedido()">Finalizar Pedido</button>
+    </div>
+</body>
+</html>
