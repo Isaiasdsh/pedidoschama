@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         document.querySelector(".welcome-screen").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
+        document.getElementById("carrinho").style.display = "block"; // Mostra o carrinho após iniciar o atendimento
     });
 
     // Função para exibir a tela de personalização do lanche escolhido
@@ -122,4 +123,5 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
+
 
