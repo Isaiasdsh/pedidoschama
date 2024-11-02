@@ -64,38 +64,67 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("titulo-lanche").innerText = "Personalizar CHAMA Kids";
             conteudoLanche.innerHTML = `
                 <p class="preco">R$19,00</p>
-                <p><strong>Ingredientes:</strong></p>
+                <p><strong>Ingredientes (não removíveis):</strong></p>
+                <ul>
+                    <li>Pão Kids (Brioche)</li>
+                    <li>Hambúrguer 80g</li>
+                </ul>
+                <p><strong>Quais Ingredientes Deseja Remover?</strong></p>
                 <div class="ingredientes">
-                    <label><input type="checkbox" name="ingrediente" value="Pão Kids (Brioche)" checked> Pão Kids (Brioche)</label>
-                    <label><input type="checkbox" name="ingrediente" value="Hambúrguer 80g" checked> Hambúrguer 80g</label>
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
             `;
         }
+
+        // Campo para o cliente informar o nome da pessoa que vai comer o lanche
+        conteudoLanche.innerHTML += `
+            <p><strong>Qual o nome da pessoa que vai comer esse lanche?</strong></p>
+            <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
+            <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+        `;
     };
 
     // Função para adicionar o lanche ao carrinho
     window.adicionarAoCarrinho = function() {
         let pedido = "";
-        let total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 19);
+        let total = 0;
+        const tipoLanche = document.getElementById("titulo-lanche").innerText;
 
-        // Nome do lanche e tipo (Simples/Duplo)
-        const tipoLanche = document.querySelector("#personalizar-lanche input[name='tipo']:checked").value;
-        const nomeLanche = document.getElementById("titulo-lanche").innerText;
-        pedido += `${nomeLanche} (${tipoLanche})\n`;
+        if (tipoLanche.includes("CHAMA Kids")) {
+            // Tratamento especial para o CHAMA Kids
+            pedido += "CHAMA Kids\n";
+            total = 19.00;
+            pedido += `Tipo de Pão: Pão Kids (Brioche)\n`;
+            pedido += `Hambúrguer: Hambúrguer 80g\n`;
 
-        // Tipo de pão
-        const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked").value;
-        pedido += `Tipo de Pão: ${paoEscolhido}\n`;
+            // Ingredientes removidos para CHAMA Kids
+            const ingredientesRemovidos = [];
+            document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+                ingredientesRemovidos.push(ingrediente.value);
+            });
+            if (ingredientesRemovidos.length > 0) {
+                pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+            }
 
-        // Ingredientes removidos
-        const ingredientesRemovidos = [];
-        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
-            ingredientesRemovidos.push(ingrediente.value);
-        });
-        if (ingredientesRemovidos.length > 0) {
-            pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+        } else {
+            // Tratamento para os outros lanches
+            const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.value || "Simples";
+            total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 0);
+            pedido += `${tipoLanche} (${tipo})\n`;
+
+            // Tipo de pão
+            const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked").value;
+            pedido += `Tipo de Pão: ${paoEscolhido}\n`;
+
+            // Ingredientes removidos
+            const ingredientesRemovidos = [];
+            document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+                ingredientesRemovidos.push(ingrediente.value);
+            });
+            if (ingredientesRemovidos.length > 0) {
+                pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+            }
         }
 
         // Adicionais
@@ -116,6 +145,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         if (bebidaEscolhida.length > 0) {
             pedido += `Bebida: ${bebidaEscolhida.join(", ")}\n`;
+        }
+
+        // Nome da pessoa que vai consumir o lanche
+        const nomePessoa = document.getElementById("nome-pessoa").value;
+        if (nomePessoa) {
+            pedido += `Para: ${nomePessoa}\n`;
         }
 
         // Adiciona o total do lanche, mas só mostra ao final se houver mais de um lanche
