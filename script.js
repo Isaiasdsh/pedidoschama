@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-button");
     const carrinhoLista = document.getElementById("carrinho-lista");
+    const carrinhoSubtotal = document.getElementById("carrinho-subtotal");
     const carrinhoTotal = document.getElementById("carrinho-total");
     let carrinho = [];
     let totalCarrinho = 0;
+    const taxaEntrega = 5;
 
     startButton.addEventListener("click", function(e) {
         e.preventDefault();
@@ -81,13 +83,37 @@ document.addEventListener("DOMContentLoaded", function() {
         totalCarrinho += total;
         carrinho.push({ pedido, total });
 
+        atualizarCarrinho();
         alert("Item adicionado ao carrinho!");
         document.getElementById("personalizar-lanche").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
     };
 
+    // Atualiza o carrinho em tempo real
+    function atualizarCarrinho() {
+        carrinhoLista.innerHTML = "";
+        carrinho.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = `${item.pedido} - R$${item.total.toFixed(2)}`;
+            carrinhoLista.appendChild(li);
+        });
+        carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
+        carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
+    }
+
     window.finalizarPedido = function() {
-        // Código de finalização de pedido para WhatsApp
+        let pedido = "Pedido:\n";
+        carrinho.forEach(item => {
+            pedido += `${item.pedido} - R$${item.total.toFixed(2)}\n`;
+        });
+        pedido += `Subtotal: R$${totalCarrinho.toFixed(2)}\n`;
+        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\n`;
+        pedido += `Total: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+
+        const name = document.getElementById("name").value;
+        const whatsapp = document.getElementById("whatsapp").value;
+        const mensagem = encodeURIComponent(`Pedido de: ${name}\nWhatsApp: ${whatsapp}\n\n${pedido}`);
+        
+        window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
-
