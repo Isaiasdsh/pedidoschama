@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function() {
         conteudoLanche.innerHTML += `
             <p><strong>Qual o nome da pessoa que vai comer esse lanche?</strong></p>
             <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-            <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
         `;
     };
 
