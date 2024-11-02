@@ -17,28 +17,32 @@
         </form>
     </div>
 
-    <!-- Tela inicial de escolha dos lanches -->
     <div id="lanches-menu" style="display: none;">
-        <h2>Escolha Seu Lanche</h2>
-
-        <div class="lanche-opcao" onclick="escolherLanche('classico')">
+    <h2>Escolha seu Lanche</h2>
+    <div class="card-container">
+        <!-- Card CHAMA Clássico -->
+        <div class="card">
             <h3>CHAMA Clássico</h3>
-            <p>Pão, Hambúrguer de carne bovina, queijo, cebola roxa, alface, tomate e maionese.</p>
-            <p>Preço: R$26,00 (Simples) | R$33,00 (Duplo)</p>
+            <p>Hambúrguer de carne bovina (120g), queijo mussarela, cebola roxa, alface, tomate e maionese da casa.</p>
+            <button onclick="escolherLanche('classico')">Personalizar</button>
         </div>
 
-        <div class="lanche-opcao" onclick="escolherLanche('bacon')">
+        <!-- Card CHAMA Bacon -->
+        <div class="card">
             <h3>CHAMA Bacon</h3>
-            <p>Pão, Hambúrguer de carne bovina, queijo, bacon, cheddar cremoso, cebola roxa, alface, tomate e maionese.</p>
-            <p>Preço: R$30,00 (Simples) | R$37,00 (Duplo)</p>
+            <p>Hambúrguer de carne bovina (120g), BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa e maionese da casa.</p>
+            <button onclick="escolherLanche('bacon')">Personalizar</button>
         </div>
 
-        <div class="lanche-opcao" onclick="escolherLanche('kids')">
+        <!-- Card CHAMA Kids -->
+        <div class="card">
             <h3>CHAMA Kids</h3>
-            <p>Pão Kids, Hambúrguer de carne bovina 80g, queijo e maionese.</p>
-            <p>Preço: R$19,00</p>
+            <p>Hambúrguer de carne bovina (80g), queijo mussarela e maionese da casa.</p>
+            <button onclick="escolherLanche('kids')">Personalizar</button>
         </div>
     </div>
+</div>
+
 
     <!-- Tela de personalização do lanche -->
     <div id="personalizar-lanche" style="display: none;">
