@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const carrinhoLista = document.getElementById("carrinho-lista");
     const carrinhoSubtotal = document.getElementById("carrinho-subtotal");
     const carrinhoTotal = document.getElementById("carrinho-total");
+    const carrinhoCompletoDiv = document.getElementById("carrinho-completo"); // Div para exibir carrinho completo
     let carrinho = [];
     let totalCarrinho = 0;
     const taxaEntrega = 5;
@@ -141,6 +142,24 @@ document.addEventListener("DOMContentLoaded", function() {
         carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
         carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
     }
+
+    // Função para visualizar o carrinho completo
+    window.verCarrinho = function() {
+        carrinhoCompletoDiv.innerHTML = ""; // Limpa o carrinho completo anterior
+
+        carrinho.forEach(item => {
+            const p = document.createElement("p");
+            p.innerText = item.pedido;
+            carrinhoCompletoDiv.appendChild(p);
+        });
+
+        const totalFinal = document.createElement("p");
+        totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+        totalFinal.style.fontWeight = "bold";
+        carrinhoCompletoDiv.appendChild(totalFinal);
+
+        carrinhoCompletoDiv.style.display = "block"; // Exibe a div do carrinho completo
+    };
 
     window.finalizarPedido = function() {
         let pedido = "Pedido:\n";
