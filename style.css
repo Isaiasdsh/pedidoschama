@@ -1,13 +1,65 @@
-.lanche-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin: 10px;
-    max-width: 500px;
-    text-align: left;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-screen, #menu {
+    margin-top: 20px;
+}
+
+input, button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
 }
 
 button {
     background-color: #28a745;
     color: white;
+    border: none;
+    cursor: pointer;
     padding: 10px 20px;
+}
+
+/* Estilo para os cards dos lanches */
+.lanche-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 500px;
+    width: 90%;
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+
+.lanche-card h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.preco {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+/* Organiza os ingredientes em duas colunas */
+.ingredientes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ingredientes div {
+    width: 48%;
+}
+
+h2, h3 {
+    color: #333;
 }
