@@ -48,6 +48,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
+                <p><strong>Adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
             `;
         } else if (tipo === "bacon") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Bacon";
@@ -68,6 +74,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
+                <p><strong>Adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
             `;
         } else if (tipo === "kids") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Kids";
@@ -82,6 +94,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="ingredientes">
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
+                <p><strong>Adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
                 </div>
             `;
         }
@@ -118,6 +136,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
 
+        const adicionaisSelecionados = [];
+        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
+            adicionaisSelecionados.push(adicional.value);
+            total += parseFloat(adicional.dataset.price || 0);
+        });
+        if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
+
         const nomePessoa = document.getElementById("nome-pessoa").value;
         if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
@@ -129,6 +154,9 @@ document.addEventListener("DOMContentLoaded", function() {
         // Limpar os campos de adicionais para o próximo lanche
         document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
             checkbox.checked = true;
+        });
+        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => {
+            checkbox.checked = false;
         });
 
         document.getElementById("personalizar-lanche").style.display = "none";
@@ -185,3 +213,4 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
+
