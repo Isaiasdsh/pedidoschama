@@ -1,65 +1,73 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    text-align: left;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+h1, h2, h3 {
+    color: #333;
 }
 
 .welcome-screen, #menu {
-    margin-top: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 input, button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
     font-size: 16px;
+    margin: 10px 0;
 }
 
 button {
+    display: block;
+    width: 100%;
     background-color: #28a745;
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #218838;
 }
 
 /* Estilo para os cards dos lanches */
 .lanche-card {
-    border: 1px solid #ddd;
+    margin-bottom: 20px;
     padding: 15px;
-    margin: 10px auto;
-    max-width: 500px;
-    width: 90%;
-    text-align: left;
-    display: inline-block;
-    vertical-align: top;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid #ddd;
     border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
 .lanche-card h3 {
-    margin: 0;
-    font-size: 1.4em;
-    color: #333;
+    margin-bottom: 5px;
+    color: #444;
 }
 
-.preco {
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-}
-
-/* Organiza os ingredientes em duas colunas */
+/* Ingredientes em duas colunas */
 .ingredientes {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
 }
 
-.ingredientes div {
-    width: 48%;
+.ingredientes label {
+    font-size: 14px;
 }
 
-h2, h3 {
-    color: #333;
+h3 {
+    background-color: #ffd966;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
 }
