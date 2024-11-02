@@ -1,57 +1,56 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const startButton = document.querySelector("#welcome-form button");
+    const startButton = document.getElementById("start-button");
+    const totalPriceEl = document.getElementById("total-price");
 
-    // Evento de clique no botão para iniciar o atendimento
-    startButton.addEventListener("click", function (e) {
-        e.preventDefault(); // Previne o envio do formulário
-
-        // Oculta a tela de boas-vindas e exibe o menu
+    // Iniciar atendimento e exibir o menu
+    startButton.addEventListener("click", function(e) {
+        e.preventDefault();
         document.querySelector(".welcome-screen").style.display = "none";
         document.getElementById("menu").style.display = "block";
     });
+
+    // Atualizar preço total
+    document.getElementById("menu").addEventListener("change", updateTotalPrice);
+
+    function updateTotalPrice() {
+        let total = 0;
+
+        // Preços dos lanches
+        const lancheClassico = document.querySelector("input[name='ingredientes-classico']:checked");
+        const lancheBacon = document.querySelector("input[name='ingredientes-bacon']:checked");
+        const lancheKids = document.querySelector("input[name='ingredientes-kids']:checked");
+        
+        // Soma valores dos lanches selecionados e adicionais
+        if (lancheClassico) total += parseFloat(lancheClassico.dataset.price);
+        if (lancheBacon) total += parseFloat(lancheBacon.dataset.price);
+        if (lancheKids) total += parseFloat(lancheKids.dataset.price);
+
+        // Adicionais
+        document.querySelectorAll(".extra:checked").forEach(item => {
+            total += parseFloat(item.getAttribute("data-price"));
+        });
+
+        // Bebidas
+        document.querySelectorAll(".drink:checked").forEach(item => {
+            total += parseFloat(item.getAttribute("data-price"));
+        });
+
+        totalPriceEl.textContent = total.toFixed(2);
+    }
+
+    // Finalizar e enviar pedido
+    window.finalizarPedido = function() {
+        let pedido = "Seu pedido:\n";
+        document.querySelectorAll("#menu input:checked").forEach(item => {
+            pedido += `- ${item.value}\n`;
+        });
+        pedido += `\nTotal: R$${totalPriceEl.textContent}`;
+
+        const name = document.getElementById("name").value;
+        const whatsapp = document.getElementById("whatsapp").value;
+        const mensagem = encodeURIComponent(`Pedido de: ${name}\nWhatsApp: ${whatsapp}\n\n${pedido}`);
+
+        window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
+    };
 });
 
-function finalizarPedido() {
-    // Obter o lanche selecionado e o preço
-    const lanche = document.querySelector('input[name="lanche"]:checked');
-    const lancheNome = lanche.value;
-    let totalPrice = parseFloat(lanche.getAttribute("data-price"));
-    let pedido = `Lanche: ${lancheNome}\n`;
-
-    // Adicionar tipo de pão
-    const pao = document.querySelector('input[name="pao"]:checked').value;
-    pedido += `Pão: ${pao}\n`;
-
-    // Adicionar ponto da carne
-    const ponto = document.querySelector('input[name="ponto"]:checked').value;
-    pedido += `Ponto da Carne: ${ponto}\n`;
-
-    // Adicionar adicionais
-    const extras = document.querySelectorAll(".extra:checked");
-    extras.forEach(extra => {
-        pedido += `+ ${extra.value} - R$${extra.getAttribute("data-price")}\n`;
-        totalPrice += parseFloat(extra.getAttribute("data-price"));
-    });
-
-    // Adicionar bebidas
-    const drinks = document.querySelectorAll(".drink:checked");
-    drinks.forEach(drink => {
-        pedido += `+ Bebida: ${drink.value} - R$${drink.getAttribute("data-price")}\n`;
-        totalPrice += parseFloat(drink.getAttribute("data-price"));
-    });
-
-    // Taxa de entrega
-    totalPrice += 5;
-    pedido += `\nTaxa de entrega: R$5,00\n`;
-    pedido += `Total: R$${totalPrice.toFixed(2)}`;
-
-    // Dados do cliente
-    const name = document.getElementById("name").value;
-    const whatsapp = document.getElementById("whatsapp").value;
-    const mensagem = encodeURIComponent(
-        `Pedido de: ${name}\nWhatsApp: ${whatsapp}\n\n${pedido}`
-    );
-
-    // Enviar pedido para o WhatsApp
-    window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
-}
