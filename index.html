@@ -63,15 +63,21 @@
         <button onclick="finalizarPedido()">Finalizar Pedido</button>
     </div>
 
-    <!-- Carrinho de pedidos (visível após iniciar o atendimento) -->
-    <div id="carrinho" style="display: none;">
-        <h2>Carrinho</h2>
-        <ul id="carrinho-lista"></ul>
-        <h3>Subtotal: R$<span id="carrinho-subtotal">0.00</span></h3>
-        <h3>Taxa de Entrega: R$5,00</h3>
-        <h3>Total do Pedido: R$<span id="carrinho-total">5.00</span></h3>
-        <button onclick="verCarrinho()">Ver Carrinho Completo</button>
-    </div>
+<!-- Carrinho de pedidos (visível após iniciar o atendimento) -->
+<div id="carrinho" style="display: none;">
+    <h2>Carrinho</h2>
+    <ul id="carrinho-lista"></ul>
+    <h3>Subtotal: R$<span id="carrinho-subtotal">0.00</span></h3>
+    <h3>Taxa de Entrega: R$5,00</h3>
+    <h3>Total do Pedido: R$<span id="carrinho-total">5.00</span></h3>
+    <button onclick="verCarrinho()">Ver Carrinho Completo</button>
+</div>
+
+<!-- Div para exibir o carrinho completo -->
+<div id="carrinho-completo" style="display: none; padding: 20px; background-color: #f9f9f9; margin-top: 20px;">
+    <h2>Resumo Completo do Pedido</h2>
+</div>
+
 
     <script src="./script.js"></script>
 </body>
