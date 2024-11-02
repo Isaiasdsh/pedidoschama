@@ -23,13 +23,13 @@
 
         <div class="lanche-opcao" onclick="escolherLanche('classico')">
             <h3>CHAMA Clássico</h3>
-            <p>Pão, Hambúrguer de carne bovina, queijo, alface, tomate e maionese.</p>
+            <p>Pão, Hambúrguer de carne bovina, queijo, cebola roxa, alface, tomate e maionese.</p>
             <p>Preço: R$26,00 (Simples) | R$33,00 (Duplo)</p>
         </div>
 
         <div class="lanche-opcao" onclick="escolherLanche('bacon')">
             <h3>CHAMA Bacon</h3>
-            <p>Pão, Hambúrguer de carne bovina, queijo, bacon, cheddar, alface e maionese.</p>
+            <p>Pão, Hambúrguer de carne bovina, queijo, bacon, cheddar cremoso, cebola roxa, alface, tomate e maionese.</p>
             <p>Preço: R$30,00 (Simples) | R$37,00 (Duplo)</p>
         </div>
 
@@ -70,14 +70,8 @@
     <h3>Subtotal: R$<span id="carrinho-subtotal">0.00</span></h3>
     <h3>Taxa de Entrega: R$5,00</h3>
     <h3>Total do Pedido: R$<span id="carrinho-total">5.00</span></h3>
-    <button onclick="verCarrinho()">Ver Carrinho Completo</button>
-</div>
-
-<!-- Div para exibir o carrinho completo -->
-<div id="carrinho-completo" style="display: none; padding: 20px; background-color: #f9f9f9; margin-top: 20px;">
-    <h2>Resumo Completo do Pedido</h2>
-</div>
-
+    <button onclick="finalizarPedido()">Finalizar Pedido</button>
+    </div>
 
     <script src="./script.js"></script>
 </body>
