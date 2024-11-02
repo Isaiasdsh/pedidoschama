@@ -47,20 +47,34 @@
         <!-- Conteúdo dinâmico da personalização do lanche será inserido aqui -->
         <div id="conteudo-lanche"></div>
 
+        <!-- Seção para adicionais e bebidas -->
+        <h3>Gostaria de Turbinar seu Pedido?</h3>
+        <label><input type="checkbox" class="extra" value="Bacon extra" data-price="5"> Bacon extra - R$5,00</label><br>
+        <label><input type="checkbox" class="extra" value="Cheddar Cremoso" data-price="4"> Cheddar Cremoso - R$4,00</label><br>
+        <label><input type="checkbox" class="extra" value="Maionese da Casa" data-price="2"> Maionese da Casa - R$2,00</label><br>
+
+        <h3>Vai uma Bebida para Fechar o Combo?</h3>
+        <label><input type="checkbox" class="drink" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label><br>
+        <label><input type="checkbox" class="drink" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label><br>
+        <label><input type="checkbox" class="drink" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label><br>
+
         <!-- Opções de adicionar ao carrinho ou finalizar pedido -->
         <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
         <button onclick="finalizarPedido()">Finalizar Pedido</button>
     </div>
 
-    <!-- Carrinho de pedidos -->
-    <div id="carrinho" style="display: none;">
-        <h2>Carrinho de Pedidos</h2>
+    <!-- Carrinho de pedidos (visível na tela de personalização do lanche) -->
+    <div id="carrinho" style="display: block;">
+        <h2>Carrinho</h2>
         <ul id="carrinho-lista"></ul>
-        <h3>Total do Pedido: R$<span id="carrinho-total">0.00</span></h3>
-        <button onclick="finalizarPedido()">Finalizar Pedido</button>
+        <h3>Subtotal: R$<span id="carrinho-subtotal">0.00</span></h3>
+        <h3>Taxa de Entrega: R$5,00</h3>
+        <h3>Total do Pedido: R$<span id="carrinho-total">5.00</span></h3>
+        <button onclick="verCarrinho()">Ver Carrinho Completo</button>
     </div>
 
     <script src="./script.js"></script>
 </body>
 </html>
+
 
