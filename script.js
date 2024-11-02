@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     startButton.addEventListener("click", function(e) {
         e.preventDefault();
+        
+        const nome = document.getElementById("name").value.trim();
+        const whatsapp = document.getElementById("whatsapp").value.trim();
+        
+        if (nome === "" || whatsapp === "") {
+            alert("Por favor, preencha seu nome e WhatsApp para iniciar o atendimento.");
+            return;
+        }
+        
         document.querySelector(".welcome-screen").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
         document.getElementById("carrinho").style.display = "block"; // Mostra o carrinho após iniciar o atendimento
@@ -116,7 +125,12 @@ document.addEventListener("DOMContentLoaded", function() {
         totalCarrinho += total;
         atualizarCarrinho();
         alert("Item adicionado ao carrinho!");
-        
+
+        // Limpar os campos de adicionais para o próximo lanche
+        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
+            checkbox.checked = true;
+        });
+
         document.getElementById("personalizar-lanche").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
     };
