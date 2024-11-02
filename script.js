@@ -81,8 +81,45 @@ document.addEventListener("DOMContentLoaded", function() {
         conteudoLanche.innerHTML += `
             <p><strong>Qual o nome da pessoa que vai comer esse lanche?</strong></p>
             <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-            
+            <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+            <button onclick="voltarParaMenu()">Voltar</button>
         `;
+    };
+
+    // Função para adicionar o lanche ao carrinho
+    window.adicionarAoCarrinho = function() {
+        let pedido = "";
+        let total = 0;
+        const tipoLanche = document.getElementById("titulo-lanche").innerText;
+
+        const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
+        if (tipo) {
+            total = parseFloat(tipo.dataset.price || 0);
+            pedido += `${tipoLanche} (${tipo.value})\n`;
+        } else {
+            total = 19.00; // Preço fixo para CHAMA Kids
+            pedido += `${tipoLanche}\n`;
+        }
+
+        const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
+        if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
+
+        const ingredientesRemovidos = [];
+        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+            ingredientesRemovidos.push(ingrediente.value);
+        });
+        if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+
+        const nomePessoa = document.getElementById("nome-pessoa").value;
+        if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
+
+        carrinho.push({ pedido, total });
+        totalCarrinho += total;
+        atualizarCarrinho();
+        alert("Item adicionado ao carrinho!");
+        
+        document.getElementById("personalizar-lanche").style.display = "none";
+        document.getElementById("lanches-menu").style.display = "block";
     };
 
     // Função para retornar ao menu de lanches
@@ -107,52 +144,31 @@ document.addEventListener("DOMContentLoaded", function() {
         carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
     }
 
-    // Função para visualizar o carrinho completo
-    window.verCarrinho = function() {
-        carrinhoCompletoDiv.innerHTML = ""; // Limpa o carrinho completo anterior
+    function removerDoCarrinho(index) {
+        totalCarrinho -= carrinho[index].total;
+        carrinho.splice(index, 1);
+        atualizarCarrinho();
+    }
 
+    window.verCarrinho = function() {
+        carrinhoCompletoDiv.innerHTML = "";
         carrinho.forEach(item => {
             const p = document.createElement("p");
             p.innerText = item.pedido;
             carrinhoCompletoDiv.appendChild(p);
         });
-
         const totalFinal = document.createElement("p");
         totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
         totalFinal.style.fontWeight = "bold";
         carrinhoCompletoDiv.appendChild(totalFinal);
-
-        // Botão para voltar ao menu
-        const backButton = document.createElement("button");
-        backButton.innerText = "Voltar";
-        backButton.onclick = function() {
-            carrinhoCompletoDiv.style.display = "none";
-            document.getElementById("lanches-menu").style.display = "block";
-        };
-        carrinhoCompletoDiv.appendChild(backButton);
-
-        carrinhoCompletoDiv.style.display = "block"; // Exibe a div do carrinho completo
+        carrinhoCompletoDiv.style.display = "block";
     };
 
     window.finalizarPedido = function() {
-        let pedido = "Pedido de:\n";
-        const name = document.getElementById("name").value;
-        const whatsapp = document.getElementById("whatsapp").value;
-        const horarioPedido = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-
-        pedido += `Nome: ${name}\nWhatsApp: ${whatsapp}\nHorário do pedido: ${horarioPedido}\n\n`;
-
-        // Adiciona cada item do carrinho
-        carrinho.forEach(item => {
-            pedido += `${item.pedido}\n`;
-        });
-
-        // Adiciona taxa de entrega e total final
-        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\n`;
-        pedido += `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
-
+        let pedido = `Pedido de:\n`;
+        carrinho.forEach(item => pedido += `${item.pedido}\n`);
+        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
         const mensagem = encodeURIComponent(pedido);
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
-
