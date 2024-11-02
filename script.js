@@ -76,21 +76,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Função para adicionar o lanche ao carrinho
     window.adicionarAoCarrinho = function() {
-        let pedido = "Lanche: ";
+        let pedido = "";
         let total = parseFloat(document.querySelector("#personalizar-lanche input[name='tipo']:checked")?.dataset.price || 19);
 
-        document.querySelectorAll("#personalizar-lanche input:checked").forEach(item => {
-            if (item.classList.contains("extra") || item.classList.contains("drink")) {
-                total += parseFloat(item.getAttribute("data-price"));
-            }
-            pedido += `${item.value}, `;
-        });
+        // Nome do lanche e tipo (Simples/Duplo)
+        const tipoLanche = document.querySelector("#personalizar-lanche input[name='tipo']:checked").value;
+        const nomeLanche = document.getElementById("titulo-lanche").innerText;
+        pedido += `${nomeLanche} (${tipoLanche})\n`;
 
-        totalCarrinho += total;
+        // Tipo de pão
+        const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked").value;
+        pedido += `Tipo de Pão: ${paoEscolhido}\n`;
+
+        // Ingredientes removidos
+        const ingredientesRemovidos = [];
+        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+            ingredientesRemovidos.push(ingrediente.value);
+        });
+        if (ingredientesRemovidos.length > 0) {
+            pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+        }
+
+        // Adicionais
+        const adicionaisEscolhidos = [];
+        document.querySelectorAll("#personalizar-lanche input.extra:checked").forEach(adicional => {
+            adicionaisEscolhidos.push(adicional.value);
+            total += parseFloat(adicional.getAttribute("data-price"));
+        });
+        if (adicionaisEscolhidos.length > 0) {
+            pedido += `Adicionais: ${adicionaisEscolhidos.join(", ")}\n`;
+        }
+
+        // Bebida
+        const bebidaEscolhida = [];
+        document.querySelectorAll("#personalizar-lanche input.drink:checked").forEach(bebida => {
+            bebidaEscolhida.push(bebida.value);
+            total += parseFloat(bebida.getAttribute("data-price"));
+        });
+        if (bebidaEscolhida.length > 0) {
+            pedido += `Bebida: ${bebidaEscolhida.join(", ")}\n`;
+        }
+
+        // Adiciona o total do lanche, mas só mostra ao final se houver mais de um lanche
         carrinho.push({ pedido, total });
+        totalCarrinho += total;
 
         atualizarCarrinho();
         alert("Item adicionado ao carrinho!");
+
+        // Zerar os campos adicionais e bebidas para o próximo lanche
+        document.querySelectorAll("#personalizar-lanche input[type='checkbox']").forEach(input => input.checked = false);
         document.getElementById("personalizar-lanche").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
     };
@@ -100,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
         carrinhoLista.innerHTML = "";
         carrinho.forEach(item => {
             const li = document.createElement("li");
-            li.textContent = `${item.pedido} - R$${item.total.toFixed(2)}`;
+            li.textContent = item.pedido;
             carrinhoLista.appendChild(li);
         });
         carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
@@ -110,11 +145,11 @@ document.addEventListener("DOMContentLoaded", function() {
     window.finalizarPedido = function() {
         let pedido = "Pedido:\n";
         carrinho.forEach(item => {
-            pedido += `${item.pedido} - R$${item.total.toFixed(2)}\n`;
+            pedido += `${item.pedido}\n`;
         });
-        pedido += `Subtotal: R$${totalCarrinho.toFixed(2)}\n`;
-        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\n`;
-        pedido += `Total: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+        pedido += `\nTotal: R$${totalCarrinho.toFixed(2)}`;
+        pedido += `\nTaxa de Entrega: R$${taxaEntrega.toFixed(2)}`;
+        pedido += `\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
 
         const name = document.getElementById("name").value;
         const whatsapp = document.getElementById("whatsapp").value;
@@ -123,5 +158,3 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
-
-
