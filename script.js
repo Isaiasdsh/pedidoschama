@@ -40,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p><strong>Pão:</strong></p>
                 <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
                 <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
+                <p><strong>Ponto da Carne:</strong></p>
+                <label><input type="radio" name="ponto" value="Mal Passada" checked> Mal Passada</label>
+                <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
+                <label><input type="radio" name="ponto" value="Bem Passada"> Bem Passada</label>
                 <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
                 <div class="ingredientes">
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
@@ -70,6 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p><strong>Pão:</strong></p>
                 <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
                 <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
+                <p><strong>Ponto da Carne:</strong></p>
+                <label><input type="radio" name="ponto" value="Mal Passada" checked> Mal Passada</label>
+                <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
+                <label><input type="radio" name="ponto" value="Bem Passada"> Bem Passada</label>
                 <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
                 <div class="ingredientes">
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
