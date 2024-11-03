@@ -1,125 +1,275 @@
-/* Estilos Gerais */
+/* Geral */
 body {
     font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #f2f2f2;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Fundo suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-/* Container da Logo */
-.logo-container {
+h1, h2, h3 {
+    color: #ff8c00; /* Cor laranja vibrante para títulos */
+}
+
+/* Tela de Boas-Vindas */
+.welcome-screen {
+    background-color: #333;
+    border-radius: 12px;
+    padding: 25px;
     text-align: center;
-    margin: 20px 0;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    margin-top: 20px;
 }
 
 .logo {
-    max-width: 180px; /* Tamanho máximo para telas grandes */
-    width: 100%;
-    height: auto;
-}
-
-/* Containers e Layouts */
-.container {
-    padding: 15px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* Estilo dos Quadrados dos Lanches */
-.lanche-box {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 10px;
-    background-color: #fff; /* Fundo branco */
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.2s;
-}
-
-.lanche-box:hover {
-    transform: translateY(-5px); /* Elevação ao passar o mouse */
-}
-
-.lanche-box h3 {
-    font-size: 20px;
+    width: 80px; /* Tamanho mais discreto para a logo */
     margin-bottom: 15px;
-    color: #333;
+    opacity: 0.85;
 }
 
-/* Botão Principal */
-.button {
-    background-color: #FF6600; /* Laranja queimado */
-    color: #fff;
-    padding: 10px 20px;
+.welcome-screen input {
+    display: block;
+    margin: 12px auto;
+    padding: 10px;
+    width: 85%;
+    max-width: 280px;
+    border-radius: 6px;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    background-color: #2d2d2d;
+    color: #f2f2f2;
+}
+
+#start-button {
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
     font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
     transition: background-color 0.3s;
 }
 
-.button:hover {
-    background-color: #e55d00; /* Laranja mais escuro ao passar o mouse */
+#start-button:hover {
+    background-color: #e07a00;
 }
 
-/* Estilo do Carrinho */
-#carrinho {
-    background-color: #333; /* Preto ou cinza escuro */
-    color: #fff;
+/* Menu de Lanches */
+#lanches-menu {
+    margin-top: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.lanche-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.lanche-option {
+    background-color: #2d2d2d;
+    width: 100%;
+    max-width: 180px;
+    padding: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.lanche-option:hover {
+    background-color: #383838;
+    transform: scale(1.05);
+}
+
+.lanche-option h3 {
+    margin: 0;
+    color: #ff8c00;
+    font-size: 18px;
+}
+
+.lanche-option p {
+    margin: 8px 0;
+    color: #ccc;
+    font-size: 15px;
+}
+
+/* Personalização do Lanche */
+#personalizar-lanche {
+    width: 90%;
+    max-width: 600px;
+    background-color: #333;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+#personalizar-lanche label {
+    display: block;
+    margin: 10px 0;
+    color: #ccc;
+}
+
+#personalizar-lanche input[type="text"] {
+    display: block;
+    margin: 12px 0;
     padding: 10px;
-    border-radius: 8px;
+    width: 100%;
+    border-radius: 6px;
+    border: none;
+    background-color: #2d2d2d;
+    color: #f2f2f2;
 }
 
-/* Responsividade para Telas Menores */
+#personalizar-lanche .ingredientes, #personalizar-lanche .adicionais, #personalizar-lanche .bebidas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#personalizar-lanche .ingredientes label,
+#personalizar-lanche .adicionais label,
+#personalizar-lanche .bebidas label {
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #e07a00;
+    transform: translateY(-2px);
+}
+
+/* Carrinho */
+#carrinho {
+    width: 90%;
+    max-width: 600px;
+    background-color: #333;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+#carrinho h2 {
+    margin-top: 0;
+}
+
+#carrinho ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#carrinho ul li {
+    background-color: #2d2d2d;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    color: #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#carrinho ul li button {
+    background-color: #e63946;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#carrinho ul li button:hover {
+    background-color: #cc2e3c;
+}
+
+#carrinho p {
+    margin: 10px 0;
+    color: #f2f2f2;
+}
+
+#carrinho-completo {
+    width: 90%;
+    max-width: 600px;
+    background-color: #333;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+}
+
+#carrinho-completo p {
+    color: #f2f2f2;
+    margin: 10px 0;
+    text-align: left;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    .container {
+    .welcome-screen, #lanches-menu, #personalizar-lanche, #carrinho, #carrinho-completo {
+        width: 95%;
+    }
+
+    .lanche-option {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #personalizar-lanche .ingredientes label,
+    #personalizar-lanche .adicionais label,
+    #personalizar-lanche .bebidas label {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.4em;
+    }
+
+    .lanche-option p {
+        font-size: 13px;
+    }
+
+    #start-button, button {
+        font-size: 14px;
         padding: 10px;
     }
 
-    .logo {
-        max-width: 140px;
-    }
-
-    .lanche-box {
-        margin: 10px;
-        padding: 15px;
-    }
-
-    .lanche-box h3 {
-        font-size: 18px;
-    }
-
-    .button {
-        font-size: 15px;
-        padding: 8px 16px;
+    #carrinho ul li {
+        font-size: 13px;
     }
 }
-
-/* Responsividade para Telas Muito Pequenas */
-@media (max-width: 480px) {
-    .container {
-        padding: 5px;
-    }
-
-    .logo {
-        max-width: 100px;
-    }
-
-    .lanche-box {
-        margin: 8px;
-        padding: 12px;
-    }
-
-    .lanche-box h3 {
-        font-size: 16px;
-    }
-
-    .button {
-        font-size: 14px;
-        padding: 8px 14px;
-    }
-}
-
 
 
