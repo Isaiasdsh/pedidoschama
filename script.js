@@ -135,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let total = 0;
     const tipoLanche = document.getElementById("titulo-lanche").innerText;
 
-    // Obter o tipo de lanche (Simples ou Duplo)
     const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
     if (tipo) {
         total = parseFloat(tipo.dataset.price || 0);
@@ -145,63 +144,66 @@ document.addEventListener("DOMContentLoaded", function() {
         pedido += `${tipoLanche}\n`;
     }
 
-    // Obter o ponto da carne
     const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto']:checked");
     if (pontoCarne) {
         pedido += `Ponto da Carne: ${pontoCarne.value}\n`;
     }
 
-    // Adicionar os adicionais selecionados ao pedido e ao total
+    const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
+    if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
+
+    const ingredientesRemovidos = [];
+    document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+        ingredientesRemovidos.push(ingrediente.value);
+    });
+    if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+
     const adicionaisSelecionados = [];
     document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
         adicionaisSelecionados.push(adicional.value);
-        total += parseFloat(adicional.dataset.price || 0); // Adicionar o preço do adicional ao total
+        total += parseFloat(adicional.dataset.price || 0);
     });
     if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
 
-    // Adicionar as bebidas selecionadas ao pedido e ao total
     const bebidasSelecionadas = [];
     document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
         bebidasSelecionadas.push(bebida.value);
-        total += parseFloat(bebida.dataset.price || 0); // Adicionar o preço da bebida ao total
+        total += parseFloat(bebida.dataset.price || 0);
     });
     if (bebidasSelecionadas.length > 0) pedido += `Bebidas: ${bebidasSelecionadas.join(", ")}\n`;
 
-    // Adicionar o nome da pessoa (se fornecido)
     const nomePessoa = document.getElementById("nome-pessoa").value;
     if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
-    // Adicionar o pedido ao carrinho
-    carrinho.push({ pedido, total });
+    carrinho.push({ nomeLanche: tipoLanche, pedido, total });
     totalCarrinho += total;
     atualizarCarrinho();
     alert("Item adicionado ao carrinho!");
 
-    // Resetar a tela de personalização para o próximo pedido
     document.getElementById("personalizar-lanche").style.display = "none";
     document.getElementById("lanches-menu").style.display = "block";
 };
 
-    function atualizarCarrinho() {
-        carrinhoLista.innerHTML = "";
-        carrinho.forEach((item, index) => {
-            const li = document.createElement("li");
-            li.textContent = item.pedido;
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remover";
-            removeButton.onclick = () => removerDoCarrinho(index);
-            li.appendChild(removeButton);
-            carrinhoLista.appendChild(li);
-        });
-        carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
-        carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
-    }
+function atualizarCarrinho() {
+    carrinhoLista.innerHTML = "";
+    carrinho.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${item.nomeLanche}</strong> - R$${item.total.toFixed(2)}<br>${item.pedido}`;
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remover";
+        removeButton.onclick = () => removerDoCarrinho(index);
+        li.appendChild(removeButton);
+        carrinhoLista.appendChild(li);
+    });
+    carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
+    carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
+}
 
-    function removerDoCarrinho(index) {
-        totalCarrinho -= carrinho[index].total;
-        carrinho.splice(index, 1);
-        atualizarCarrinho();
-    }
+function removerDoCarrinho(index) {
+    totalCarrinho -= carrinho[index].total;
+    carrinho.splice(index, 1);
+    atualizarCarrinho();
+}
 
     window.finalizarPedido = function() {
     const nomeCliente = document.getElementById("name").value.trim();
