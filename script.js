@@ -41,6 +41,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 <label><input type="radio" name="ponto" value="Mal Passado" checked> Mal Passado</label>
                 <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
                 <label><input type="radio" name="ponto" value="Bem Passado"> Bem Passado</label>
+                <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
+                <div class="ingredientes">
+                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
+                    <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
+                    <label><input type="checkbox" name="ingrediente" value="Alface" checked> Alface</label>
+                    <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
+                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
                 <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
                 <div class="adicionais">
                     <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
@@ -64,6 +72,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 <label><input type="radio" name="ponto" value="Mal Passado" checked> Mal Passado</label>
                 <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
                 <label><input type="radio" name="ponto" value="Bem Passado"> Bem Passado</label>
+                <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
+                <div class="ingredientes">
+                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
+                    <label><input type="checkbox" name="ingrediente" value="Cheddar cremoso" checked> Cheddar cremoso</label>
+                    <label><input type="checkbox" name="ingrediente" value="Bacon em tiras" checked> Bacon em tiras</label>
+                    <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
+                    <label><input type="checkbox" name="ingrediente" value="Alface" checked> Alface</label>
+                    <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
+                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
                 <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
                 <div class="adicionais">
                     <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
@@ -121,10 +139,32 @@ document.addEventListener("DOMContentLoaded", function() {
         if (tipo) {
             total = parseFloat(tipo.dataset.price || 0);
             pedido += `${tipoLanche} (${tipo.value})\n`;
+        } else {
+            total = 19; // Preço fixo para CHAMA Kids
+            pedido += `${tipoLanche}\n`;
         }
 
-        const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto']:checked").value;
-        pedido += `Ponto da Carne: ${pontoCarne}\n`;
+        const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto']:checked");
+        if (pontoCarne) {
+            pedido += `Ponto da Carne: ${pontoCarne.value}\n`;
+        }
+
+        const adicionaisSelecionados = [];
+        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
+            adicionaisSelecionados.push(adicional.value);
+            total += parseFloat(adicional.dataset.price || 0);
+        });
+        if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
+
+        const bebidasSelecionadas = [];
+        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
+            bebidasSelecionadas.push(bebida.value);
+            total += parseFloat(bebida.dataset.price || 0);
+        });
+        if (bebidasSelecionadas.length > 0) pedido += `Bebidas: ${bebidasSelecionadas.join(", ")}\n`;
+
+        const nomePessoa = document.getElementById("nome-pessoa").value;
+        if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
         carrinho.push({ pedido, total });
         totalCarrinho += total;
@@ -164,3 +204,4 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
+
