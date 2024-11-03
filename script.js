@@ -204,11 +204,40 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     window.finalizarPedido = function() {
-        let pedido = `Pedido de:\n`;
-        carrinho.forEach(item => pedido += `${item.pedido}\n`);
-        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
-        const mensagem = encodeURIComponent(pedido);
-        window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
-    };
-});
+    const nomeCliente = document.getElementById("name").value.trim();
+    const whatsappCliente = document.getElementById("whatsapp").value.trim();
+
+    let pedido = `*Comanda Chama Burguer*\n\n`;
+    pedido += `*Nome:* ${nomeCliente}\n`;
+    pedido += `*WhatsApp:* ${whatsappCliente}\n\n`;
+
+    carrinho.forEach((item, index) => {
+        pedido += `*Lanche ${index + 1}*\n`;
+        pedido += `*Nome do Lanche:* ${item.nomeLanche}\n`;
+        pedido += `*Tipo de Pão:* ${item.paoEscolhido || 'Padrão'}\n`;
+        pedido += `*Ponto da Carne:* ${item.pontoCarne || 'Não especificado'}\n`;
+
+        if (item.ingredientesRemovidos && item.ingredientesRemovidos.length > 0) {
+            pedido += `*Ingredientes para RETIRAR:* ${item.ingredientesRemovidos.join(', ')}\n`;
+        }
+
+        if (item.adicionaisSelecionados && item.adicionaisSelecionados.length > 0) {
+            pedido += `*Adicionais:* ${item.adicionaisSelecionados.join(', ')}\n`;
+        }
+
+        if (item.bebidasSelecionadas && item.bebidasSelecionadas.length > 0) {
+            pedido += `*Bebidas:* ${item.bebidasSelecionadas.join(', ')}\n`;
+        }
+
+        pedido += `*Esse lanche é para:* ${item.nomePessoa || 'Não especificado'}\n`;
+        pedido += `*Valor:* R$${item.total.toFixed(2)}\n\n`;
+    });
+
+    pedido += `*Taxa de Entrega:* R$${taxaEntrega.toFixed(2)}\n`;
+    pedido += `*Total do Pedido:* R$${(totalCarrinho + taxaEntrega).toFixed(2)}\n\n`;
+    pedido += `Agradecemos por escolher o Chama Burguer!`;
+
+    const mensagem = encodeURIComponent(pedido);
+    window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
+};
 
