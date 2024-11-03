@@ -224,12 +224,18 @@ document.addEventListener("DOMContentLoaded", function() {
         carrinhoCompletoDiv.style.display = "block";
     };
 
+   // Função para finalizar o pedido e enviar pelo WhatsApp
     window.finalizarPedido = function() {
-        let pedido = `Pedido de:\n`;
-        carrinho.forEach(item => pedido += `${item.pedido}\n`);
-        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+        const nome = document.getElementById("name").value.trim();
+        const whatsapp = document.getElementById("whatsapp").value.trim();
+        let pedido = `Pedido de: *${nome}* (WhatsApp: ${whatsapp})\n------------------------------------------------\n`;
+
+        carrinho.forEach(item => pedido += `${item.pedido}\n---------------------------------------------------------\n`);
+
+        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\n`;
+        pedido += `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+
         const mensagem = encodeURIComponent(pedido);
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
-
