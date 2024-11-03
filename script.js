@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-button");
-    // Forçar somente números no campo WhatsApp
-    document.getElementById("whatsapp").addEventListener("input", function(e) {
-        this.value = this.value.replace(/[^0-9]/g, ''); // Remove caracteres não numéricos
-    });
     const carrinhoLista = document.getElementById("carrinho-lista");
     const carrinhoSubtotal = document.getElementById("carrinho-subtotal");
     const carrinhoTotal = document.getElementById("carrinho-total");
@@ -12,213 +8,55 @@ document.addEventListener("DOMContentLoaded", function() {
     let totalCarrinho = 0;
     const taxaEntrega = 5;
 
-     // Função para iniciar o atendimento
     startButton.addEventListener("click", function(e) {
         e.preventDefault();
-        
         const nome = document.getElementById("name").value.trim();
         const whatsapp = document.getElementById("whatsapp").value.trim();
-        
-        // Verifica se os campos estão preenchidos
-        if (nome === "" || whatsapp === "") {
+
+        if (!nome || !whatsapp) {
             alert("Por favor, preencha seu nome e WhatsApp para iniciar o atendimento.");
-            return; // Não avança se algum campo estiver vazio
+            return;
         }
         
         document.querySelector(".welcome-screen").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
-        document.getElementById("carrinho").style.display = "block";
     });
 
-    // Função para exibir a tela de personalização do lanche escolhido
     window.escolherLanche = function(tipo) {
         document.getElementById("lanches-menu").style.display = "none";
         document.getElementById("personalizar-lanche").style.display = "block";
         const conteudoLanche = document.getElementById("conteudo-lanche");
-        conteudoLanche.innerHTML = "";
+        let htmlContent = "";
 
         if (tipo === "classico") {
-            document.getElementById("titulo-lanche").innerText = "CHAMA Clássico";
-            conteudoLanche.innerHTML = `
-                <p><strong>Escolha o Tipo:</strong></p>
-                <label><input type="radio" name="tipo" value="Simples" data-price="26" checked> Simples - R$26,00</label>
-                <label><input type="radio" name="tipo" value="Duplo" data-price="33"> Duplo - R$33,00</label>
-                <p><strong>Pão:</strong></p>
-                <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
-                <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
-                <p><strong>Ponto da Carne:</strong></p>
-                <label><input type="radio" name="ponto" value="Mal Passada" checked> Mal Passada</label>
-                <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
-                <label><input type="radio" name="ponto" value="Bem Passada"> Bem Passada</label>
-                <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
-                <div class="ingredientes">
-                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
-                    <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
-                    <label><input type="checkbox" name="ingrediente" value="Alface" checked> Alface</label>
-                    <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
-                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
-                </div>
-                <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
-                <div class="adicionais">
-                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
-                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
-                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
-                </div>
-                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
-                <div class="bebidas">
-                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
-                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
-                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
-                </div>
-            `;
+            htmlContent = `<p><strong>CHAMA Clássico</strong></p>`;
         } else if (tipo === "bacon") {
-            document.getElementById("titulo-lanche").innerText = "CHAMA Bacon";
-            conteudoLanche.innerHTML = `
-                <p><strong>Escolha o Tipo:</strong></p>
-                <label><input type="radio" name="tipo" value="Simples" data-price="30" checked> Simples - R$30,00</label>
-                <label><input type="radio" name="tipo" value="Duplo" data-price="37"> Duplo - R$37,00</label>
-                <p><strong>Pão:</strong></p>
-                <label><input type="radio" name="pao" value="Brioche" checked> Brioche</label>
-                <label><input type="radio" name="pao" value="Parmesão"> Parmesão</label>
-                <p><strong>Ponto da Carne:</strong></p>
-                <label><input type="radio" name="ponto" value="Mal Passada" checked> Mal Passada</label>
-                <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
-                <label><input type="radio" name="ponto" value="Bem Passada"> Bem Passada</label>
-                <p><strong>Quais Ingredientes Deseja? (desmarque o que você quer retirar)</strong></p>
-                <div class="ingredientes">
-                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
-                    <label><input type="checkbox" name="ingrediente" value="Cheddar cremoso" checked> Cheddar cremoso</label>
-                    <label><input type="checkbox" name="ingrediente" value="Bacon em tiras" checked> Bacon em tiras</label>
-                    <label><input type="checkbox" name="ingrediente" value="Cebola roxa" checked> Cebola roxa</label>
-                    <label><input type="checkbox" name="ingrediente" value="Alface" checked> Alface</label>
-                    <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
-                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
-                </div>
-                <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
-                <div class="adicionais">
-                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
-                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
-                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
-                </div>
-                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
-                <div class="bebidas">
-                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
-                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
-                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
-                </div>
-            `;
-        } else if (tipo === "kids") {
-            document.getElementById("titulo-lanche").innerText = "CHAMA Kids";
-            conteudoLanche.innerHTML = `
-                <p class="preco">R$19,00</p>
-                <p><strong>Ingredientes (não removíveis):</strong></p>
-                <ul>
-                    <li>Pão Kids (Brioche)</li>
-                    <li>Hambúrguer 80g</li>
-                </ul>
-                <p><strong>Quais Ingredientes deseja? (desmarque o que você quer retirar)</strong></p>
-                <div class="ingredientes">
-                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
-                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
-                </div>
-                <p><strong>Adicionais:</strong></p>
-                <div class="Turbine o seu lanche com nosso adicionais:">
-                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
-                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
-                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
-                </div>
-                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
-                <div class="bebidas">
-                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
-                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
-                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
-                </div>
-            `;
+            htmlContent = `<p><strong>CHAMA Bacon</strong></p>`;
         }
-
-        conteudoLanche.innerHTML += `
-            <p><strong>Quem vai comer esse lanche?</strong></p>
-            <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-        `;
+        conteudoLanche.innerHTML = htmlContent;
     };
 
-      // Função para adicionar item ao carrinho
     window.adicionarAoCarrinho = function() {
-        const tipoLanche = document.getElementById("titulo-lanche").innerText;
-        const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
-        const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
-        const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto-carne']:checked"); // Captura o ponto da carne
-        const nomePessoa = document.getElementById("nome-pessoa").value;
-
-        // Obter os ingredientes removidos
-        const ingredientesRemovidos = Array.from(document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)")).map(ingrediente => ingrediente.value);
-
-        // Obter os adicionais selecionados
-        const adicionaisSelecionados = Array.from(document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked")).map(adicional => {
-            totalCarrinho += parseFloat(adicional.dataset.price || 0);
-            return adicional.value;
-        });
-
-        // Obter as bebidas selecionadas
-        const bebidasSelecionadas = Array.from(document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked")).map(bebida => {
-            totalCarrinho += parseFloat(bebida.dataset.price || 0);
-            return bebida.value;
-        });
-
-        // Criar o pedido formatado
-        let pedido = `Nome do Lanche: ${tipoLanche} (${tipo ? tipo.value : 'Simples'})\n`;
-        pedido += `Tipo de Pão: ${paoEscolhido ? paoEscolhido.value : 'Pão comum'}\n`;
-        pedido += `Ponto da Carne: ${pontoCarne ? pontoCarne.value : 'Não especificado'}\n`; // Adiciona o ponto da carne
-        if (ingredientesRemovidos.length) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(', ')}\n`;
-        if (adicionaisSelecionados.length) pedido += `Adicionais: ${adicionaisSelecionados.join(', ')}\n`;
-        if (bebidasSelecionadas.length) pedido += `Bebida: ${bebidasSelecionadas.join(', ')}\n`;
-        pedido += `Para: ${nomePessoa}\n`;
-
-        // Adicionar ao carrinho
-        carrinho.push({ pedido, total: totalCarrinho });
-        totalCarrinho += parseFloat(tipo.dataset.price || 0);
-        alert("Item adicionado ao carrinho!");
-
-        // Limpar seleção de adicionais e bebidas
-        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => checkbox.checked = true);
-        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
-        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
-
+        let pedido = "Detalhes do pedido";
+        carrinho.push({ pedido, total: 10 });
+        totalCarrinho += 10;
         atualizarCarrinho();
     };
 
-    // Função para atualizar o carrinho exibido
     function atualizarCarrinho() {
-        const carrinhoLista = document.getElementById("carrinho-lista");
         carrinhoLista.innerHTML = "";
-        carrinho.forEach((item, index) => {
+        carrinho.forEach(item => {
             const li = document.createElement("li");
             li.textContent = item.pedido;
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remover";
-            removeButton.onclick = () => removerDoCarrinho(index);
-            li.appendChild(removeButton);
             carrinhoLista.appendChild(li);
         });
-        document.getElementById("carrinho-subtotal").textContent = totalCarrinho.toFixed(2);
-        document.getElementById("carrinho-total").textContent = (totalCarrinho + taxaEntrega).toFixed(2);
+        carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
+        carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
     }
 
-    // Função para remover item do carrinho
-    function removerDoCarrinho(index) {
-        totalCarrinho -= carrinho[index].total;
-        carrinho.splice(index, 1);
-        atualizarCarrinho();
-    }
-
-    // Função para finalizar pedido e enviar via WhatsApp
     window.finalizarPedido = function() {
-        const nome = document.getElementById("name").value.trim();
-        const whatsapp = document.getElementById("whatsapp").value.trim();
-        let pedido = `Pedido de: *${nome}* (WhatsApp: ${whatsapp})\n------------------------------------------------\n`;
-        carrinho.forEach(item => pedido += `${item.pedido}\n---------------------------------------------------------\n`);
-        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
-        const mensagem = encodeURIComponent(pedido);
-        window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
+        let mensagem = "Detalhes completos do pedido";
+        window.open(`https://wa.me/48991758488?text=${encodeURIComponent(mensagem)}`);
     };
 });
+
