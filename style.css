@@ -22,12 +22,12 @@ h1, h2, h3 {
     padding: 20px;
     text-align: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: 90%;
     max-width: 400px;
 }
 
 .logo {
-    width: 60px;
+    width: 50px; /* Tamanho menor para a logo */
     margin-bottom: 15px;
     opacity: 0.8;
 }
@@ -214,6 +214,51 @@ button:hover {
     color: #f2f2f2;
     margin: 8px 0;
     text-align: left;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .welcome-screen, #lanches-menu, #personalizar-lanche, #carrinho, #carrinho-completo {
+        width: 95%;
+    }
+
+    .lanche-option {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #personalizar-lanche .ingredientes label,
+    #personalizar-lanche .adicionais label,
+    #personalizar-lanche .bebidas label {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    .lanche-option p {
+        font-size: 13px;
+    }
+
+    #start-button, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #carrinho ul li {
+        font-size: 13px;
+    }
 }
 
 
