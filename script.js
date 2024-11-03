@@ -142,12 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
     };
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const carrinho = [];
-    let totalCarrinho = 0;
-    const taxaEntrega = 5;
-
-    // Função para adicionar item ao carrinho
+      // Função para adicionar item ao carrinho
     window.adicionarAoCarrinho = function() {
         const tipoLanche = document.getElementById("titulo-lanche").innerText;
         const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
