@@ -128,6 +128,13 @@ window.adicionarAoCarrinho = function() {
     });
     if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
 
+    const bebidasSelecionadas = [];
+    document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
+        bebidasSelecionadas.push(bebida.value);
+        total += parseFloat(bebida.dataset.price || 0);
+    });
+    if (bebidasSelecionadas.length > 0) pedido += `Bebida: ${bebidasSelecionadas.join(", ")}\n`;
+
     const nomePessoa = document.getElementById("nome-pessoa").value;
     if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
@@ -136,7 +143,7 @@ window.adicionarAoCarrinho = function() {
     atualizarCarrinho();
     alert("Item adicionado ao carrinho!");
 
-    // Limpar os campos de adicionais e ingredientes para o próximo lanche
+    // Reset dos ingredientes, adicionais e bebidas para o próximo lanche
     document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
         checkbox.checked = true; // Ingredientes marcados novamente por padrão
     });
