@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const carrinhoLista = document.getElementById("carrinho-lista");
     const carrinhoSubtotal = document.getElementById("carrinho-subtotal");
     const carrinhoTotal = document.getElementById("carrinho-total");
-    const carrinhoCompletoDiv = document.getElementById("carrinho-completo"); // Div para exibir carrinho completo
+    const carrinhoCompletoDiv = document.getElementById("carrinho-completo");
     let carrinho = [];
     let totalCarrinho = 0;
     const taxaEntrega = 5;
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         document.querySelector(".welcome-screen").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
-        document.getElementById("carrinho").style.display = "block"; // Mostra o carrinho após iniciar o atendimento
+        document.getElementById("carrinho").style.display = "block";
     });
 
     // Função para exibir a tela de personalização do lanche escolhido
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("lanches-menu").style.display = "none";
         document.getElementById("personalizar-lanche").style.display = "block";
         const conteudoLanche = document.getElementById("conteudo-lanche");
-        conteudoLanche.innerHTML = ""; // Limpar conteúdo anterior
+        conteudoLanche.innerHTML = "";
 
         if (tipo === "classico") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Clássico";
@@ -48,7 +48,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
-                
+                <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
+                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
+                <div class="bebidas">
+                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
+                </div>
             `;
         } else if (tipo === "bacon") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Bacon";
@@ -69,7 +80,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
-               
+                <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
+                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
+                <div class="bebidas">
+                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
+                </div>
             `;
         } else if (tipo === "kids") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Kids";
@@ -85,86 +107,88 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
-              
+                <p><strong>Adicionais:</strong></p>
+                <div class="Turbine o seu lanche com nosso adicionais:">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
+                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
+                <div class="bebidas">
+                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
+                </div>
             `;
         }
 
-        // Campo para o cliente informar o nome da pessoa que vai comer o lanche
         conteudoLanche.innerHTML += `
             <p><strong>Quem vai comer esse lanche?</strong></p>
             <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
-            
         `;
     };
 
-   // Função para adicionar o lanche ao carrinho
-window.adicionarAoCarrinho = function() {
-    let pedido = "";
-    let total = 0;
-    const tipoLanche = document.getElementById("titulo-lanche").innerText;
+    // Função para adicionar o lanche ao carrinho
+    window.adicionarAoCarrinho = function() {
+        let pedido = "";
+        let total = 0;
+        const tipoLanche = document.getElementById("titulo-lanche").innerText;
 
-    const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
-    if (tipo) {
-        total = parseFloat(tipo.dataset.price || 0);
-        pedido += `${tipoLanche} (${tipo.value})\n`;
-    } else {
-        total = 19.00; // Preço fixo para CHAMA Kids
-        pedido += `${tipoLanche}\n`;
-    }
+        const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
+        if (tipo) {
+            total = parseFloat(tipo.dataset.price || 0);
+            pedido += `${tipoLanche} (${tipo.value})\n`;
+        } else {
+            total = 19.00; // Preço fixo para CHAMA Kids
+            pedido += `${tipoLanche}\n`;
+        }
 
-    const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
-    if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
+        const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
+        if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
 
-    const ingredientesRemovidos = [];
-    document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
-        ingredientesRemovidos.push(ingrediente.value);
-    });
-    if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+        const ingredientesRemovidos = [];
+        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+            ingredientesRemovidos.push(ingrediente.value);
+        });
+        if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
 
-    const adicionaisSelecionados = [];
-    document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
-        adicionaisSelecionados.push(adicional.value);
-        total += parseFloat(adicional.dataset.price || 0); // Soma o preço do adicional ao total
-    });
-    if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
+        const adicionaisSelecionados = [];
+        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
+            adicionaisSelecionados.push(adicional.value);
+            total += parseFloat(adicional.dataset.price || 0);
+        });
+        if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
 
-    const bebidasSelecionadas = [];
-    document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
-        bebidasSelecionadas.push(bebida.value);
-        total += parseFloat(bebida.dataset.price || 0); // Soma o preço da bebida ao total
-    });
-    if (bebidasSelecionadas.length > 0) pedido += `Bebida: ${bebidasSelecionadas.join(", ")}\n`;
+        const bebidasSelecionadas = [];
+        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
+            bebidasSelecionadas.push(bebida.value);
+            total += parseFloat(bebida.dataset.price || 0);
+        });
+        if (bebidasSelecionadas.length > 0) pedido += `Bebida: ${bebidasSelecionadas.join(", ")}\n`;
 
-    const nomePessoa = document.getElementById("nome-pessoa").value;
-    if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
+        const nomePessoa = document.getElementById("nome-pessoa").value;
+        if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
-    carrinho.push({ pedido, total });
-    totalCarrinho += total;
-    atualizarCarrinho();
-    alert("Item adicionado ao carrinho!");
+        carrinho.push({ pedido, total });
+        totalCarrinho += total;
+        atualizarCarrinho();
+        alert("Item adicionado ao carrinho!");
 
-    // Reset dos ingredientes, adicionais e bebidas para o próximo lanche
-    document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
-        checkbox.checked = true; // Ingredientes marcados novamente por padrão
-    });
-    document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => {
-        checkbox.checked = false; // Adicionais desmarcados para o próximo pedido
-    });
-    document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']").forEach(checkbox => {
-        checkbox.checked = false; // Bebidas desmarcadas para o próximo pedido
-    });
+        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
+            checkbox.checked = true;
+        });
+        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']").forEach(checkbox => {
+            checkbox.checked = false;
+        });
 
-    document.getElementById("personalizar-lanche").style.display = "none";
-    document.getElementById("lanches-menu").style.display = "block";
-};
-
-    // Função para retornar ao menu de lanches
-    window.voltarParaMenu = function() {
         document.getElementById("personalizar-lanche").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
     };
 
-    // Atualiza o carrinho em tempo real e exibe os itens com um botão de remover
+    // Funções de carrinho e finalização
     function atualizarCarrinho() {
         carrinhoLista.innerHTML = "";
         carrinho.forEach((item, index) => {
@@ -208,4 +232,5 @@ window.adicionarAoCarrinho = function() {
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
 });
+
 
