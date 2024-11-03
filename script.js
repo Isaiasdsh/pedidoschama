@@ -8,15 +8,17 @@ document.addEventListener("DOMContentLoaded", function() {
     let totalCarrinho = 0;
     const taxaEntrega = 5;
 
+     // Função para iniciar o atendimento
     startButton.addEventListener("click", function(e) {
         e.preventDefault();
         
         const nome = document.getElementById("name").value.trim();
         const whatsapp = document.getElementById("whatsapp").value.trim();
         
+        // Verifica se os campos estão preenchidos
         if (nome === "" || whatsapp === "") {
             alert("Por favor, preencha seu nome e WhatsApp para iniciar o atendimento.");
-            return;
+            return; // Não avança se algum campo estiver vazio
         }
         
         document.querySelector(".welcome-screen").style.display = "none";
