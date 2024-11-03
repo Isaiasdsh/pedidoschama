@@ -151,14 +151,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
         if (tipo) {
             total = parseFloat(tipo.dataset.price || 0);
-            pedido += `${tipoLanche} (${tipo.value})\n`;
+            pedido += `Nome do Lanche: *${tipoLanche} (${tipo.value})*\n`;
         } else {
             total = 19.00; // Preço fixo para CHAMA Kids
-            pedido += `${tipoLanche}\n`;
+            pedido += `Nome do Lanche: *${tipoLanche}*\n`;
         }
 
         const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
         if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
+
+        const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto']:checked");
+        if (pontoCarne) pedido += `Ponto da Carne: ${pontoCarne.value}\n`;
 
         const ingredientesRemovidos = [];
         document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
@@ -202,43 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("lanches-menu").style.display = "block";
     };
 
-    // Funções de carrinho e finalização
-    function atualizarCarrinho() {
-        carrinhoLista.innerHTML = "";
-        carrinho.forEach((item, index) => {
-            const li = document.createElement("li");
-            li.textContent = item.pedido;
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remover";
-            removeButton.onclick = () => removerDoCarrinho(index);
-            li.appendChild(removeButton);
-            carrinhoLista.appendChild(li);
-        });
-        carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
-        carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
-    }
-
-    function removerDoCarrinho(index) {
-        totalCarrinho -= carrinho[index].total;
-        carrinho.splice(index, 1);
-        atualizarCarrinho();
-    }
-
-    window.verCarrinho = function() {
-        carrinhoCompletoDiv.innerHTML = "";
-        carrinho.forEach(item => {
-            const p = document.createElement("p");
-            p.innerText = item.pedido;
-            carrinhoCompletoDiv.appendChild(p);
-        });
-        const totalFinal = document.createElement("p");
-        totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
-        totalFinal.style.fontWeight = "bold";
-        carrinhoCompletoDiv.appendChild(totalFinal);
-        carrinhoCompletoDiv.style.display = "block";
-    };
-
-   // Função para finalizar o pedido e enviar pelo WhatsApp
+    // Função para finalizar o pedido e enviar pelo WhatsApp
     window.finalizarPedido = function() {
         const nome = document.getElementById("name").value.trim();
         const whatsapp = document.getElementById("whatsapp").value.trim();
