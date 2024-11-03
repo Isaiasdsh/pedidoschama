@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-button");
+    // Forçar somente números no campo WhatsApp
+    document.getElementById("whatsapp").addEventListener("input", function(e) {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Remove caracteres não numéricos
+    });
     const carrinhoLista = document.getElementById("carrinho-lista");
     const carrinhoSubtotal = document.getElementById("carrinho-subtotal");
     const carrinhoTotal = document.getElementById("carrinho-total");
