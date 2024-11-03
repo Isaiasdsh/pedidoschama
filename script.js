@@ -98,55 +98,58 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Função para adicionar o lanche ao carrinho
-    window.adicionarAoCarrinho = function() {
-        let pedido = "";
-        let total = 0;
-        const tipoLanche = document.getElementById("titulo-lanche").innerText;
+window.adicionarAoCarrinho = function() {
+    let pedido = "";
+    let total = 0;
+    const tipoLanche = document.getElementById("titulo-lanche").innerText;
 
-        const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
-        if (tipo) {
-            total = parseFloat(tipo.dataset.price || 0);
-            pedido += `${tipoLanche} (${tipo.value})\n`;
-        } else {
-            total = 19.00; // Preço fixo para CHAMA Kids
-            pedido += `${tipoLanche}\n`;
-        }
+    const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
+    if (tipo) {
+        total = parseFloat(tipo.dataset.price || 0);
+        pedido += `${tipoLanche} (${tipo.value})\n`;
+    } else {
+        total = 19.00; // Preço fixo para CHAMA Kids
+        pedido += `${tipoLanche}\n`;
+    }
 
-        const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
-        if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
+    const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
+    if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
 
-        const ingredientesRemovidos = [];
-        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
-            ingredientesRemovidos.push(ingrediente.value);
-        });
-        if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
+    const ingredientesRemovidos = [];
+    document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
+        ingredientesRemovidos.push(ingrediente.value);
+    });
+    if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
 
-        const adicionaisSelecionados = [];
-        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
-            adicionaisSelecionados.push(adicional.value);
-            total += parseFloat(adicional.dataset.price || 0);
-        });
-        if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
+    const adicionaisSelecionados = [];
+    document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
+        adicionaisSelecionados.push(adicional.value);
+        total += parseFloat(adicional.dataset.price || 0);
+    });
+    if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
 
-        const nomePessoa = document.getElementById("nome-pessoa").value;
-        if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
+    const nomePessoa = document.getElementById("nome-pessoa").value;
+    if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
-        carrinho.push({ pedido, total });
-        totalCarrinho += total;
-        atualizarCarrinho();
-        alert("Item adicionado ao carrinho!");
+    carrinho.push({ pedido, total });
+    totalCarrinho += total;
+    atualizarCarrinho();
+    alert("Item adicionado ao carrinho!");
 
-        // Limpar os campos de adicionais para o próximo lanche
-        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
-            checkbox.checked = true;
-        });
-        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => {
-            checkbox.checked = false;
-        });
+    // Limpar os campos de adicionais e ingredientes para o próximo lanche
+    document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
+        checkbox.checked = true; // Ingredientes marcados novamente por padrão
+    });
+    document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => {
+        checkbox.checked = false; // Adicionais desmarcados para o próximo pedido
+    });
+    document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']").forEach(checkbox => {
+        checkbox.checked = false; // Bebidas desmarcadas para o próximo pedido
+    });
 
-        document.getElementById("personalizar-lanche").style.display = "none";
-        document.getElementById("lanches-menu").style.display = "block";
-    };
+    document.getElementById("personalizar-lanche").style.display = "none";
+    document.getElementById("lanches-menu").style.display = "block";
+};
 
     // Função para retornar ao menu de lanches
     window.voltarParaMenu = function() {
