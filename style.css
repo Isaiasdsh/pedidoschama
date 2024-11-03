@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* Cor de fundo suave */
+    background-color: #f4f4f4; /* Fundo suave */
 }
 
 /* Container da Logo */
@@ -13,7 +13,7 @@ body {
 }
 
 .logo {
-    max-width: 180px; /* Tamanho máximo em telas maiores */
+    max-width: 180px; /* Tamanho máximo para telas grandes */
     width: 100%;
     height: auto;
 }
@@ -27,14 +27,14 @@ body {
 
 /* Estilo dos Quadrados dos Lanches */
 .lanche-box {
-    border: 1px solid #ddd;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 20px;
     margin: 10px;
-    background-color: #ffffff;
+    background-color: #fff; /* Fundo branco */
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.2s; /* Animação de leve ao passar o mouse */
+    transition: transform 0.2s;
 }
 
 .lanche-box:hover {
@@ -47,8 +47,9 @@ body {
     color: #333;
 }
 
+/* Botão Principal */
 .button {
-    background-color: #ff6600;
+    background-color: #FF6600; /* Laranja queimado */
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -59,7 +60,15 @@ body {
 }
 
 .button:hover {
-    background-color: #e65c00; /* Cor mais escura ao passar o mouse */
+    background-color: #e55d00; /* Laranja mais escuro ao passar o mouse */
+}
+
+/* Estilo do Carrinho */
+#carrinho {
+    background-color: #333; /* Preto ou cinza escuro */
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 /* Responsividade para Telas Menores */
@@ -69,7 +78,7 @@ body {
     }
 
     .logo {
-        max-width: 140px; /* Logo menor para telas médias */
+        max-width: 140px;
     }
 
     .lanche-box {
@@ -94,7 +103,7 @@ body {
     }
 
     .logo {
-        max-width: 100px; /* Logo ainda menor para telas pequenas */
+        max-width: 100px;
     }
 
     .lanche-box {
@@ -111,5 +120,6 @@ body {
         padding: 8px 14px;
     }
 }
+
 
 
