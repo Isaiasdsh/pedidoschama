@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
     };
 
-    // Função para adicionar o lanche ao carrinho
+   // Função para adicionar o lanche ao carrinho
 window.adicionarAoCarrinho = function() {
     let pedido = "";
     let total = 0;
@@ -124,14 +124,14 @@ window.adicionarAoCarrinho = function() {
     const adicionaisSelecionados = [];
     document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
         adicionaisSelecionados.push(adicional.value);
-        total += parseFloat(adicional.dataset.price || 0);
+        total += parseFloat(adicional.dataset.price || 0); // Soma o preço do adicional ao total
     });
     if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
 
     const bebidasSelecionadas = [];
     document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
         bebidasSelecionadas.push(bebida.value);
-        total += parseFloat(bebida.dataset.price || 0);
+        total += parseFloat(bebida.dataset.price || 0); // Soma o preço da bebida ao total
     });
     if (bebidasSelecionadas.length > 0) pedido += `Bebida: ${bebidasSelecionadas.join(", ")}\n`;
 
