@@ -142,80 +142,87 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
     };
 
-    // Função para adicionar o lanche ao carrinho
+    document.addEventListener("DOMContentLoaded", function() {
+    const carrinho = [];
+    let totalCarrinho = 0;
+    const taxaEntrega = 5;
+
+    // Função para adicionar item ao carrinho
     window.adicionarAoCarrinho = function() {
-        let pedido = "";
-        let total = 0;
         const tipoLanche = document.getElementById("titulo-lanche").innerText;
-
         const tipo = document.querySelector("#personalizar-lanche input[name='tipo']:checked");
-        if (tipo) {
-            total = parseFloat(tipo.dataset.price || 0);
-            pedido += `Nome do Lanche: *${tipoLanche} (${tipo.value})*\n`;
-        } else {
-            total = 19.00; // Preço fixo para CHAMA Kids
-            pedido += `Nome do Lanche: *${tipoLanche}*\n`;
-        }
-
         const paoEscolhido = document.querySelector("#personalizar-lanche input[name='pao']:checked");
-        if (paoEscolhido) pedido += `Tipo de Pão: ${paoEscolhido.value}\n`;
-
-        const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto']:checked");
-        if (pontoCarne) pedido += `Ponto da Carne: ${pontoCarne.value}\n`;
-
-        const ingredientesRemovidos = [];
-        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)").forEach(ingrediente => {
-            ingredientesRemovidos.push(ingrediente.value);
-        });
-        if (ingredientesRemovidos.length > 0) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(", ")}\n`;
-
-        const adicionaisSelecionados = [];
-        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked").forEach(adicional => {
-            adicionaisSelecionados.push(adicional.value);
-            total += parseFloat(adicional.dataset.price || 0);
-        });
-        if (adicionaisSelecionados.length > 0) pedido += `Adicionais: ${adicionaisSelecionados.join(", ")}\n`;
-
-        const bebidasSelecionadas = [];
-        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked").forEach(bebida => {
-            bebidasSelecionadas.push(bebida.value);
-            total += parseFloat(bebida.dataset.price || 0);
-        });
-        if (bebidasSelecionadas.length > 0) pedido += `Bebida: ${bebidasSelecionadas.join(", ")}\n`;
-
+        const pontoCarne = document.querySelector("#personalizar-lanche input[name='ponto-carne']:checked"); // Captura o ponto da carne
         const nomePessoa = document.getElementById("nome-pessoa").value;
-        if (nomePessoa) pedido += `Para: ${nomePessoa}\n`;
 
-        carrinho.push({ pedido, total });
-        totalCarrinho += total;
-        atualizarCarrinho();
+        // Obter os ingredientes removidos
+        const ingredientesRemovidos = Array.from(document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']:not(:checked)")).map(ingrediente => ingrediente.value);
+
+        // Obter os adicionais selecionados
+        const adicionaisSelecionados = Array.from(document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']:checked")).map(adicional => {
+            totalCarrinho += parseFloat(adicional.dataset.price || 0);
+            return adicional.value;
+        });
+
+        // Obter as bebidas selecionadas
+        const bebidasSelecionadas = Array.from(document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']:checked")).map(bebida => {
+            totalCarrinho += parseFloat(bebida.dataset.price || 0);
+            return bebida.value;
+        });
+
+        // Criar o pedido formatado
+        let pedido = `Nome do Lanche: ${tipoLanche} (${tipo ? tipo.value : 'Simples'})\n`;
+        pedido += `Tipo de Pão: ${paoEscolhido ? paoEscolhido.value : 'Pão comum'}\n`;
+        pedido += `Ponto da Carne: ${pontoCarne ? pontoCarne.value : 'Não especificado'}\n`; // Adiciona o ponto da carne
+        if (ingredientesRemovidos.length) pedido += `Ingredientes que retirou: ${ingredientesRemovidos.join(', ')}\n`;
+        if (adicionaisSelecionados.length) pedido += `Adicionais: ${adicionaisSelecionados.join(', ')}\n`;
+        if (bebidasSelecionadas.length) pedido += `Bebida: ${bebidasSelecionadas.join(', ')}\n`;
+        pedido += `Para: ${nomePessoa}\n`;
+
+        // Adicionar ao carrinho
+        carrinho.push({ pedido, total: totalCarrinho });
+        totalCarrinho += parseFloat(tipo.dataset.price || 0);
         alert("Item adicionado ao carrinho!");
 
-        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => {
-            checkbox.checked = true;
-        });
-        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => {
-            checkbox.checked = false;
-        });
-        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']").forEach(checkbox => {
-            checkbox.checked = false;
-        });
+        // Limpar seleção de adicionais e bebidas
+        document.querySelectorAll("#personalizar-lanche .ingredientes input[type='checkbox']").forEach(checkbox => checkbox.checked = true);
+        document.querySelectorAll("#personalizar-lanche .adicionais input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
+        document.querySelectorAll("#personalizar-lanche .bebidas input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
 
-        document.getElementById("personalizar-lanche").style.display = "none";
-        document.getElementById("lanches-menu").style.display = "block";
+        atualizarCarrinho();
     };
 
-    // Função para finalizar o pedido e enviar pelo WhatsApp
+    // Função para atualizar o carrinho exibido
+    function atualizarCarrinho() {
+        const carrinhoLista = document.getElementById("carrinho-lista");
+        carrinhoLista.innerHTML = "";
+        carrinho.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.textContent = item.pedido;
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remover";
+            removeButton.onclick = () => removerDoCarrinho(index);
+            li.appendChild(removeButton);
+            carrinhoLista.appendChild(li);
+        });
+        document.getElementById("carrinho-subtotal").textContent = totalCarrinho.toFixed(2);
+        document.getElementById("carrinho-total").textContent = (totalCarrinho + taxaEntrega).toFixed(2);
+    }
+
+    // Função para remover item do carrinho
+    function removerDoCarrinho(index) {
+        totalCarrinho -= carrinho[index].total;
+        carrinho.splice(index, 1);
+        atualizarCarrinho();
+    }
+
+    // Função para finalizar pedido e enviar via WhatsApp
     window.finalizarPedido = function() {
         const nome = document.getElementById("name").value.trim();
         const whatsapp = document.getElementById("whatsapp").value.trim();
         let pedido = `Pedido de: *${nome}* (WhatsApp: ${whatsapp})\n------------------------------------------------\n`;
-
         carrinho.forEach(item => pedido += `${item.pedido}\n---------------------------------------------------------\n`);
-
-        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\n`;
-        pedido += `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
-
+        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
         const mensagem = encodeURIComponent(pedido);
         window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
     };
