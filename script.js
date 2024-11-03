@@ -38,14 +38,80 @@ document.addEventListener("DOMContentLoaded", function() {
                 <label><input type="radio" name="tipo" value="Simples" data-price="26" checked> Simples - R$26,00</label>
                 <label><input type="radio" name="tipo" value="Duplo" data-price="33"> Duplo - R$33,00</label>
                 <p><strong>Ponto da Carne:</strong></p>
-                <label><input type="radio" name="ponto" value="Mal Passado"> Mal Passado</label>
-                <label><input type="radio" name="ponto" value="Ao Ponto" checked> Ao Ponto</label>
+                <label><input type="radio" name="ponto" value="Mal Passado" checked> Mal Passado</label>
+                <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
                 <label><input type="radio" name="ponto" value="Bem Passado"> Bem Passado</label>
+                <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
+                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
+                <div class="bebidas">
+                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
+                </div>
+            `;
+        } else if (tipo === "bacon") {
+            document.getElementById("titulo-lanche").innerText = "CHAMA Bacon";
+            conteudoLanche.innerHTML = `
+                <p><strong>Escolha o Tipo:</strong></p>
+                <label><input type="radio" name="tipo" value="Simples" data-price="30" checked> Simples - R$30,00</label>
+                <label><input type="radio" name="tipo" value="Duplo" data-price="37"> Duplo - R$37,00</label>
+                <p><strong>Ponto da Carne:</strong></p>
+                <label><input type="radio" name="ponto" value="Mal Passado" checked> Mal Passado</label>
+                <label><input type="radio" name="ponto" value="Ao Ponto"> Ao Ponto</label>
+                <label><input type="radio" name="ponto" value="Bem Passado"> Bem Passado</label>
+                <p><strong>Turbine o seu lanche com nosso adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
+                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
+                <div class="bebidas">
+                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
+                </div>
+            `;
+        } else if (tipo === "kids") {
+            document.getElementById("titulo-lanche").innerText = "CHAMA Kids";
+            conteudoLanche.innerHTML = `
+                <p class="preco">R$19,00</p>
+                <p><strong>Ingredientes (não removíveis):</strong></p>
+                <ul>
+                    <li>Pão Kids (Brioche)</li>
+                    <li>Hambúrguer 80g</li>
+                </ul>
+                <p><strong>Quais Ingredientes deseja? (desmarque o que você quer retirar)</strong></p>
+                <div class="ingredientes">
+                    <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
+                    <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
+                </div>
+                <p><strong>Adicionais:</strong></p>
+                <div class="adicionais">
+                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
+                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
+                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
+                </div>
+                <p><strong>Vai uma Bebida para Fechar o Combo?</strong></p>
+                <div class="bebidas">
+                    <label><input type="checkbox" name="bebida" value="Coca Cola 310ml" data-price="6"> Coca Cola 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Guaraná Antártica 310ml" data-price="6"> Guaraná Antártica 310ml - R$6,00</label>
+                    <label><input type="checkbox" name="bebida" value="Água com Gás" data-price="3"> Água com Gás - R$3,00</label>
+                </div>
             `;
         }
-        // Outras opções omitidas para brevidade
-    };
 
+        conteudoLanche.innerHTML += `
+            <p><strong>Quem vai comer esse lanche?</strong></p>
+            <input type="text" id="nome-pessoa" placeholder="Nome da pessoa">
+        `;
+    };
+  
     window.adicionarAoCarrinho = function() {
         let pedido = "";
         let total = 0;
