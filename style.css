@@ -1,266 +1,100 @@
-/* Geral */
+/* Estilos Gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #f2f2f2;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
-h1, h2, h3 {
-    color: #ff8c00; /* Cor laranja vibrante para títulos */
-}
-
-/* Tela de Boas-Vindas */
-.welcome-screen {
-    background-color: #333;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 400px;
-}
-
+/* Container da Logo */
 .logo {
-    width: 90px; /* Tamanho menor para a logo */
-    margin-bottom: 15px;
-    opacity: 0.8;
-}
-
-.welcome-screen input {
     display: block;
-    margin: 10px auto;
-    padding: 8px;
-    width: 80%;
-    max-width: 300px;
-    border-radius: 4px;
-    border: none;
+    max-width: 200px; /* Tamanho máximo para telas grandes */
+    width: 100%; /* Redimensiona para 100% do container */
+    height: auto; /* Mantém a proporção */
+    margin: 20px auto; /* Centraliza a logo */
 }
 
-#start-button {
-    background-color: #ff8c00;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-#start-button:hover {
-    background-color: #e07a00;
-}
-
-/* Menu de Lanches */
-#lanches-menu {
-    margin-top: 20px;
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
-}
-
-.lanche-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.lanche-option {
-    background-color: #2d2d2d;
-    width: 100%;
-    max-width: 180px;
+/* Containers e Layouts */
+.container {
     padding: 15px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Estilo dos Quadrados dos Lanches */
+.lanche-box {
+    border: 1px solid #ddd;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 10px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.lanche-option:hover {
-    background-color: #383838;
+.lanche-box h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 
-.lanche-option h3 {
-    margin: 0;
-    color: #ff8c00;
-}
-
-.lanche-option p {
-    margin: 8px 0;
-    color: #ccc;
-    font-size: 14px;
-}
-
-/* Personalização do Lanche */
-#personalizar-lanche {
-    width: 90%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#personalizar-lanche label {
-    display: block;
-    margin: 8px 0;
-    color: #ccc;
-}
-
-#personalizar-lanche input[type="text"] {
-    display: block;
-    margin: 10px 0;
-    padding: 8px;
-    width: 100%;
-    border-radius: 4px;
-    border: none;
-}
-
-#personalizar-lanche .ingredientes, #personalizar-lanche .adicionais, #personalizar-lanche .bebidas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-#personalizar-lanche .ingredientes label,
-#personalizar-lanche .adicionais label,
-#personalizar-lanche .bebidas label {
-    width: 48%;
-    margin-bottom: 10px;
-}
-
-button {
-    background-color: #ff8c00;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #e07a00;
-}
-
-/* Carrinho */
-#carrinho {
-    width: 90%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#carrinho h2 {
-    margin-top: 0;
-}
-
-#carrinho ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#carrinho ul li {
-    background-color: #2d2d2d;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 4px;
-    color: #f2f2f2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#carrinho ul li button {
-    background-color: #e63946;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-#carrinho ul li button:hover {
-    background-color: #cc2e3c;
-}
-
-#carrinho p {
-    margin: 8px 0;
-}
-
-#carrinho-completo {
-    width: 90%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-}
-
-#carrinho-completo p {
-    color: #f2f2f2;
-    margin: 8px 0;
-    text-align: left;
-}
-
-/* Responsividade */
+/* Responsividade para Telas Menores */
 @media (max-width: 768px) {
-    .welcome-screen, #lanches-menu, #personalizar-lanche, #carrinho, #carrinho-completo {
-        width: 95%;
-    }
-
-    .lanche-option {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 10px;
-    }
-
-    #personalizar-lanche .ingredientes label,
-    #personalizar-lanche .adicionais label,
-    #personalizar-lanche .bebidas label {
-        width: 100%;
-    }
-
-    button {
-        width: 100%;
-        font-size: 14px;
-        padding: 8px;
-        margin-top: 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1, h2 {
-        font-size: 1.5em;
-    }
-
-    .lanche-option p {
-        font-size: 13px;
-    }
-
-    #start-button, button {
-        font-size: 14px;
+    .container {
         padding: 10px;
     }
 
-    #carrinho ul li {
-        font-size: 13px;
+    .lanche-box {
+        margin: 5px;
+        padding: 15px;
+    }
+
+    /* Ajusta o Texto */
+    .lanche-box h3 {
+        font-size: 16px;
+    }
+
+    /* Carrinho e Botões */
+    #carrinho, #personalizar-lanche {
+        width: 100%;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    /* Ajuste da Logo para Telas Menores */
+    .logo {
+        max-width: 150px; /* Logo menor para telas médias */
     }
 }
 
+/* Responsividade para Telas Muito Pequenas */
+@media (max-width: 480px) {
+    .lanche-box {
+        margin: 5px;
+        padding: 10px;
+    }
 
+    .lanche-box h3 {
+        font-size: 14px;
+    }
+
+    /* Ajusta o Carrinho */
+    #carrinho {
+        padding: 5px;
+    }
+
+    /* Botões de Tamanho Reduzido */
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Ajuste da Logo para Telas Muito Pequenas */
+    .logo {
+        max-width: 100px; /* Logo ainda menor para telas muito pequenas */
+    }
+}
 
 
