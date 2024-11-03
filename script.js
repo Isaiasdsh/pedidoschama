@@ -194,7 +194,49 @@ document.addEventListener("DOMContentLoaded", function() {
         voltarParaMenu();
     };
 
-    // Funções de carrinho e finalização permanecem inalteradas
+
+    function atualizarCarrinho() {
+        carrinhoLista.innerHTML = "";
+        carrinho.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.textContent = item.pedido;
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remover";
+            removeButton.onclick = () => removerDoCarrinho(index);
+            li.appendChild(removeButton);
+            carrinhoLista.appendChild(li);
+        });
+        carrinhoSubtotal.textContent = totalCarrinho.toFixed(2);
+        carrinhoTotal.textContent = (totalCarrinho + taxaEntrega).toFixed(2);
+    }
+
+    function removerDoCarrinho(index) {
+        totalCarrinho -= carrinho[index].total;
+        carrinho.splice(index, 1);
+        atualizarCarrinho();
+    }
+
+    window.verCarrinho = function() {
+        carrinhoCompletoDiv.innerHTML = "";
+        carrinho.forEach(item => {
+            const p = document.createElement("p");
+            p.innerText = item.pedido;
+            carrinhoCompletoDiv.appendChild(p);
+        });
+        const totalFinal = document.createElement("p");
+        totalFinal.innerText = `Total Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+        totalFinal.style.fontWeight = "bold";
+        carrinhoCompletoDiv.appendChild(totalFinal);
+        carrinhoCompletoDiv.style.display = "block";
+    };
+
+    window.finalizarPedido = function() {
+        let pedido = `Pedido de:\n`;
+        carrinho.forEach(item => pedido += `${item.pedido}\n`);
+        pedido += `Taxa de Entrega: R$${taxaEntrega.toFixed(2)}\nTotal Final: R$${(totalCarrinho + taxaEntrega).toFixed(2)}`;
+        const mensagem = encodeURIComponent(pedido);
+        window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
+    };
 });
 
 
