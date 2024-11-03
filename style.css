@@ -12,66 +12,63 @@ body {
 }
 
 h1, h2, h3 {
-    color: #ff8c00; /* Cor laranja vibrante para títulos */
+    color: #ff8c00;
 }
 
-/* Tela de Boas-Vindas */
 .welcome-screen {
     background-color: #333;
-    border-radius: 12px;
-    padding: 25px;
+    border-radius: 8px;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 400px;
-    margin-top: 20px;
 }
 
 .logo {
-    width: 80px; /* Tamanho mais discreto para a logo */
+    width: 80px;
     margin-bottom: 15px;
-    opacity: 0.85;
+    opacity: 0.8;
 }
 
 .welcome-screen input {
     display: block;
-    margin: 12px auto;
-    padding: 10px;
-    width: 85%;
-    max-width: 280px;
-    border-radius: 6px;
+    margin: 10px auto;
+    padding: 8px;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 4px;
     border: none;
-    background-color: #2d2d2d;
-    color: #f2f2f2;
 }
 
 #start-button {
     background-color: #ff8c00;
     color: #fff;
     border: none;
-    padding: 12px 25px;
+    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 6px;
-    transition: background-color 0.3s;
+    border-radius: 4px;
 }
 
 #start-button:hover {
     background-color: #e07a00;
 }
 
-/* Menu de Lanches */
-#lanches-menu {
-    margin-top: 20px;
+#lanches-menu, #personalizar-lanche, #carrinho, #carrinho-completo {
     width: 90%;
     max-width: 600px;
-    text-align: center;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .lanche-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
     justify-content: center;
 }
 
@@ -79,196 +76,41 @@ h1, h2, h3 {
     background-color: #2d2d2d;
     width: 100%;
     max-width: 180px;
-    padding: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    border-radius: 8px;
     text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .lanche-option:hover {
     background-color: #383838;
-    transform: scale(1.05);
-}
-
-.lanche-option h3 {
-    margin: 0;
-    color: #ff8c00;
-    font-size: 18px;
-}
-
-.lanche-option p {
-    margin: 8px 0;
-    color: #ccc;
-    font-size: 15px;
-}
-
-/* Personalização do Lanche */
-#personalizar-lanche {
-    width: 90%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-}
-
-#personalizar-lanche label {
-    display: block;
-    margin: 10px 0;
-    color: #ccc;
-}
-
-#personalizar-lanche input[type="text"] {
-    display: block;
-    margin: 12px 0;
-    padding: 10px;
-    width: 100%;
-    border-radius: 6px;
-    border: none;
-    background-color: #2d2d2d;
-    color: #f2f2f2;
-}
-
-#personalizar-lanche .ingredientes, #personalizar-lanche .adicionais, #personalizar-lanche .bebidas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-#personalizar-lanche .ingredientes label,
-#personalizar-lanche .adicionais label,
-#personalizar-lanche .bebidas label {
-    width: 48%;
-    margin-bottom: 10px;
 }
 
 button {
     background-color: #ff8c00;
     color: #fff;
     border: none;
-    padding: 12px 25px;
+    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 100%;
 }
 
 button:hover {
     background-color: #e07a00;
-    transform: translateY(-2px);
 }
 
-/* Carrinho */
-#carrinho {
-    width: 90%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
-}
-
-#carrinho h2 {
-    margin-top: 0;
-}
-
-#carrinho ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#carrinho ul li {
-    background-color: #2d2d2d;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    color: #f2f2f2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#carrinho ul li button {
-    background-color: #e63946;
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#carrinho ul li button:hover {
-    background-color: #cc2e3c;
-}
-
-#carrinho p {
-    margin: 10px 0;
-    color: #f2f2f2;
-}
-
-#carrinho-completo {
-    width: 90%;
-    max-width: 600px;
-    background-color: #333;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
-    margin-top: 20px;
-}
-
-#carrinho-completo p {
-    color: #f2f2f2;
-    margin: 10px 0;
-    text-align: left;
-}
-
-/* Responsividade */
 @media (max-width: 768px) {
-    .welcome-screen, #lanches-menu, #personalizar-lanche, #carrinho, #carrinho-completo {
+    #lanches-menu, #personalizar-lanche, #carrinho, #carrinho-completo {
         width: 95%;
     }
 
     .lanche-option {
-        width: 100%;
         max-width: 100%;
-        margin-bottom: 10px;
-    }
-
-    #personalizar-lanche .ingredientes label,
-    #personalizar-lanche .adicionais label,
-    #personalizar-lanche .bebidas label {
-        width: 100%;
-    }
-
-    button {
-        width: 100%;
-        font-size: 15px;
-        padding: 10px;
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1, h2 {
-        font-size: 1.4em;
-    }
-
-    .lanche-option p {
-        font-size: 13px;
-    }
-
-    #start-button, button {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    #carrinho ul li {
-        font-size: 13px;
     }
 }
 
