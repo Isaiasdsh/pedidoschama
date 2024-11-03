@@ -10,19 +10,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     startButton.addEventListener("click", function(e) {
         e.preventDefault();
-        
+
         const nome = document.getElementById("name").value.trim();
         const whatsapp = document.getElementById("whatsapp").value.trim();
-        
+
         if (nome === "" || whatsapp === "") {
             alert("Por favor, preencha seu nome e WhatsApp para iniciar o atendimento.");
             return;
         }
-        
+
         document.querySelector(".welcome-screen").style.display = "none";
         document.getElementById("lanches-menu").style.display = "block";
         document.getElementById("carrinho").style.display = "block";
     });
+});
 
     // Função para exibir a tela de personalização do lanche escolhido
     window.escolherLanche = function(tipo) {
