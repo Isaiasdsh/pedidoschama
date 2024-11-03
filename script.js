@@ -242,4 +242,3 @@ function removerDoCarrinho(index) {
     const mensagem = encodeURIComponent(pedido);
     window.open(`https://wa.me/48991758488?text=${mensagem}`, "_blank");
 };
-
