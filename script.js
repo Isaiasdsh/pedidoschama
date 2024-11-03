@@ -48,12 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
-                <p><strong>Adicionais:</strong></p>
-                <div class="adicionais">
-                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
-                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
-                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
-                </div>
+                
             `;
         } else if (tipo === "bacon") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Bacon";
@@ -74,12 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Tomate" checked> Tomate</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
-                <p><strong>Adicionais:</strong></p>
-                <div class="adicionais">
-                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
-                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
-                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
-                </div>
+               
             `;
         } else if (tipo === "kids") {
             document.getElementById("titulo-lanche").innerText = "CHAMA Kids";
@@ -95,12 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label><input type="checkbox" name="ingrediente" value="Queijo mussarela" checked> Queijo mussarela</label>
                     <label><input type="checkbox" name="ingrediente" value="Maionese" checked> Maionese</label>
                 </div>
-                <p><strong>Adicionais:</strong></p>
-                <div class="adicionais">
-                    <label><input type="checkbox" name="adicional" value="Bacon" data-price="5"> Bacon - R$5,00</label>
-                    <label><input type="checkbox" name="adicional" value="Cheddar cremoso" data-price="4"> Cheddar cremoso - R$4,00</label>
-                    <label><input type="checkbox" name="adicional" value="Maionese da casa" data-price="2"> Maionese da casa - R$2,00</label>
-                </div>
+              
             `;
         }
 
