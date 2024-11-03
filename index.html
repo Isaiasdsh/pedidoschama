@@ -4,64 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chama Burguer - Pedido</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Tela de boas-vindas -->
+
+    <!-- Tela de Boas-Vindas -->
     <div class="welcome-screen">
-        <h1>Bem-vindo à Chama Burguer</h1>
-        <form id="welcome-form">
-            <input type="text" id="name" placeholder="Digite seu nome" required>
-            <input type="tel" id="whatsapp" placeholder="Número do WhatsApp" required>
-            <button type="submit" id="start-button">Iniciar Atendimento</button>
-        </form>
+        <h1>Bem-vindo ao Chama Burguer</h1>
+        <p>Por favor, preencha seu nome e WhatsApp para iniciar o atendimento:</p>
+        <input type="text" id="name" placeholder="Seu nome">
+        <input type="text" id="whatsapp" placeholder="Número de WhatsApp">
+        <button id="start-button">Iniciar Atendimento</button>
     </div>
 
+    <!-- Menu de Lanches -->
     <div id="lanches-menu" style="display: none;">
-    <h2>Escolha seu Lanche</h2>
-    <div class="card-container">
-        <!-- Card CHAMA Clássico -->
-        <div class="card">
+        <h2>Escolha seu Lanche</h2>
+        <div class="lanche-option" onclick="escolherLanche('classico')">
             <h3>CHAMA Clássico</h3>
-            <p>Hambúrguer de carne bovina (120g), queijo mussarela, cebola roxa, alface, tomate e maionese da casa.</p>
-            <button onclick="escolherLanche('classico')">Quero esse</button>
+            <p>Pão, Hambúrguer de carne bovina (120g), queijo mussarela, cebola roxa, alface, tomate, maionese da casa</p>
+            <p><strong>Simples - R$26,00 | Duplo - R$33,00</strong></p>
         </div>
-
-        <!-- Card CHAMA Bacon -->
-        <div class="card">
+        <div class="lanche-option" onclick="escolherLanche('bacon')">
             <h3>CHAMA Bacon</h3>
-            <p>Hambúrguer de carne bovina (120g), BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa e maionese da casa.</p>
-            <button onclick="escolherLanche('bacon')">Quero esse</button>
+            <p>Pão, Hambúrguer de carne bovina (120g), BBQ, queijo mussarela, cheddar cremoso, bacon em tiras, alface, tomate, cebola roxa, maionese da casa</p>
+            <p><strong>Simples - R$30,00 | Duplo - R$37,00</strong></p>
         </div>
-
-        <!-- Card CHAMA Kids -->
-        <div class="card">
+        <div class="lanche-option" onclick="escolherLanche('kids')">
             <h3>CHAMA Kids</h3>
-            <p>Hambúrguer de carne bovina (80g), queijo mussarela e maionese da casa.</p>
-            <button onclick="escolherLanche('kids')">Quero esse</button>
+            <p>Pão Kids (Brioche), Hambúrguer de carne bovina (80g), queijo mussarela, maionese da casa</p>
+            <p><strong>R$19,00</strong></p>
         </div>
     </div>
-</div>
 
-
-    <!-- Tela de personalização do lanche -->
+    <!-- Personalização do Lanche -->
     <div id="personalizar-lanche" style="display: none;">
-        <h2 id="titulo-lanche">Personalizar Lanche</h2>
-
-        <!-- Conteúdo dinâmico da personalização do lanche será inserido aqui -->
+        <h2 id="titulo-lanche">Quero esse!</h2>
         <div id="conteudo-lanche"></div>
-
-        
-<!-- Carrinho de pedidos (visível após iniciar o atendimento) -->
-<div id="carrinho" style="display: none;">
-    <h2>Carrinho</h2>
-    <ul id="carrinho-lista"></ul>
-    <h3>Subtotal: R$<span id="carrinho-subtotal">0.00</span></h3>
-    <h3>Taxa de Entrega: R$5,00</h3>
-    <h3>Total do Pedido: R$<span id="carrinho-total">5.00</span></h3>
-    <button onclick="finalizarPedido()">Finalizar Pedido</button>
+        <button onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+        <button onclick="voltarParaMenu()">Voltar</button>
     </div>
 
-    <script src="./script.js"></script>
+    <!-- Carrinho -->
+    <div id="carrinho" style="display: none;">
+        <h2>Carrinho</h2>
+        <ul id="carrinho-lista"></ul>
+        <p>Subtotal: R$<span id="carrinho-subtotal">0.00</span></p>
+        <p>Taxa de Entrega: R$<span>5.00</span></p>
+        <p>Total do Pedido: R$<span id="carrinho-total">0.00</span></p>
+        <button onclick="finalizarPedido()">Finalizar Pedido</button>
+    </div>
+
+    <!-- Carrinho Completo para visualização -->
+    <div id="carrinho-completo" style="display: none;">
+        <h2>Resumo do Carrinho Completo</h2>
+        <!-- Itens do carrinho aparecerão aqui -->
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
