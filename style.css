@@ -27,7 +27,7 @@ h1, h2, h3 {
 }
 
 .logo {
-    width: 50px; /* Tamanho menor para a logo */
+    width: 90px; /* Tamanho menor para a logo */
     margin-bottom: 15px;
     opacity: 0.8;
 }
