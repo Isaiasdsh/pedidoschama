@@ -1,184 +1,169 @@
-/* Definições gerais */
+/* Geral */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1C1C1C; /* Fundo preto */
-    color: #FFFFFF; /* Texto principal em branco */
+    background-color: #1a1a1a;
+    color: #f2f2f2;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-h1, h2 {
-    color: #FFA500; /* Título em laranja vibrante */
+h1, h2, h3 {
+    color: #ff8c00; /* Cor laranja vibrante para títulos */
 }
 
-p {
-    color: #FFFFFF;
-}
-
-/* Estilo da tela de boas-vindas */
+/* Tela de Boas-Vindas */
 .welcome-screen {
-    background-color: #1C1C1C;
-    color: #FFFFFF;
+    background-color: #333;
+    border-radius: 8px;
     padding: 20px;
     text-align: center;
-    border-radius: 8px;
-    margin-top: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 15px;
 }
 
 .welcome-screen input {
-    padding: 10px;
-    margin: 10px 0;
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
     width: 80%;
-    border-radius: 5px;
-    border: 1px solid #FFA500;
-    background-color: #2C2C2C;
-    color: #FFFFFF;
+    max-width: 300px;
+    border-radius: 4px;
+    border: none;
 }
 
-.welcome-screen button {
-    padding: 10px 20px;
-    background-color: #FFA500;
-    color: #1C1C1C;
+#start-button {
+    background-color: #ff8c00;
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
+    border-radius: 4px;
 }
 
-.welcome-screen button:hover {
-    background-color: #FF8C00;
+#start-button:hover {
+    background-color: #e07a00;
 }
 
-/* Estilo do menu de lanches */
+/* Menu de Lanches */
 #lanches-menu {
-    background-color: #1C1C1C;
-    color: #FFFFFF;
-    padding: 20px;
-    text-align: center;
-    width: 90%;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-#lanches-menu h2 {
-    color: #FFA500;
-    margin-bottom: 20px;
-}
-
-/* Estilo do contêiner dos cartões */
-.card-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
     margin-top: 20px;
-}
-
-/* Estilo individual dos cartões */
-.card {
-    background-color: #2C2C2C; /* Fundo cinza escuro */
-    color: #FFFFFF;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
     text-align: center;
-    transition: transform 0.2s;
 }
 
-/* Efeito de hover nos cartões */
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+.lanche-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
-/* Título do lanche */
-.card h3 {
-    color: #FFA500; /* Cor laranja para o título */
-    margin-bottom: 10px;
-}
-
-/* Parágrafo com a descrição do lanche */
-.card p {
-    font-size: 0.9em;
-    margin-bottom: 15px;
-    color: #E0E0E0;
-}
-
-/* Botão de personalização */
-.card button {
-    padding: 10px 20px;
-    background-color: #FFA500; /* Botão laranja */
-    color: #1C1C1C; /* Texto do botão em preto */
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
+.lanche-option {
+    background-color: #2d2d2d;
+    width: 100%;
+    max-width: 180px;
+    padding: 15px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-.card button:hover {
-    background-color: #FF8C00; /* Cor mais escura no hover */
+.lanche-option:hover {
+    background-color: #383838;
 }
 
-/* Estilo de personalização do lanche */
+.lanche-option h3 {
+    margin: 0;
+    color: #ff8c00;
+}
+
+.lanche-option p {
+    margin: 8px 0;
+    color: #ccc;
+    font-size: 14px;
+}
+
+/* Personalização do Lanche */
 #personalizar-lanche {
-    background-color: #1C1C1C;
-    color: #FFFFFF;
+    width: 90%;
+    max-width: 600px;
+    background-color: #333;
     padding: 20px;
     border-radius: 8px;
-    text-align: left;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #personalizar-lanche label {
-    color: #FFFFFF;
+    display: block;
+    margin: 8px 0;
+    color: #ccc;
 }
 
-#personalizar-lanche .ingredientes label {
-    display: inline-block;
-    width: 48%;
-    margin-bottom: 5px;
-}
-
-#personalizar-lanche button {
-    padding: 10px 20px;
-    background-color: #FFA500;
-    color: #1C1C1C;
+#personalizar-lanche input[type="text"] {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
     border: none;
-    border-radius: 5px;
-    font-weight: bold;
+}
+
+#personalizar-lanche .ingredientes, #personalizar-lanche .adicionais, #personalizar-lanche .bebidas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#personalizar-lanche .ingredientes label,
+#personalizar-lanche .adicionais label,
+#personalizar-lanche .bebidas label {
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
-    width: 48%;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-#personalizar-lanche button:hover {
-    background-color: #FF8C00;
+button:hover {
+    background-color: #e07a00;
 }
 
-/* Estilo do carrinho */
+/* Carrinho */
 #carrinho {
-    background-color: #2C2C2C;
-    color: #FFFFFF;
-    padding: 15px;
-    border-radius: 8px;
     width: 90%;
-    max-width: 500px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    background-color: #333;
+    padding: 20px;
     margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #carrinho h2 {
-    color: #FFA500;
+    margin-top: 0;
 }
 
 #carrinho ul {
@@ -187,74 +172,49 @@ p {
 }
 
 #carrinho ul li {
+    background-color: #2d2d2d;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 4px;
+    color: #f2f2f2;
     display: flex;
     justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px solid #3C3C3C;
+    align-items: center;
 }
 
-#carrinho button {
-    padding: 5px 10px;
-    background-color: #FFA500;
-    color: #1C1C1C;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#carrinho button:hover {
-    background-color: #FF8C00;
-}
-
-/* Estilo do botão de remover item do carrinho */
 #carrinho ul li button {
-    background-color: #B22222; /* Vermelho escuro para o botão de remover */
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
+    background-color: #e63946;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 0.9em;
 }
 
 #carrinho ul li button:hover {
-    background-color: #FF6347;
+    background-color: #cc2e3c;
 }
 
-/* Estilo da visualização completa do carrinho */
+#carrinho p {
+    margin: 8px 0;
+}
+
 #carrinho-completo {
-    background-color: #1C1C1C;
-    color: #FFFFFF;
+    width: 90%;
+    max-width: 600px;
+    background-color: #333;
     padding: 20px;
     border-radius: 8px;
-    text-align: left;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
-    display: none;
 }
 
 #carrinho-completo p {
-    margin: 5px 0;
+    color: #f2f2f2;
+    margin: 8px 0;
+    text-align: left;
 }
 
-#carrinho-completo button {
-    padding: 10px 20px;
-    background-color: #FFA500;
-    color: #1C1C1C;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-}
-
-#carrinho-completo button:hover {
-    background-color: #FF8C00;
-}
 
 
 
